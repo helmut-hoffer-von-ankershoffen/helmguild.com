@@ -682,26 +682,66 @@ footer p {
   font-size: 0.9em;
 }
 
-.lang-switch {
+/* Global DE/EN toggle — fixed top-right, paired with burger ───────── */
+
+.lang-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 4.75rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 0.7rem;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
   font-size: 0.85rem;
   letter-spacing: 0.05em;
+  font-family: var(--sans);
   color: var(--ink-soft);
-  margin: 0 0 1.75rem;
-  text-align: right;
+  box-sizing: border-box;
+  transition: background 0.18s ease, border-color 0.18s ease;
 }
 
-.lang-switch a {
-  color: var(--accent);
+.lang-toggle:hover { background: rgba(255, 255, 255, 0.75); border-color: var(--accent); }
+
+.lang-toggle a {
+  color: var(--ink-soft);
   text-decoration: none;
-  border-bottom: 1px solid rgba(46, 79, 107, 0.3);
-  padding-bottom: 1px;
+  border: none;
+  padding: 0 0.2rem;
+  transition: color 0.18s ease;
 }
 
-.lang-switch a:hover { color: var(--accent-hover); border-bottom-color: var(--accent-hover); }
+.lang-toggle a:hover { color: var(--accent); }
 
-.lang-switch strong {
+.lang-toggle .current {
   color: var(--ink);
   font-weight: 600;
+  padding: 0 0.2rem;
+}
+
+.lang-toggle .sep {
+  color: var(--ink-soft);
+  opacity: 0.5;
+  margin: 0 0.15rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .lang-toggle { background: rgba(20, 23, 31, 0.55); }
+  .lang-toggle:hover { background: rgba(20, 23, 31, 0.75); }
+}
+
+@media (max-width: 480px) {
+  .lang-toggle {
+    right: 4.25rem;
+    height: 38px;
+    padding: 0 0.55rem;
+    font-size: 0.8rem;
+  }
 }
 
 .legal-note {
