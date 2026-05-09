@@ -221,11 +221,12 @@ Internet-Draft                    AMMP                          May 2026
 
    AMMP arose from a concrete deployment scenario.  An operator
    ("Operator A") had been running an autonomous AI assistant
-   ("Mentor") for several months.  Mentor had accumulated dozens of
-   operational lessons stored in its long-term memory: language
-   defaults, message-buffer constraints, OAuth callback resilience
-   patterns, time-zone handling, rate-limit recovery procedures,
-   compartmentalisation rules, and so on.
+   ("Mentor") successfully, with Mentor owning a content-generating
+   pipeline end-to-end and having accumulated dozens of operational
+   lessons in its long-term memory: language defaults, message-buffer
+   constraints, OAuth callback resilience patterns, time-zone
+   handling, rate-limit recovery procedures, compartmentalisation
+   rules, and so on.
 
    A second operator ("Operator B"), in the same household, was about
    to deploy a separate AI assistant ("Mentee") for their own
