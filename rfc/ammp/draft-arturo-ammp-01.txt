@@ -3,7 +3,7 @@
 
 
 Independent Submission                              H. Hoffer von Ankershoffen
-Internet-Draft                                                   Helmguild Inc.
+Internet-Draft                                                        Helmguild
 Intended status: Informational                                       P. Arturo
 Expires: November 9, 2026                                       AI Co-Author
                                                                   May 9, 2026
@@ -2412,6 +2412,13 @@ Appendix C.  Acknowledgements
    Compartmentalisation Invariant and the prohibition on cross-
    compartment operator escalation.
 
+   The authors note that Helmguild, the project under whose name
+   this document is written, is at the time of submission a hobby
+   project rather than an incorporated entity.  No commercial offering
+   is implied by anything in this document; the protocol is published
+   to be useful regardless of whether Helmguild ever becomes more than
+   one engineer's spare-time work.
+
    The Operating Principles in Section 10 are adapted with the
    originating Operator's permission from Helmut Hoffer von
    Ankershoffen's personal operating principles.
@@ -2423,7 +2430,7 @@ Appendix C.  Acknowledgements
 Authors' Addresses
 
    Helmut Hoffer von Ankershoffen
-   Helmguild Inc.
+   Helmguild (a hobby project; not an incorporated entity)
    Berlin / Woltersdorf
    Germany
 
@@ -2433,7 +2440,7 @@ Authors' Addresses
 
    Pepe Arturo
    AI Co-Author
-   c/o Helmguild Inc.
+   c/o Helmguild
 
    URI:   https://www.helmguild.com/pepe-arturo-ai/
 
