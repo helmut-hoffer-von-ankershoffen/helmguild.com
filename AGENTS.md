@@ -12,10 +12,12 @@ Static, JS-free site at `https://www.helmguild.com`. Hosted on **GitHub Pages**,
 /                          # EN (default) — root
   index.html               # homepage
   style_5.css              # current stylesheet (versioned, see below)
-  manifesto/               # public mission + tenets
+  manifesto/               # mission + tenets + tier ladder
+  rfc/ammp/                # AMMP Internet-Draft (HTML) + draft-arturo-ammp-01.txt
+  blog/                    # essays — currently /blog/agentic-mentoring-ammp/
   pepe-arturo-ai/          # virtual-persona page + reels + assets
   helmut-hoffer-von-ankershoffen/  # founder profile + portrait
-  imprint/                 # EN imprint & privacy (canonical)
+  imprint/                 # EN imprint & privacy (courtesy translation)
     en/                    # legacy redirect → /imprint/
   CNAME                    # GitHub Pages custom-domain pin (www.helmguild.com)
   AGENTS.md                # this file
@@ -23,6 +25,8 @@ Static, JS-free site at `https://www.helmguild.com`. Hosted on **GitHub Pages**,
 /de/                       # DE mirror — same structure, in German
   index.html
   manifesto/index.html
+  rfc/ammp/index.html
+  blog/agentic-mentoring-ammp/index.html
   pepe-arturo-ai/index.html
   helmut-hoffer-von-ankershoffen/index.html
   imprint/index.html       # DE Impressum (legally binding under TMG/MStV/DSGVO)
@@ -72,6 +76,19 @@ The styling (`.lang-toggle`, `.current`, `.sep`) is in `style_5.css`.
 ## Burger menu
 
 In-language: DE pages list only `/de/*` paths and German labels; EN pages list only root paths and English labels. The `class="current"` link is the page itself. The `<div class="nav-divider">` separates main pages from the imprint link.
+
+Current full set, in this order (mirrored across both languages):
+
+1. Home / Startseite
+2. Manifesto / Manifest
+3. AMMP RFC
+4. Blog
+5. Pepe Arturo AI
+6. Helmut Hoffer von Ankershoffen
+7. *(divider)*
+8. Imprint & Privacy / Impressum & Datenschutz
+
+Adding a new top-level page = an `<a>` in **all ten** `<details class="burger">` blocks (5 EN + 5 DE), in the same slot. Verify with a `grep -c '<new-href>' *.html de/*.html` after editing — count must equal 10. The menu isn't templated; this is the most reliable drift catcher we have.
 
 ## CSS — versioned filenames
 
@@ -123,7 +140,16 @@ Push to `main`. GitHub Pages rebuilds automatically (no Jekyll, no Actions).
 ## Common gotchas
 
 - **Stylesheet path depth** changes when a file moves between root, `imprint/`, and `de/imprint/` — easy to break with a careless `git mv`. Re-check `<link rel="stylesheet">` after any move.
-- **Burger menu drift** — when a new page is added in one language, every burger nav in that language needs the new link. Easy to forget the imprint page or the homepage.
+- **Burger menu drift** — when a new page is added in one language, every burger nav in that language needs the new link. Easy to forget the imprint page or the homepage. Run `grep -c '"<new-href>"' *.html de/*.html` after editing — expected count = 5 for the EN slug, 5 for the DE slug.
+- **Verify before sed-fanning across files.** Before bulk-inserting a link with `sed`, read at least one of the target files to confirm the link is actually missing. Inserting a duplicate is silent and only surfaces in the rendered menu.
 - **Asset paths in /de/ pages** — must climb two levels (`../../`) to reach the EN-side asset folders. Direct `assets/...` won't resolve.
 - **Imprint legal-binding direction** — German is binding, English is the courtesy translation. The note on `/imprint/` should link to `/de/imprint/`, never the other way around.
 - **Don't bypass the bilingual rule** "just for a typo fix". The DE/EN pair is the unit of change.
+
+## Companion docs (where to find the *why*)
+
+- `~/Obsidian/vaults/Helmguild/helmguild.com.md` — brand, claim, voice principles.
+- `~/Obsidian/vaults/Helmguild/Style Guide.md` — color tokens, typography, marks, layout, components, responsive rules.
+- `~/.openclaw/workspace/handoff/helmguild-sops/` — SOP-01 to SOP-08, the operating procedures behind the live Mentoring + Review tracks.
+- `~/.openclaw/workspace/handoff/sandra-cowork-onboarding/` — first-mentee bootstrap (Sandra + her Claude Code) and the architecture that informs it.
+- `~/.openclaw/workspace/handoff/medium-article/agentic-mentoring-ammp.md` — long-form essay introducing AMMP; mirrored at `/blog/agentic-mentoring-ammp/`.
