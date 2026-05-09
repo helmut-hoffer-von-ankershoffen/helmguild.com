@@ -14,10 +14,10 @@ Static site, hosted on **GitHub Pages** at the apex domain `helmguild.com`. No b
 
 Browsers and CDNs cache CSS aggressively. To force every visitor to pull the latest stylesheet on every change, the CSS file is **versioned in its filename** (not via query string):
 
-- Current: `style_1.css`
-- Next change: rename to `style_2.css`, update the `<link href>` in `index.html` to match, delete the previous version.
+- Current: `style_2.css`
+- Next change: copy/rename to `style_3.css`, edit the new file, update the `<link href>` in `index.html` to match. **Keep the old versions** in the repo — don't delete them.
 
-In short: every CSS edit = bump the integer + rename + relink + delete previous. Same single commit. Never edit `style_<N>.css` in place across deploys; always cut a new file.
+In short: every CSS edit = bump the integer + new file + relink. Same single commit. Old versions stay alongside the new one — no link points to them, but they're available for review / rollback / diff.
 
 ## Local preview
 
