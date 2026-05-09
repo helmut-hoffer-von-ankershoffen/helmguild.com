@@ -7,8 +7,17 @@ Static site, hosted on **GitHub Pages** at the apex domain `helmguild.com`. No b
 ## Files
 
 - `index.html` — the page itself.
-- `style.css` — minimal, professional, maritime-restrained styling.
-- `CNAME` — tells GitHub Pages to serve at the `helmguild.com` apex domain.
+- `style_<N>.css` — minimal, professional, maritime-restrained styling. Versioned for cache-busting (see below).
+- `CNAME` — tells GitHub Pages to serve at the `www.helmguild.com` custom domain.
+
+## Cache-busting convention
+
+Browsers and CDNs cache CSS aggressively. To force every visitor to pull the latest stylesheet on every change, the CSS file is **versioned in its filename** (not via query string):
+
+- Current: `style_1.css`
+- Next change: rename to `style_2.css`, update the `<link href>` in `index.html` to match, delete the previous version.
+
+In short: every CSS edit = bump the integer + rename + relink + delete previous. Same single commit. Never edit `style_<N>.css` in place across deploys; always cut a new file.
 
 ## Local preview
 
