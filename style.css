@@ -1,19 +1,29 @@
-/* helmguild.com — minimal, professional, maritime-restrained
+/* helmguild.com — Starlight-flavored, modern, maritime-restrained
  * Locked 2026-05-09. Voice: calm, principled, succinct.
- * Typography: system serif for the wordmark + headings (established, timeless),
- * system sans-serif for body (legible, current).
+ *
+ * Primary color: Apple MacBook Air "Starlight" (Polarstern) — warm bone-cream,
+ * approximated to #ECE6D9 / #E5DFD0 for screen.
+ *
+ * Maritime cues: helm mark above the wordmark, anchor in the footer. Both as
+ * inline SVGs in the deep-ocean accent color.
  */
 
 :root {
-  --paper: #f7f4ed;        /* warm cream — paper / nautical chart background */
-  --ink: #1a1f2c;          /* deep navy-near-black — ink */
-  --ink-soft: #4a5168;     /* muted slate — secondary text */
-  --rule: #d8d2c4;         /* faint hairline */
-  --accent: #2e4f6b;       /* deep ocean blue — links, accents */
-  --accent-hover: #3a6285;
+  /* Starlight gradient — top brighter, bottom slightly more saturated, like brushed aluminum */
+  --starlight-hi: #F2EDE2;
+  --starlight: #ECE6D9;
+  --starlight-lo: #E2DBC8;
+
+  --ink: #1A1F2C;          /* deep ink-near-black */
+  --ink-soft: #535868;     /* muted slate */
+  --rule: #CFC8B6;         /* faint hairline, warm */
+  --accent: #2E4F6B;       /* deep ocean blue */
+  --accent-hover: #3B6488;
+
   --serif: "Iowan Old Style", "Apple Garamond", "Palatino Linotype", "Palatino", Georgia, serif;
-  --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --measure: 38rem;
+  --sans: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --measure: 40rem;
 }
 
 * { box-sizing: border-box; }
@@ -21,11 +31,12 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--paper);
+  background: linear-gradient(180deg, var(--starlight-hi) 0%, var(--starlight) 50%, var(--starlight-lo) 100%);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--sans);
   font-size: 17px;
-  line-height: 1.65;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -33,31 +44,57 @@ html, body {
 main {
   max-width: var(--measure);
   margin: 0 auto;
-  padding: 6rem 1.5rem 4rem;
+  padding: 7rem 1.75rem 4rem;
 }
+
+/* ─── Maritime SVG marks ─── */
+
+.mark {
+  display: block;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+.mark-helm {
+  width: 56px;
+  height: 56px;
+  margin: 0 0 1.75rem;
+  /* a single-direction soft drop-shadow for subtle depth on the warm bg */
+  filter: drop-shadow(0 1px 2px rgba(46, 79, 107, 0.12));
+}
+
+.mark-anchor {
+  width: 28px;
+  height: 28px;
+  margin: 0 0 0.75rem;
+  opacity: 0.7;
+}
+
+/* ─── Hero ─── */
 
 .hero {
   border-bottom: 1px solid var(--rule);
-  padding-bottom: 3rem;
-  margin-bottom: 3rem;
+  padding-bottom: 3.25rem;
+  margin-bottom: 3.25rem;
 }
 
 .wordmark {
   font-family: var(--serif);
-  font-size: clamp(2rem, 6vw, 3rem);
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  margin: 0 0 1.25rem;
+  font-size: clamp(2.25rem, 6.4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+  margin: 0 0 1.5rem;
   color: var(--ink);
 }
 
 .tagline {
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.45rem);
   line-height: 1.4;
   color: var(--ink);
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.75rem;
   font-weight: 400;
 }
 
@@ -65,27 +102,36 @@ main {
   color: var(--ink-soft);
   margin: 0;
   font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.55;
 }
 
+/* ─── Prose ─── */
+
 .prose p {
-  margin: 0 0 1.2rem;
+  margin: 0 0 1.3rem;
   color: var(--ink);
+  font-weight: 400;
 }
+
+.prose p:last-child { margin-bottom: 0; }
+
+/* ─── Presence ─── */
 
 .presence {
   margin-top: 3.5rem;
   border-top: 1px solid var(--rule);
-  padding-top: 2.5rem;
+  padding-top: 2.75rem;
 }
 
 .presence h2 {
   font-family: var(--serif);
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   color: var(--ink-soft);
-  margin: 0 0 1.2rem;
+  margin: 0 0 1.4rem;
 }
 
 .links {
@@ -95,14 +141,16 @@ main {
 }
 
 .links li {
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.85rem;
+  line-height: 1.5;
 }
 
 .links a {
   color: var(--accent);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.15s ease, color 0.15s ease;
+  border-bottom: 1px solid rgba(46, 79, 107, 0.3);
+  padding-bottom: 1px;
+  transition: color 0.18s ease, border-color 0.18s ease;
 }
 
 .links a:hover,
@@ -114,40 +162,59 @@ main {
 .caption {
   color: var(--ink-soft);
   font-size: 0.95rem;
+  margin-left: 0.25rem;
 }
+
+/* ─── Footer ─── */
 
 footer {
   margin-top: 5rem;
-  padding-top: 1.5rem;
+  padding-top: 2rem;
   border-top: 1px solid var(--rule);
   color: var(--ink-soft);
   font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+footer .mark-anchor {
+  margin: 0 0 0.6rem;
 }
 
 footer p {
   margin: 0;
+  letter-spacing: 0.02em;
 }
 
-/* Comfortable on small screens */
+/* ─── Responsive ─── */
+
 @media (max-width: 480px) {
-  main { padding: 4rem 1.25rem 3rem; }
-  .hero { padding-bottom: 2rem; margin-bottom: 2rem; }
+  main { padding: 4.5rem 1.25rem 3rem; }
+  .hero { padding-bottom: 2.25rem; margin-bottom: 2.25rem; }
   .presence { margin-top: 2.5rem; padding-top: 2rem; }
+  .mark-helm { width: 48px; height: 48px; }
 }
 
-/* Respect reduced-motion users (currently no animation, but future-proof) */
+/* ─── Reduced motion ─── */
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
 
-/* Optional dark-mode reading — quiet, not stark */
+/* ─── Optional dark mode (quiet, not stark) ─── */
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #14171f;
-    --ink: #e9e5d8;
-    --ink-soft: #9aa1b3;
-    --rule: #2b3142;
-    --accent: #87a8c3;
-    --accent-hover: #a4c3dc;
+    --starlight-hi: #1B1E25;
+    --starlight: #14171F;
+    --starlight-lo: #0F1218;
+    --ink: #ECE6D9;             /* Starlight inverted into the ink role */
+    --ink-soft: #9AA1B3;
+    --rule: #2B3142;
+    --accent: #87A8C3;
+    --accent-hover: #A4C3DC;
   }
+  .mark { opacity: 0.95; }
 }
