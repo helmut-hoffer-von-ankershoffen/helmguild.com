@@ -44,7 +44,7 @@ html, body {
 main {
   max-width: var(--measure);
   margin: 0 auto;
-  padding: 7rem 1.75rem 4rem;
+  padding: 5rem 1.75rem 2.5rem;
 }
 
 /* ─── Maritime SVG marks ─── */
@@ -74,8 +74,8 @@ main {
 
 .hero {
   border-bottom: 1px solid var(--rule);
-  padding-bottom: 3.25rem;
-  margin-bottom: 3.25rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .brand {
@@ -116,7 +116,7 @@ main {
 /* ─── Prose ─── */
 
 .prose p {
-  margin: 0 0 1.3rem;
+  margin: 0 0 0.95rem;
   color: var(--ink);
   font-weight: 400;
 }
@@ -175,8 +175,8 @@ main {
 /* ─── Footer ─── */
 
 footer {
-  margin-top: 5rem;
-  padding-top: 2rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--rule);
   color: var(--ink-soft);
   font-size: 0.9rem;
@@ -198,9 +198,11 @@ footer p {
 /* ─── Responsive ─── */
 
 @media (max-width: 480px) {
-  main { padding: 4.5rem 1.25rem 3rem; }
-  .hero { padding-bottom: 2.25rem; margin-bottom: 2.25rem; }
-  .presence { margin-top: 2.5rem; padding-top: 2rem; }
+  main { padding: 3.5rem 1.25rem 2rem; }
+  .hero { padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
+  .presence { margin-top: 2rem; padding-top: 1.5rem; }
+  .personas { margin-top: 1.75rem; padding-top: 1.5rem; }
+  footer { margin-top: 2.25rem; padding-top: 1.25rem; }
   .brand { gap: 0.75rem; }
   .mark-helm { width: 44px; height: 44px; }
 }
@@ -230,12 +232,12 @@ footer p {
 /* ─── Homepage personas grid ─────────────────────────────────────────── */
 
 .personas {
-  margin-top: 3.5rem;
+  margin-top: 2.25rem;
   border-top: 1px solid var(--rule);
-  padding-top: 2.75rem;
+  padding-top: 1.75rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .persona-card {
@@ -323,7 +325,10 @@ footer p {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(20, 23, 31, 0.15) 0%, rgba(20, 23, 31, 0.55) 100%);
+  /* Stronger gradient: darker overall, deepest under the avatar/name/role block. */
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 75%, rgba(20, 23, 31, 0.78) 0%, rgba(20, 23, 31, 0.35) 70%, rgba(20, 23, 31, 0.30) 100%),
+    linear-gradient(180deg, rgba(20, 23, 31, 0.30) 0%, rgba(20, 23, 31, 0.65) 100%);
   z-index: -1;
 }
 
@@ -342,22 +347,29 @@ footer p {
 .persona-hero .name {
   font-family: var(--serif);
   font-size: clamp(1.8rem, 5vw, 2.5rem);
-  font-weight: 500;
-  color: var(--starlight-hi);
+  font-weight: 600;
+  color: #ffffff;
   text-align: center;
   margin: 0 0 0.4rem;
   letter-spacing: -0.005em;
   line-height: 1.1;
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.85),
+    0 2px 14px rgba(0, 0, 0, 0.75),
+    0 0 28px rgba(0, 0, 0, 0.55);
 }
 
 .persona-hero .role {
-  color: var(--starlight-hi);
+  color: #ffffff;
   text-align: center;
   font-size: 1.05rem;
   margin: 0;
-  opacity: 0.92;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+  opacity: 1;
+  font-weight: 500;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.85),
+    0 2px 12px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Profile-page hero (no banner — square portrait centered) */
@@ -669,4 +681,44 @@ footer p {
   font-family: var(--sans);
   font-size: 0.9em;
 }
+
+.lang-switch {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  margin: 0 0 1.75rem;
+  text-align: right;
+}
+
+.lang-switch a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(46, 79, 107, 0.3);
+  padding-bottom: 1px;
+}
+
+.lang-switch a:hover { color: var(--accent-hover); border-bottom-color: var(--accent-hover); }
+
+.lang-switch strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.legal-note {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  background: rgba(46, 79, 107, 0.05);
+  border-left: 3px solid var(--rule);
+  padding: 0.85rem 1rem;
+  margin: 0 0 2rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.legal-note a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(46, 79, 107, 0.3);
+}
+
+.legal-note a:hover { color: var(--accent-hover); border-bottom-color: var(--accent-hover); }
 
