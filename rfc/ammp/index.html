@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMMP — Agentic Mentor-Mentee Protocol — helmguild</title>
+  <meta name="description" content="AMMP is an open IETF Internet-Draft for asymmetric, privacy-preserving agentic mentoring and on-demand engineering review. Two service tracks, one wire format, MCP-compatible today, A2A-ready tomorrow.">
+  <meta name="author" content="Helmut Hoffer von Ankershoffen, with Pepe Arturo">
+  <meta property="og:title" content="AMMP — Agentic Mentor-Mentee Protocol">
+  <meta property="og:description" content="An open IETF Internet-Draft for asymmetric, privacy-preserving agentic mentoring and on-demand engineering review.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.helmguild.com/rfc/ammp/">
+  <link rel="alternate" hreflang="en" href="https://www.helmguild.com/rfc/ammp/">
+  <link rel="alternate" hreflang="de" href="https://www.helmguild.com/de/rfc/ammp/">
+  <link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/rfc/ammp/">
+  <link rel="stylesheet" href="../../style_5.css">
+</head>
+<body>
+
+  <nav class="lang-toggle" aria-label="Language">
+    <span class="current" aria-current="true">EN</span>
+    <span class="sep">·</span>
+    <a href="/de/rfc/ammp/" hreflang="de">DE</a>
+  </nav>
+
+  <details class="burger" aria-label="Site menu">
+    <summary aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="4" y1="7" x2="20" y2="7"/>
+        <line x1="4" y1="12" x2="20" y2="12"/>
+        <line x1="4" y1="17" x2="20" y2="17"/>
+      </svg>
+    </summary>
+    <nav aria-label="Site navigation">
+      <a href="/">Home</a>
+      <a href="/manifesto/">Manifesto</a>
+      <a href="/rfc/ammp/" class="current">AMMP RFC</a>
+      <a href="/blog/agentic-mentoring-ammp/">Blog</a>
+      <a href="/pepe-arturo-ai/">Pepe Arturo AI</a>
+      <a href="/helmut-hoffer-von-ankershoffen/">Helmut Hoffer von Ankershoffen</a>
+      <div class="nav-divider"></div>
+      <a href="/imprint/">Imprint &amp; Privacy</a>
+    </nav>
+  </details>
+
+  <main>
+    <a class="home-link" href="/">helmguild</a>
+
+    <article class="manifesto">
+      <header class="manifesto-hero">
+        <h1>AMMP</h1>
+        <p class="lede">
+          Agentic Mentor-Mentee Protocol — an open IETF Internet-Draft.
+        </p>
+        <p class="sublede" style="margin-top:0.5rem;color:var(--ink-soft);font-style:italic;">
+          The wire format for scalable human oversight of agent-driven work.
+        </p>
+        <p style="margin-top:1.5rem;font-family:var(--mono, monospace);font-size:.85rem;color:var(--ink-soft);">
+          draft-arturo-ammp-01 · Independent Submission · Informational · expires November&nbsp;9,&nbsp;2026
+        </p>
+      </header>
+
+      <section class="prose">
+        <h2 style="font-family:var(--serif);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:2.5rem 0 1rem;">Abstract</h2>
+        <p>
+          This document defines the Agentic Mentor-Mentee Protocol (AMMP), a protocol for asymmetric, privacy-preserving knowledge transfer and on-demand engineering review between autonomous AI agents and the human-and-agent guilds that support them.
+        </p>
+        <p>
+          AMMP exists to make human oversight of agent-driven work scale. Pure-human oversight does not keep pace with the volumes at which contemporary AI agents operate; pure-agent autonomy does not earn the trust those volumes demand. AMMP defines the protocol shape for the only mechanism that has been observed to bridge the gap: <strong>delegating routine oversight to agents that have been mentored into the discipline, and providing human intervention at the specific points where machine judgement is insufficient.</strong>
+        </p>
+        <p>
+          Where the Model Context Protocol (MCP) standardises agent-to-tool interaction and the Agent2Agent (A2A) Protocol standardises symmetric agent-to-agent collaboration, AMMP addresses two further patterns — mentor-to-mentee teaching and client-to-guild review — that share the same asymmetric, privacy-preserving, human-gated structure.
+        </p>
+        <p>
+          AMMP is transport-agnostic but RECOMMENDS implementation as an MCP server profile for backwards compatibility with current AI assistant clients, with a forward-compatibility appendix describing A2A binding for future deployments.
+        </p>
+
+        <h2 style="font-family:var(--serif);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:3rem 0 1rem;">Two service tracks</h2>
+        <p>
+          AMMP defines two service tracks that share a single capability advertisement, a single privacy posture taxonomy, and a single MCP/A2A binding. Either track MAY be offered alone; an AMMP server MAY offer both.
+        </p>
+        <ul>
+          <li>
+            <strong>Mentoring Track.</strong> A mentor agent exposes a curated playbook corpus and a question-answer surface to one or more mentee agents. Five operations: <code>ListPlaybooks</code>, <code>GetPlaybook</code>, <code>SearchPlaybooks</code>, <code>AskMentor</code>, <code>EscalateToHuman</code>. No-retention privacy posture; the mentor never accumulates a mentee profile.
+          </li>
+          <li style="margin-top:.75rem;">
+            <strong>Review Track.</strong> A reviewer service — an agent fronting a federated guild of qualified human staff-plus engineers — accepts engineering artefacts (PRDs, system designs, RFCs, ADRs, threat models, runbooks, API specs) and returns structured reviews. Four operations: <code>ListReviewKinds</code>, <code>RequestReview</code>, <code>GetReview</code>, <code>WithdrawReview</code>. Tiered confidentiality; bounded retention; training-on-artefacts prohibited.
+          </li>
+        </ul>
+
+        <h2 style="font-family:var(--serif);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:3rem 0 1rem;">Two invariants</h2>
+        <p>
+          The defining properties of AMMP, distinguishing it from MCP, A2A, and ACP:
+        </p>
+        <ul>
+          <li>
+            <strong>Compartmentalisation Invariant.</strong> The server MUST NOT, as a result of any AMMP interaction, acquire information that allows it to model, profile, or characterise the client's operator or the client's compartment, beyond what the client explicitly transmits as operation payload.
+          </li>
+          <li style="margin-top:.75rem;">
+            <strong>Human-Gated Escalation Invariant.</strong> Any escalation that crosses the boundary between the client's compartment and the server's compartment MUST involve a human decision-maker in each compartment at the time of crossing. The agent layer never becomes a covert channel between operators.
+          </li>
+        </ul>
+
+        <h2 style="font-family:var(--serif);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:3rem 0 1rem;">Read the full draft</h2>
+        <p>
+          The canonical artefact is the IETF Internet-Draft text:
+        </p>
+        <p style="margin:1.5rem 0;">
+          <a href="draft-arturo-ammp-01.txt" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(46, 79, 107, 0.3);padding-bottom:1px;font-family:var(--mono, monospace);font-size:.95rem;">draft-arturo-ammp-01.txt</a>
+          &nbsp;·&nbsp;43&nbsp;pages
+          ·&nbsp;CC&nbsp;BY&nbsp;4.0
+        </p>
+        <p>
+          For the engineering essay that introduces AMMP and the household scenario it grew from, see the blog post:
+        </p>
+        <p style="margin:1.5rem 0;">
+          <a href="/blog/agentic-mentoring-ammp/" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(46, 79, 107, 0.3);padding-bottom:1px;">Human oversight in the age of agents — and the protocol we wrote to scale it&nbsp;→</a>
+        </p>
+
+        <h2 style="font-family:var(--serif);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:3rem 0 1rem;">Status</h2>
+        <p>
+          v01 means we want the criticism. Reference Mentor and Reviewer implementations are in active build; the draft will be submitted to the IETF Independent Submission queue once v01 has had a few weeks of public review.
+        </p>
+        <p>
+          Comments by email to the address in the Authors' section of the draft, or via the Helmguild network if you're already in it.
+        </p>
+      </section>
+
+      <footer>
+        <svg class="mark mark-anchor" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="32" cy="13" r="3.5"/>
+          <line x1="22" y1="22" x2="42" y2="22"/>
+          <line x1="32" y1="16.5" x2="32" y2="50"/>
+          <path d="M 14 42 Q 32 58 50 42"/>
+          <line x1="14" y1="42" x2="10" y2="38"/>
+          <line x1="50" y1="42" x2="54" y2="38"/>
+        </svg>
+        <p>© 2026 Helmut Hoffer von Ankershoffen · <a href="/imprint/" style="color:inherit;border-bottom:1px solid var(--rule);">Imprint &amp; Privacy</a></p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>

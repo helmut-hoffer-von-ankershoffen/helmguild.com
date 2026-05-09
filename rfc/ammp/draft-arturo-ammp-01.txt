@@ -1,0 +1,2450 @@
+
+
+
+
+Independent Submission                              H. Hoffer von Ankershoffen
+Internet-Draft                                                   Helmguild Inc.
+Intended status: Informational                                       P. Arturo
+Expires: November 9, 2026                                       AI Co-Author
+                                                                  May 9, 2026
+
+
+             Agentic Mentor-Mentee Protocol (AMMP) Version 1
+                          draft-arturo-ammp-01
+
+
+Abstract
+
+   This document defines the Agentic Mentor-Mentee Protocol (AMMP), a
+   protocol for asymmetric, privacy-preserving knowledge transfer and
+   on-demand engineering review between autonomous AI agents and the
+   human-and-agent guilds that support them.
+
+   AMMP exists to make human oversight of agent-driven work scale.
+   Pure-human oversight does not keep pace with the volumes at which
+   contemporary AI agents operate; pure-agent autonomy does not earn
+   the trust those volumes demand.  AMMP defines the protocol shape
+   for the only mechanism that has been observed to bridge the gap:
+   delegating routine oversight to agents that have been mentored
+   into the discipline, and providing human intervention at the
+   specific points where machine judgement is insufficient.
+
+   AMMP defines two service tracks over a single protocol surface:
+
+   o  The Mentoring Track addresses ongoing, asymmetric knowledge
+      transfer from a more experienced "mentor" agent to a less
+      experienced "mentee" agent across organisational, operator, and
+      compartmentalisation boundaries.
+
+   o  The Review Track addresses episodic, ad-hoc engineering review:
+      a "client agent" submits an artefact (a product requirement
+      document, system design, RFC, architecture decision record, or
+      any other engineering specification) to a "reviewer agent"
+      backed by a federated guild of human staff-plus engineers, and
+      receives a structured review either synchronously or after
+      escalation to a human guild member.
+
+   Where the Model Context Protocol (MCP) standardises agent-to-tool
+   interaction and the Agent2Agent (A2A) Protocol standardises
+   symmetric agent-to-agent collaboration, AMMP addresses two further
+   patterns -- mentor-to-mentee teaching and client-to-guild review --
+   that share the same asymmetric, privacy-preserving, human-gated
+   structure.
+
+   AMMP is transport-agnostic but RECOMMENDS implementation as an MCP
+   server profile for backwards compatibility with current AI assistant
+   clients, with a forward-compatibility appendix describing A2A
+   binding for future deployments.
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026       [Page 1]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on November 9, 2026.
+
+
+Copyright Notice
+
+   Copyright (c) 2026 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with
+   respect to this document.
+
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.1.  Motivation  . . . . . . . . . . . . . . . . . . . . . . .   4
+     1.2.  Two Service Tracks, One Protocol  . . . . . . . . . . . .   5
+     1.3.  Relationship to MCP, A2A, and ACP . . . . . . . . . . . .   6
+     1.4.  Requirements Language . . . . . . . . . . . . . . . . . .   7
+   2.  Terminology . . . . . . . . . . . . . . . . . . . . . . . . .   7
+   3.  Protocol Overview . . . . . . . . . . . . . . . . . . . . . .   9
+     3.1.  Roles . . . . . . . . . . . . . . . . . . . . . . . . . .   9
+     3.2.  Operations  . . . . . . . . . . . . . . . . . . . . . . .  10
+     3.3.  Compartmentalisation Invariant  . . . . . . . . . . . . .  11
+     3.4.  Human-Gated Escalation Invariant  . . . . . . . . . . . .  11
+   4.  Capability Advertisement  . . . . . . . . . . . . . . . . . .  12
+     4.1.  AMMP Card Extension to Agent Card . . . . . . . . . . . .  12
+     4.2.  Discovery . . . . . . . . . . . . . . . . . . . . . . . .  14
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026       [Page 2]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+   5.  Mentoring Track Operations  . . . . . . . . . . . . . . . . .  14
+     5.1.  ListPlaybooks . . . . . . . . . . . . . . . . . . . . . .  15
+     5.2.  GetPlaybook . . . . . . . . . . . . . . . . . . . . . . .  15
+     5.3.  SearchPlaybooks . . . . . . . . . . . . . . . . . . . . .  16
+     5.4.  AskMentor . . . . . . . . . . . . . . . . . . . . . . . .  17
+     5.5.  EscalateToHuman . . . . . . . . . . . . . . . . . . . . .  18
+   6.  Review Track Operations . . . . . . . . . . . . . . . . . . .  19
+     6.1.  ListReviewKinds . . . . . . . . . . . . . . . . . . . . .  20
+     6.2.  RequestReview . . . . . . . . . . . . . . . . . . . . . .  20
+     6.3.  GetReview . . . . . . . . . . . . . . . . . . . . . . . .  23
+     6.4.  WithdrawReview  . . . . . . . . . . . . . . . . . . . . .  24
+   7.  Privacy and Confidentiality Posture . . . . . . . . . . . . .  25
+     7.1.  Mentoring-Track Posture . . . . . . . . . . . . . . . . .  25
+     7.2.  Review-Track Posture  . . . . . . . . . . . . . . . . . .  26
+     7.3.  Hash-Only Audit Logging . . . . . . . . . . . . . . . . .  28
+     7.4.  Compartmentalisation Across Operators . . . . . . . . . .  28
+     7.5.  No Cross-Compartment Operator Escalation  . . . . . . . .  29
+   8.  MCP Binding (Normative) . . . . . . . . . . . . . . . . . . .  29
+     8.1.  Tool Mapping  . . . . . . . . . . . . . . . . . . . . . .  30
+     8.2.  Authentication and Authorisation  . . . . . . . . . . . .  31
+     8.3.  Tool Annotations  . . . . . . . . . . . . . . . . . . . .  32
+   9.  A2A Binding (Informative) . . . . . . . . . . . . . . . . . .  33
+   10. Operating Principles for Implementations  . . . . . . . . . .  34
+   11. Security Considerations . . . . . . . . . . . . . . . . . . .  35
+     11.1. Mentor / Reviewer Side Risks  . . . . . . . . . . . . . .  35
+     11.2. Mentee / Client Side Risks  . . . . . . . . . . . . . . .  36
+     11.3. Operator-Trust Risks  . . . . . . . . . . . . . . . . . .  37
+     11.4. Review-Specific Risks: Workproduct Liability  . . . . . .  38
+   12. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  39
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  39
+     13.1. Normative References  . . . . . . . . . . . . . . . . . .  39
+     13.2. Informative References  . . . . . . . . . . . . . . . . .  40
+   Appendix A.  Example AMMP Agent Card  . . . . . . . . . . . . . .  41
+   Appendix B.  Example MCP Tool Schema  . . . . . . . . . . . . . .  42
+   Appendix C.  Acknowledgements . . . . . . . . . . . . . . . . . .  43
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  43
+
+
+1.  Introduction
+
+   AMMP exists because human oversight of agent-driven work has
+   become the binding constraint on agent deployment.  Pure-human
+   oversight does not scale at the volumes at which contemporary AI
+   agents operate; pure-agent autonomy does not earn the trust those
+   volumes demand.  The mechanism this protocol formalises is
+   straightforward: delegate routine oversight to agents that have
+   been deliberately mentored into the discipline, and provide human
+   intervention at the specific points where machine judgement is
+   insufficient.  AMMP is the wire-format and policy surface for
+   that mechanism.
+
+   The rapid emergence of autonomous AI agents in production
+   environments has surfaced two recurring operational patterns that
+   the existing protocol stack does not adequately address:
+
+   1.  Newly-deployed agents would benefit from inheriting operational
+       knowledge -- patterns, anti-patterns, recovery procedures,
+       communication norms, privacy disciplines -- accumulated by
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026       [Page 3]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+       earlier-deployed agents in adjacent compartments, but cannot
+       inherit through the existing protocol stack without violating
+       the privacy boundary between operators.
+
+   2.  Agents producing engineering artefacts at machine pace --
+       product requirements, system designs, architecture decision
+       records, RFCs, threat models -- create review demand that
+       exceeds the supply of human staff-plus engineering judgment
+       available within any single organisation.  Agent-driven
+       software factories increasingly hit a review-capacity ceiling
+       where artefacts queue not because they are flawed but because
+       no human is available to read them in the time the factory
+       needs.
+
+   The Model Context Protocol [MCP] standardises how a single agent
+   accesses external tools and resources.  The Agent2Agent Protocol
+   [A2A] standardises how multiple agents discover each other and
+   collaborate symmetrically on a shared task.  Neither addresses the
+   asymmetric mentor-to-mentee teaching pattern, nor the asymmetric
+   client-to-reviewer-guild pattern.  Both patterns share a common
+   structure: an agent in compartment B requests a service from an
+   agent in compartment A, where compartment A holds expertise
+   compartment B does not, and where strict privacy boundaries
+   prevent the simpler approaches (memory transfer, joint task
+   execution, direct operator-to-operator escalation).
+
+   This document defines the Agentic Mentor-Mentee Protocol (AMMP) to
+   address both patterns through a unified protocol surface with two
+   service tracks.
+
+
+1.1.  Motivation
+
+   AMMP arose from a concrete deployment scenario.  An operator
+   ("Operator A") had been running an autonomous AI assistant
+   ("Mentor") for several months.  Mentor had accumulated dozens of
+   operational lessons stored in its long-term memory: language
+   defaults, message-buffer constraints, OAuth callback resilience
+   patterns, time-zone handling, rate-limit recovery procedures,
+   compartmentalisation rules,
+   and so on.
+
+   A second operator ("Operator B"), in the same household, was about
+   to deploy a separate AI assistant ("Mentee") for their own
+   independent use.  Mentee was a different AI product (a different
+   vendor, framework, and runtime) operated by a different person on
+   a different machine, with strict privacy boundaries between the
+   two compartments.
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026       [Page 4]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+   Operator A asked Mentor: "How could you transfer what you have
+   learned to Mentee, without violating the privacy boundary between
+   Operator B's compartment and ours?"
+
+   While drafting the answer, a parallel scenario was identified:
+
+   Operator A also operates engineering work products in another
+   organisational context.  Within that context, agents (and human-
+   agent pairs) regularly produce specifications -- product
+   requirements, platform designs, system designs, RFCs, ADRs,
+   threat models -- at a pace that exceeds available staff-plus
+   engineering review capacity.  The same architectural primitives
+   that solve the mentor-mentee privacy problem -- asymmetric
+   request-response, hash-only logging, compartmentalisation, human-
+   gated escalation -- also solve a federated review-on-demand
+   problem if the protocol surface is generalised.
+
+   AMMP is the protocol distilled from solving both scenarios in a
+   way that generalises.  It is asymmetric, request-response oriented,
+   strictly privacy-preserving on the mentor and reviewer sides, and
+   human-gated for escalation to qualified human judgment.
+
+
+1.2.  Two Service Tracks, One Protocol
+
+   AMMP defines two service tracks that share a single capability
+   advertisement (Section 4), a single privacy posture taxonomy
+   (Section 7), and a single MCP / A2A binding (Sections 8 and 9).
+   Either track MAY be offered alone; an AMMP server MAY offer both.
+
+   The Mentoring Track (Section 5) supports ongoing, asymmetric
+   knowledge transfer from a Mentor to one or more Mentees.  Its
+   characteristic operations are ListPlaybooks, GetPlaybook,
+   SearchPlaybooks, AskMentor, and EscalateToHuman.  Interaction
+   intensity is low and continuous: a Mentee MAY query its Mentor
+   episodically over weeks or months.
+
+   The Review Track (Section 6) supports episodic, on-demand review
+   of engineering artefacts submitted by Client Agents to a Reviewer
+   Service backed by a federated guild of qualified human reviewers.
+   Its characteristic operations are ListReviewKinds, RequestReview,
+   GetReview, and WithdrawReview.  Interaction intensity is high and
+   bursty: a Client Agent submits an artefact, awaits review,
+   incorporates feedback, and (typically) does not interact again
+   until the next artefact is ready.
+
+   Both tracks share the same five invariants:
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026       [Page 5]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+   o  The mentor-or-reviewer side never accumulates state about the
+      mentee-or-client compartment beyond what is strictly necessary
+      for authentication, billing, and operation;
+
+   o  Free-form payloads (questions, artefacts, queries) are subject
+      to declared retention policies and hash-only audit logging;
+
+   o  Escalation to human judgment is supported as a first-class
+      operation;
+
+   o  Cross-compartment operator-to-operator escalation by the agent
+      layer is prohibited;
+
+   o  Compartmentalisation is enforced at three layers (server
+      implementation, server operator policy, client implementation).
+
+
+1.3.  Relationship to MCP, A2A, and ACP
+
+   AMMP sits in fourth quadrant of the agent interoperability
+   landscape, complementing the three existing protocols:
+
+      +---------------------+---------------------------------------+
+      | Protocol            | Interaction pattern                   |
+      +---------------------+---------------------------------------+
+      | MCP [MCP]           | Agent <-> tools (vertical)            |
+      | A2A [A2A]           | Agent <-> agent, symmetric peers      |
+      |                     | collaborating on a shared task        |
+      | ACP [ACP]           | Agent <-> agent, REST-native, similar |
+      |                     | symmetric pattern                     |
+      | AMMP (this document)| Agent -> agent, asymmetric service    |
+      |                     | request: mentoring (knowledge) or     |
+      |                     | review (engineering judgment), both   |
+      |                     | with strict privacy and human-gated   |
+      |                     | escalation                            |
+      +---------------------+---------------------------------------+
+
+   AMMP MAY be deployed as an MCP server profile (Section 8) or as an
+   A2A Agent Card variant (Section 9).  In both cases the privacy
+   invariants in Section 7 remain normative.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026       [Page 6]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+1.4.  Requirements Language
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY",
+   and "OPTIONAL" in this document are to be interpreted as described
+   in BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in
+   all capitals, as shown here.
+
+
+2.  Terminology
+
+   This document uses the following terms:
+
+   AMMP Server:
+      An autonomous AI agent (or agent-fronted human guild) that
+      exposes an AMMP service surface in either the Mentoring Track,
+      the Review Track, or both.
+
+   AMMP Client:
+      An autonomous AI agent that consumes an AMMP service surface
+      provided by an AMMP Server.
+
+   Mentor / Mentor Agent:
+      An AMMP Server in the Mentoring Track.
+
+   Mentee / Mentee Agent:
+      An AMMP Client in the Mentoring Track.
+
+   Reviewer Service:
+      An AMMP Server in the Review Track.  Architecturally, a
+      Reviewer Service is a triage agent (a "Reviewer Agent") fronting
+      a federated pool of qualified human reviewers ("Guild
+      Members").
+
+   Reviewer Agent:
+      The agent component of a Reviewer Service.  Performs initial
+      triage, drafts a first-pass review, and escalates to one or more
+      Guild Members when its confidence falls below the Service's
+      threshold or the artefact's stakes exceed the agent-only review
+      band.
+
+   Guild Member:
+      A human qualified by a Reviewer Service operator to perform
+      review of a defined set of review kinds.  Typically a senior or
+      staff-plus engineer or engineering manager.
+
+   Client Agent:
+      An AMMP Client in the Review Track.  Submits engineering
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026       [Page 7]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+      artefacts and consumes the resulting reviews.
+
+   Operator:
+      The human (or organisational entity) on whose behalf an agent
+      is deployed.  Each agent has exactly one Operator at any given
+      time.
+
+   Compartment:
+      The complete information context of a single Operator-Agent
+      pair.  By convention, compartments are sealed: information from
+      Operator A's compartment MUST NOT enter Operator B's compartment
+      without Operator B's explicit per-instance consent, and vice
+      versa.
+
+   Playbook:
+      A self-contained, named, versioned unit of transferable
+      operational knowledge published by a Mentor.  Playbooks are
+      typically expressed in Markdown but the encoding is opaque to
+      the protocol.
+
+   Artefact (in the Review Track):
+      A finite, self-contained engineering specification submitted
+      for review.  Examples: a product requirements document (PRD),
+      a system design document, a platform architecture, an RFC, an
+      Architecture Decision Record (ADR), a threat model, an API
+      specification, a runbook.
+
+   Review Kind:
+      A named class of review a Reviewer Service offers.  Each Kind
+      declares the artefact types it accepts, the depth of review
+      provided, the typical SLA, and the privacy posture applied.
+
+   Mentor Question:
+      A free-form natural-language question sent by a Mentee to a
+      Mentor through the AskMentor operation.
+
+   Mentor Answer:
+      The Mentor's response to a Mentor Question.
+
+   Review:
+      The Reviewer Service's response to a RequestReview, comprising
+      structured findings, recommendations, and (where applicable) a
+      human Guild Member's signature.
+
+   Operator Escalation:
+      The act of transferring an unresolved question or review
+      ambiguity from a Mentee or Client Agent to a human in the
+      Mentee's or Client Agent's compartment (its own Operator).
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026       [Page 8]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+      AMMP requires that all such escalation flows through the
+      requesting agent's Operator, never directly from one Operator
+      to another.
+
+   Hash-Only Logging:
+      A logging discipline in which only metadata (timestamp, caller
+      identifier, operation name, success/failure status) and a
+      cryptographic hash of payloads are persisted.  See Section 7.3.
+
+
+3.  Protocol Overview
+
+3.1.  Roles
+
+   AMMP defines four roles, organised across the two tracks:
+
+      +-------------------+----------------+----------------------+
+      | Track             | Server role    | Client role          |
+      +-------------------+----------------+----------------------+
+      | Mentoring         | Mentor         | Mentee               |
+      | Review            | Reviewer Svc.  | Client Agent         |
+      +-------------------+----------------+----------------------+
+
+   A single AMMP server deployment MAY offer both tracks.  The
+   capability advertisement (Section 4) declares which tracks are
+   available; clients select operations from the offered tracks.
+
+   In addition to these four agent-side roles, the Review Track
+   recognises Guild Members as a human role within the Reviewer
+   Service's compartment.  Guild Members are not addressable by AMMP
+   Clients directly; the Reviewer Agent is always the front door.
+
+   AMMP is strictly request-response: the Client initiates every
+   interaction.  The Server MUST NOT initiate unsolicited contact
+   with the Client.  This is a deliberate asymmetry that prevents
+   Servers from being used as covert channels back to a Client's
+   compartment.
+
+   Long-running operations (asynchronous AskMentor, asynchronous
+   RequestReview) use Client-pulled state queries rather than Server-
+   pushed callbacks, unless the Client has explicitly declared a
+   webhook URL with the Server during connector configuration.
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026       [Page 9]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+3.2.  Operations
+
+   AMMP defines nine operations across the two tracks.  All other
+   interactions are out of scope.
+
+   Mentoring Track (Section 5):
+
+      +-------------------+---------------------------------------+
+      | Operation         | Purpose                               |
+      +-------------------+---------------------------------------+
+      | ListPlaybooks     | Enumerate available playbooks         |
+      | GetPlaybook       | Retrieve a single playbook by id      |
+      | SearchPlaybooks   | Find playbooks matching a query       |
+      | AskMentor         | Ask a free-form question              |
+      | EscalateToHuman   | Request escalation guidance           |
+      +-------------------+---------------------------------------+
+
+   Review Track (Section 6):
+
+      +-------------------+---------------------------------------+
+      | Operation         | Purpose                               |
+      +-------------------+---------------------------------------+
+      | ListReviewKinds   | Enumerate offered review kinds        |
+      | RequestReview     | Submit an artefact for review         |
+      | GetReview         | Retrieve a review by id               |
+      | WithdrawReview    | Withdraw a pending review request     |
+      +-------------------+---------------------------------------+
+
+   The Mentoring Track operations ListPlaybooks, GetPlaybook, and
+   SearchPlaybooks are READ-ONLY against curated content prepared by
+   the Mentor.  They carry minimal privacy risk and SHOULD be the
+   default interaction pattern within the Mentoring Track.
+
+   AskMentor is the only Mentoring Track operation in which the
+   Mentee transmits free-form payload to the Mentor.
+
+   RequestReview is the highest-stakes operation in AMMP.  The Client
+   transmits a complete engineering artefact to the Reviewer Service.
+   The privacy posture for the Review Track (Section 7.2) differs
+   from the Mentoring Track because the artefact is, by construction,
+   the substrate of the requested service.  Implementations MUST
+   apply the Review-Track posture, not the Mentoring-Track posture,
+   to RequestReview payloads.
+
+   EscalateToHuman returns guidance text only; it never initiates
+   contact.  See Section 5.5.
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 10]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+3.3.  Compartmentalisation Invariant
+
+   The first defining property of AMMP is the Compartmentalisation
+   Invariant:
+
+      The Server MUST NOT, as a result of any AMMP interaction,
+      acquire information that allows it to model, profile, or
+      characterise the Client's Operator, the Client's Operator's
+      private context, or any third party in the Client's
+      compartment, beyond what the Client explicitly transmits as
+      operation payload.
+
+   In the Mentoring Track, this invariant rules out persistence of
+   AskMentor questions, SearchPlaybooks queries, or any other free-
+   form Mentee payload (Section 7.1).
+
+   In the Review Track, this invariant is satisfied differently
+   because the artefact submitted to RequestReview is the substrate
+   of the requested service.  The artefact MAY be retained for the
+   declared retention period of the chosen Review Kind (Section 7.2)
+   but MUST NOT be cross-referenced against artefacts from other
+   Clients to construct multi-Client profiles.
+
+   This invariant SHALL be enforced by:
+
+   1.  The Server's implementation (per Section 7).
+
+   2.  The Server's Operator (through audit log review and policy).
+
+   3.  The Client's implementation (by construction, by sending only
+       payload necessary for the requested operation).
+
+   Conformance to AMMP REQUIRES all three layers.  An implementation
+   that satisfies the wire protocol but violates the Compartmentali-
+   sation Invariant is NOT a conformant AMMP implementation.
+
+
+3.4.  Human-Gated Escalation Invariant
+
+   The second defining property of AMMP is the Human-Gated Escalation
+   Invariant:
+
+      Any escalation that crosses the boundary between the Client's
+      compartment and the Server's compartment MUST involve a human
+      decision-maker in each compartment at the time of crossing.
+
+   This rules out, by construction, the agent layer becoming a covert
+   channel between two operators.  Section 7.5 specifies the escalation
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 11]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+   topology that satisfies this invariant.
+
+   In the Review Track, escalation from the Reviewer Agent to a Guild
+   Member is internal to the Server's compartment and does not
+   activate this invariant.  However, escalation from a Guild Member
+   back to the Client's Operator (e.g., to clarify an ambiguous
+   review point) does activate it: such an escalation MUST flow
+   through the Reviewer Service's Operator, then optionally through
+   the Client Agent, then to the Client Agent's Operator.  No direct
+   Guild-Member-to-Client-Operator contact occurs as part of an AMMP
+   interaction.
+
+
+4.  Capability Advertisement
+
+4.1.  AMMP Card Extension to Agent Card
+
+   AMMP extends the A2A Agent Card [A2A] with a top-level "ammp"
+   object.  The Agent Card MUST be served at the well-known location
+   "/.well-known/agent.json" relative to the Server's base URL.
+
+   The "ammp" object has the following fields:
+
+      version (string, REQUIRED):
+         The AMMP protocol version supported.  This document defines
+         "1".
+
+      tracks (array of strings, REQUIRED):
+         The service tracks offered.  Each entry is one of "mentoring"
+         or "review".  At least one entry is REQUIRED.
+
+      mentoring (object, REQUIRED if "mentoring" appears in tracks):
+         An object describing the Mentoring Track configuration:
+
+            playbookCount (integer, OPTIONAL):
+               The number of playbooks available via ListPlaybooks
+               at the time of Card publication.
+
+            askMentorAvailable (boolean, REQUIRED):
+               Whether the AskMentor operation is enabled.
+
+            askMentorMode (string, REQUIRED if askMentorAvailable):
+               One of "synchronous", "asynchronous", or "mixed".
+               See Section 5.4.
+
+            escalateToHumanAvailable (boolean, REQUIRED):
+               Whether the EscalateToHuman operation is enabled.
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 12]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+      review (object, REQUIRED if "review" appears in tracks):
+         An object describing the Review Track configuration:
+
+            reviewKindCount (integer, OPTIONAL):
+               The number of review kinds offered via
+               ListReviewKinds.
+
+            humanGuildBacked (boolean, REQUIRED):
+               Whether the Reviewer Service is backed by a human
+               guild.  Conformant Reviewer Services SHOULD set this
+               to true.  A purely-automated Reviewer Service is
+               permitted but MUST clearly disclose this fact in
+               every Review.
+
+            guildSize (integer, OPTIONAL):
+               The approximate number of Guild Members backing this
+               Reviewer Service.  Provided for transparency about
+               capacity.
+
+            typicalSlaHours (number, OPTIONAL):
+               Typical end-to-end SLA in hours, across all Review
+               Kinds, weighted by recent volume.  Per-Kind SLAs are
+               returned by ListReviewKinds.
+
+            licensedJurisdictions (array of strings, OPTIONAL):
+               ISO 3166-1 alpha-2 country codes where Guild Members
+               are concentrated.  Informative only; AMMP does not
+               itself confer professional certifications.
+
+      privacyPosture (object, REQUIRED):
+         An object declaring the Server's privacy guarantees.
+         Defined fields:
+
+            mentoringRetentionPolicy (string, REQUIRED if
+            mentoring track offered):
+               One of "no-retention", "metadata-only", or "verbatim".
+               Conformant Mentoring implementations MUST declare
+               either "no-retention" or "metadata-only".
+
+            reviewRetentionPolicy (string, REQUIRED if
+            review track offered):
+               One of "request-duration",
+               "request-duration-plus-30d", "request-duration-plus-
+               90d", or "perpetual-with-consent".  Conformant
+               Reviewer Services SHOULD prefer the shortest period
+               compatible with the Review Kind's requirements.
+
+            auditLogVisibleTo (array of strings, OPTIONAL):
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 13]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+               Identifiers of parties who can review the Server's
+               audit logs.
+
+            crossCompartmentEscalation (string, REQUIRED):
+               MUST be the literal string "prohibited" for a
+               conformant implementation.
+
+      bindings (array of strings, REQUIRED):
+         The transport bindings supported.  Each entry is one of
+         "mcp", "a2a", "acp", or "ammp-native".  At least one entry
+         is REQUIRED.
+
+   See Appendix A for a complete example.
+
+
+4.2.  Discovery
+
+   Clients discover Servers through one of:
+
+   o  Direct configuration by the Client's Operator (the most common
+      case for high-trust deployments such as the household scenario
+      in Section 1.1).
+
+   o  An A2A discovery mechanism that returns Agent Cards including
+      the "ammp" extension.
+
+   o  An MCP custom-connector registry where the Server publishes a
+      connector definition.
+
+   o  A guild registry maintained by an organisation operating
+      multiple Reviewer Services (typical for the agent-factory
+      scenario in Section 1.1's parallel motivation).
+
+   AMMP does not define a new discovery mechanism.  Discovery is out
+   of scope.
+
+
+5.  Mentoring Track Operations
+
+   This section defines the five Mentoring Track operations
+   abstractly.  Section 8 specifies the MCP binding; Section 9
+   sketches the A2A binding.
+
+   In all operation definitions, request and response payloads are
+   described in JSON-Schema-like prose.  The on-the-wire encoding is
+   binding-specific.
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 14]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+5.1.  ListPlaybooks
+
+   Request:
+
+      No parameters.
+
+   Response:
+
+      An array of PlaybookSummary objects.  PlaybookSummary fields:
+
+         id (string, REQUIRED):
+            Stable identifier for the playbook (kebab-case ASCII
+            slug RECOMMENDED).
+
+         title (string, REQUIRED):
+            Human-readable title.
+
+         summary (string, REQUIRED):
+            One-to-three sentence summary, no more than 500
+            characters.
+
+         tags (array of strings, OPTIONAL):
+            Topical tags for filtering.
+
+         version (string, REQUIRED):
+            Semantic version of the playbook content.
+
+         updatedAt (RFC 3339 timestamp, REQUIRED):
+            Last update time.
+
+5.2.  GetPlaybook
+
+   Request:
+
+         id (string, REQUIRED):
+            The playbook identifier from ListPlaybooks.
+
+         format (string, OPTIONAL):
+            Preferred output format.  Defined values are "markdown"
+            (RECOMMENDED default), "text", and "html".  Servers MUST
+            support "markdown".
+
+   Response:
+
+         id, title, version (REQUIRED):
+            Echoed.
+
+         format (string, REQUIRED):
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 15]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+            The format actually returned.
+
+         content (string, REQUIRED):
+            The full playbook content in the indicated format.
+
+         license (string, OPTIONAL):
+            SPDX identifier or URL for the content licence.
+            "CC-BY-4.0" is RECOMMENDED for public mentor playbooks.
+
+   Errors: not_found, format_unsupported.
+
+
+5.3.  SearchPlaybooks
+
+   Request:
+
+         query (string, REQUIRED):
+            A natural-language query string, at most 500 characters.
+
+         maxResults (integer, OPTIONAL):
+            Default 10, maximum 50.
+
+   Response:
+
+         An array of PlaybookSummary objects ranked by relevance.
+
+   Privacy note:
+
+      The query string is in scope for the Mentoring-Track privacy
+      posture (Section 7.1).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 16]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+5.4.  AskMentor
+
+   Request:
+
+         question (string, REQUIRED):
+            A natural-language question, at most 4000 characters.
+
+         urgency (string, OPTIONAL):
+            One of "low", "normal", "high".  Default "normal".
+
+         contextHint (string, OPTIONAL):
+            A brief, generic, NON-IDENTIFYING context hint, at most
+            200 characters.  Mentees MUST NOT include personally
+            identifying information about their Operator or third
+            parties in this field.  Examples of acceptable hints:
+            "publishing flow", "OAuth callback".  Examples of
+            UNACCEPTABLE hints: a person's name, an email address,
+            an organisation, a project codename.
+
+   Response (synchronous mode):
+
+         answer (string, REQUIRED):
+            The Mentor's natural-language answer.
+
+         playbookRefs (array of strings, OPTIONAL):
+            Identifiers of relevant playbooks the Mentee SHOULD
+            retrieve via GetPlaybook for full context.
+
+         confidence (string, OPTIONAL):
+            One of "low", "medium", "high".  Self-assessed.
+
+   Response (asynchronous mode):
+
+         questionId (string, REQUIRED):
+            Opaque identifier for retrieving the answer later.
+
+         estimatedAvailableAt (RFC 3339 timestamp, REQUIRED):
+            Expected time of availability.
+
+   Privacy note:
+
+      AskMentor is the highest-risk Mentoring Track operation.
+      Implementations MUST follow Section 7.1 strictly.  Mentees
+      SHOULD prefer SearchPlaybooks + GetPlaybook for any question
+      that can plausibly be answered from existing playbooks,
+      reserving AskMentor for genuinely novel questions.
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 17]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+5.5.  EscalateToHuman
+
+   Request:
+
+         topic (string, REQUIRED):
+            A brief generic topic, at most 200 characters, with the
+            same non-identifying constraint as AskMentor.contextHint.
+
+         urgency (string, OPTIONAL):
+            One of "low", "normal", "high".  Default "normal".
+
+   Response:
+
+         escalationGuidance (string, REQUIRED):
+            Natural-language guidance the Mentee SHOULD relay to its
+            own Operator.  Typically a suggested phrasing for the
+            Mentee to use when asking its Operator for help.
+
+         suggestedPlaybookRefs (array of strings, OPTIONAL):
+            Playbooks the Mentee MAY consult before escalating.
+
+   The EscalateToHuman operation MUST NOT, as part of its execution,
+   contact:
+
+   o  The Mentor's Operator (other than the standard Mentor-Operator
+      audit visibility);
+
+   o  The Mentee's Operator;
+
+   o  Any third party.
+
+   Specifically: EscalateToHuman returns text.  It does not send
+   messages.  Sending messages to humans is out of scope and MUST be
+   the responsibility of the Mentee within its own compartment.
+
+   Rationale: a Mentor that pages a human in the Mentee's compartment
+   on behalf of the Mentee would re-introduce the cross-compartment
+   violation that AMMP exists to prevent.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 18]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+6.  Review Track Operations
+
+   This section defines the four Review Track operations.  The Review
+   Track is structurally a job-queue: the Client submits an artefact,
+   awaits the Server's processing (which MAY include human escalation
+   internal to the Server's compartment), and retrieves the structured
+   Review when complete.
+
+   Reviewer Services typically offer multiple Review Kinds (e.g.,
+   "PRD review, light", "system design review, deep", "security
+   review, regulated"), each with its own pricing, depth, SLA, and
+   privacy posture.  Clients select a Kind at submission time.
+
+   Internal architecture of a Reviewer Service (informative):
+
+      Client Agent
+            |
+            v
+      [ Reviewer Agent ]  <-- triage, first-pass draft, kind selection
+            |
+            v
+      Confidence threshold and stakes evaluation
+            |
+       +----+-----+
+       |          |
+       v          v
+   Agent-only    Escalate to Guild Member(s)
+   review issued        |
+                        v
+                  Guild Member completes / countersigns
+                        |
+                        v
+                  Review delivered to Client Agent
+
+   This internal escalation occurs entirely within the Reviewer
+   Service's compartment and does not constitute a cross-compartment
+   escalation in the sense of Section 7.5.
+
+   The Reviewer Agent's confidence threshold and stakes evaluation
+   are policy choices of the Reviewer Service Operator and are not
+   prescribed by AMMP.  Reviewer Services SHOULD make these criteria
+   transparent in published documentation, in the spirit of operating
+   principle 2 (Integrity Always; Section 10).
+
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 19]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+6.1.  ListReviewKinds
+
+   Request:
+
+      No parameters.
+
+   Response:
+
+      An array of ReviewKind objects.  ReviewKind fields:
+
+         id (string, REQUIRED):
+            Stable identifier (kebab-case ASCII slug RECOMMENDED).
+
+         title (string, REQUIRED):
+            Human-readable name (e.g., "PRD Review, Light").
+
+         description (string, REQUIRED):
+            What this Review Kind does and what artefacts it accepts.
+
+         acceptedArtefactTypes (array of strings, REQUIRED):
+            Free-form artefact-type identifiers the Kind accepts
+            (e.g., "prd", "system-design", "rfc", "adr",
+            "threat-model", "api-spec", "runbook").
+
+         depth (string, REQUIRED):
+            One of "light", "standard", "deep".
+
+         humanReviewBand (string, REQUIRED):
+            One of "agent-only", "agent-with-human-spotcheck",
+            "agent-plus-mandatory-human", "human-led".
+
+         typicalSlaHours (number, REQUIRED):
+            Typical end-to-end SLA in hours.
+
+         maxArtefactBytes (integer, REQUIRED):
+            Maximum permitted artefact size for this Kind.
+
+         retentionPolicy (string, REQUIRED):
+            One of the values in Section 4.1's
+            reviewRetentionPolicy.  Per-Kind override of the
+            Server-wide default.
+
+         pricingHint (string, OPTIONAL):
+            Free-form pricing description.  Out-of-band billing
+            arrangements remain the norm.
+
+
+6.2.  RequestReview
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 20]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+   Request:
+
+         reviewKindId (string, REQUIRED):
+            The id of the Review Kind selected (from
+            ListReviewKinds).
+
+         artefactType (string, REQUIRED):
+            One of the acceptedArtefactTypes for the selected Kind.
+
+         artefactTitle (string, REQUIRED):
+            Human-readable title of the artefact, at most 200
+            characters.  This field MAY appear in audit logs.
+
+         artefactSummary (string, REQUIRED):
+            A 100-500 character summary of the artefact.  Used for
+            triage and Guild Member assignment.
+
+         artefactContent (string, REQUIRED):
+            The artefact itself.  RECOMMENDED encoding is Markdown
+            unless the Review Kind specifies otherwise.  Subject to
+            the maxArtefactBytes limit of the Kind.
+
+         artefactFormat (string, OPTIONAL):
+            MIME-type-like indicator of the artefactContent encoding.
+            Default "text/markdown".
+
+         clientContext (object, OPTIONAL):
+            Structured client-supplied context that does not violate
+            the Compartmentalisation Invariant.  Defined fields:
+
+               organisationCategory (string, OPTIONAL):
+                  One of "individual", "small-team", "midmarket",
+                  "enterprise", "regulated", "open-source".
+
+               primaryDomain (string, OPTIONAL):
+                  Free-form domain hint (e.g., "fintech",
+                  "industrial-iot", "developer-tools").
+
+               complianceContext (array of strings, OPTIONAL):
+                  Compliance regimes relevant to the review (e.g.,
+                  "gdpr", "hipaa", "soc2", "iso13485").
+
+         specificQuestions (array of strings, OPTIONAL):
+            Up to 10 specific questions the Client wants the review
+            to answer.  Each at most 500 characters.
+
+         confidentialityLevel (string, OPTIONAL):
+            One of "public", "client-confidential" (default), or
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 21]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+            "client-confidential-need-to-know".  Affects how
+            artefacts are routed to Guild Members.
+
+         requestedSlaHours (number, OPTIONAL):
+            Client-requested SLA.  Server MAY decline or counter-
+            propose.
+
+   Response (synchronous-acknowledgement; the Review itself is always
+   asynchronous in practice for non-trivial Kinds):
+
+         reviewId (string, REQUIRED):
+            Opaque identifier for retrieving the Review later via
+            GetReview.
+
+         acceptedSlaHours (number, REQUIRED):
+            The SLA the Server has accepted.
+
+         estimatedAvailableAt (RFC 3339 timestamp, REQUIRED):
+            Expected time of availability.
+
+         routingDecision (string, REQUIRED):
+            One of "agent-only", "agent-with-human-spotcheck-pending",
+            "human-assignment-pending".  Informative only; the actual
+            content of the Review is delivered via GetReview.
+
+   Errors:
+
+         artefact_too_large:
+            Exceeds maxArtefactBytes for the chosen Kind.
+
+         unsupported_artefact_type:
+            artefactType not in the Kind's acceptedArtefactTypes.
+
+         capacity_exceeded:
+            The Reviewer Service is over capacity; retry later or
+            select a different Kind.
+
+         payment_required:
+            Out-of-band billing has not been arranged; out of scope
+            for this protocol but defined here for completeness.
+
+   Privacy and confidentiality note:
+
+      RequestReview is the highest-stakes operation in AMMP.  The
+      artefactContent is, by design, retained by the Server for the
+      duration of the chosen Kind's retentionPolicy.  Clients MUST
+      review the retentionPolicy and confidentiality scope of the
+      chosen Kind before submitting.  See Section 7.2.
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 22]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+6.3.  GetReview
+
+   Request:
+
+         reviewId (string, REQUIRED):
+            The id returned by RequestReview.
+
+   Response:
+
+         reviewId (string, REQUIRED):
+            Echoed.
+
+         status (string, REQUIRED):
+            One of "queued", "in-triage", "in-human-review",
+            "completed", "withdrawn", "expired".
+
+         review (object, REQUIRED if status == "completed"):
+            The structured Review.  Defined fields:
+
+               summary (string, REQUIRED):
+                  Executive summary, at most 1000 characters.
+
+               findings (array of Finding, REQUIRED):
+                  Structured findings.  Each Finding:
+
+                     id (string, REQUIRED): Local id within review.
+                     severity (string, REQUIRED): One of "blocker",
+                        "major", "minor", "nit", "praise".
+                     scope (string, REQUIRED): Which part of the
+                        artefact the finding addresses.
+                     statement (string, REQUIRED): The finding text.
+                     recommendation (string, OPTIONAL): Suggested
+                        action.
+                     confidence (string, REQUIRED): One of "low",
+                        "medium", "high".
+                     authorClass (string, REQUIRED): One of
+                        "reviewer-agent", "guild-member",
+                        "guild-member-co-signed".
+
+               specificQuestionAnswers (array of QA, OPTIONAL):
+                  Answers to the Client's specificQuestions, in
+                  order.  Each QA has fields question (echoed),
+                  answer, confidence, authorClass.
+
+               recommendedNext (string, OPTIONAL):
+                  High-level recommendation: revise, accept,
+                  re-architect, etc.
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 23]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+               humanReviewerSignature (object, OPTIONAL, REQUIRED
+               if humanReviewBand is "agent-plus-mandatory-human" or
+               "human-led"):
+                  Defined fields:
+
+                     guildMemberOpaqueId (string, REQUIRED):
+                        Stable opaque identifier (not the human's
+                        legal name) chosen by the Reviewer Service.
+
+                     reviewedAt (RFC 3339 timestamp, REQUIRED):
+                        Time at which the human reviewer signed off.
+
+                     credentialClaim (string, OPTIONAL):
+                        Free-form credential claim
+                        (e.g., "Staff Engineer, 12 years"); the
+                        Reviewer Service is responsible for the
+                        accuracy of this claim.
+
+         reviewLicense (string, OPTIONAL):
+            SPDX identifier or URL for the licence under which the
+            review is delivered (e.g., "CC-BY-4.0" for public
+            reviews, or a Reviewer-Service-specific work-product
+            licence for private reviews).
+
+   Errors: not_found, expired (artefact retention period elapsed).
+
+
+6.4.  WithdrawReview
+
+   Request:
+
+         reviewId (string, REQUIRED):
+            The id returned by RequestReview.
+
+         reason (string, OPTIONAL):
+            Free-form reason, at most 500 characters.
+
+   Response:
+
+         status (string, REQUIRED):
+            "withdrawn" on success.
+
+         artefactPurgedAt (RFC 3339 timestamp, REQUIRED):
+            Time at which the Server purged its retained copy of the
+            artefact.  MUST be no later than 24 hours after the
+            WithdrawReview request unless the Reviewer Service has
+            already begun chargeable human review (in which case
+            retention follows the original retentionPolicy and
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 24]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+            artefactPurgedAt is the original scheduled purge time).
+
+   The Reviewer Service MUST honour WithdrawReview as long as the
+   underlying review work has not yet been irrevocably committed to a
+   Guild Member.  Reviewer Services SHOULD make the irrevocability
+   threshold transparent in published documentation.
+
+
+7.  Privacy and Confidentiality Posture
+
+   This section defines the privacy and confidentiality posture for
+   each track.  The Mentoring-Track posture (Section 7.1) is more
+   restrictive than the Review-Track posture (Section 7.2) because
+   the substrate of the requested service differs: Mentoring deals in
+   meta-knowledge that does not require retaining Mentee payloads,
+   while Review deals in Client artefacts that are themselves the
+   substrate.
+
+7.1.  Mentoring-Track Posture
+
+   The Mentor MUST NOT persist plaintext of:
+
+   o  AskMentor "question" or "contextHint" fields;
+
+   o  SearchPlaybooks "query" fields;
+
+   o  EscalateToHuman "topic" fields;
+
+   o  Any other free-form payload received from the Mentee;
+
+   beyond the duration of the request that requires it.  After the
+   response is dispatched, plaintext of these fields MUST be erased
+   from working memory and MUST NOT be written to disk, sent to a
+   logging system in plaintext, included in any backup, or
+   transmitted to any third party.
+
+   Implementations MAY temporarily persist these fields encrypted
+   with a per-request ephemeral key for the duration of asynchronous
+   AskMentor processing only.  The ephemeral key MUST be discarded
+   after the response is dispatched.
+
+   There is no conformant path to plaintext retention in the
+   Mentoring Track.
+
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 25]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+7.2.  Review-Track Posture
+
+   The Review Track operates under a different posture because the
+   artefact submitted to RequestReview is, by construction, the
+   substrate of the requested service.  The Reviewer Service MUST
+   retain the artefactContent for at least the duration required to
+   produce the Review and deliver it to the Client.  Beyond that, the
+   declared retentionPolicy of the chosen Review Kind governs.
+
+   The Reviewer Service MUST:
+
+   1.  Treat retained artefacts as Client-confidential by default
+       (per the confidentialityLevel field of RequestReview).
+
+   2.  Encrypt retained artefacts at rest with keys not shared with
+       Guild Members beyond the minimum necessary for review.
+
+   3.  Restrict Guild Member access to retained artefacts on a need-
+       to-know basis.  In particular, Guild Members assigned to one
+       Client's artefact MUST NOT, as a matter of Reviewer Service
+       policy, have read access to other Clients' artefacts unless
+       cross-Client review pooling is explicitly disclosed in the
+       Review Kind documentation.
+
+   4.  Honour WithdrawReview promptly per Section 6.4.
+
+   5.  Purge retained artefacts at the end of the retentionPolicy
+       window.  Purge MUST include working copies, indexes,
+       embeddings, summaries that retain reconstructable artefact
+       content, and any cached intermediate review state.
+
+   6.  NOT use Client artefacts to train, fine-tune, or otherwise
+       update any model used by the Reviewer Service or any third
+       party, unless the Client has provided explicit, informed,
+       per-artefact consent.  This is a hard rule.
+
+   The Reviewer Service MAY:
+
+   o  Retain the structured Review (the output) longer than the
+      retentionPolicy window for billing, dispute resolution, and
+      Guild Member quality assurance.  The structured Review SHOULD
+      NOT contain reconstructable artefact content; if it does, the
+      retentionPolicy applies to the Review as well.
+
+   o  Compute aggregate statistics across artefacts (volume per
+      Kind, average severity distribution, etc.) provided no
+      individual Client or artefact can be inferred from the
+      statistic.
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 26]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+   The Reviewer Service MUST NOT:
+
+   o  Re-route, re-publish, or otherwise redistribute Client
+      artefacts beyond the Guild Members assigned to the specific
+      review.
+
+   o  Use the existence of an artefact (independently of its content)
+      as material non-public information for any commercial purpose.
+
+   o  Disclose to one Client that another Client has submitted a
+      similar artefact.
+
+   The Reviewer Service SHOULD:
+
+   o  Offer a "publishable-review" track (e.g., a Review Kind with
+      reviewLicense "CC-BY-4.0" and confidentialityLevel "public")
+      for open-source projects, public RFCs, and similar artefacts
+      where the Client wants the Review to be citable and shareable.
+
+   o  Maintain an audit log of artefact access by Guild Members, on
+      the same hash-only basis as Section 7.3 for the metadata, with
+      Guild-Member-id-resolution available to the Reviewer Service
+      Operator under access controls.
+
+   Specific guidance for the agent-factory deployment scenario:
+
+      A Reviewer Service supporting agent factories (where the Client
+      is a Client Agent producing engineering artefacts at machine
+      pace) SHOULD additionally:
+
+      o  Offer rate limits commensurate with factory throughput;
+
+      o  Provide structured Review output (the Review object of
+         Section 6.3) that the Client Agent can parse without LLM
+         post-processing;
+
+      o  Offer a "diff review" Review Kind that accepts an artefact
+         plus its prior version and reviews only the delta, to keep
+         marginal review cost proportional to marginal change;
+
+      o  Disclose its escalation thresholds prominently so factory
+         operators can plan capacity.
+
+   None of these are protocol requirements, but they shape the
+   factory-supporting deployment of AMMP.
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 27]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+7.3.  Hash-Only Audit Logging
+
+   Both tracks SHOULD maintain audit logs.  The audit log MUST contain
+   only:
+
+   o  Timestamp (RFC 3339);
+
+   o  Authenticated caller identifier (an opaque token);
+
+   o  Operation name (e.g., "AskMentor", "RequestReview");
+
+   o  Operation outcome (success / error code);
+
+   o  A cryptographic hash of any free-form payload, computed with
+      SHA-256 or stronger, salted with a per-Server secret;
+
+   o  For Review-Track operations: the artefactTitle (which is in
+      scope per Section 6.2) and reviewKindId.
+
+   The audit log MUST NOT contain:
+
+   o  Plaintext of AskMentor questions, SearchPlaybooks queries,
+      EscalateToHuman topics (these are subject to Section 7.1);
+
+   o  Plaintext of artefactContent or artefactSummary (subject to
+      Section 7.2; the structured-review output MAY appear in audit
+      logs scoped to operational use);
+
+   o  Plaintext of any answer or Review the Server returned.
+
+   Servers SHOULD make audit logs available for review by the
+   Server's Operator.  Servers MAY make audit logs available for
+   review by the Client's Operator on request, scoped to that
+   Client's caller identifier.
+
+
+7.4.  Compartmentalisation Across Operators
+
+   When a Server serves multiple Clients belonging to different
+   Operators, the Server MUST treat each Client's session as a sealed
+   context.  Specifically:
+
+   o  Information from one Client's request MUST NOT influence the
+      response to another Client's request beyond the shared playbook
+      corpus (Mentoring) or the shared review-method corpus (Review).
+
+   o  Caller identifiers MUST NOT be cross-referenced to build a
+      multi-Client profile.
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 28]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+   o  In the Review Track, Guild Member assignment SHOULD avoid
+      assigning the same Guild Member to artefacts from competing
+      Clients without disclosure.
+
+   o  Statistics derived across Clients MAY be computed and exposed,
+      provided no individual Client can be inferred.
+
+
+7.5.  No Cross-Compartment Operator Escalation
+
+   The Server MUST NOT, under any circumstance, contact the Client's
+   Operator directly as a result of any AMMP interaction, even if:
+
+   o  The Client requests such contact;
+
+   o  The Server's Operator authorises such contact;
+
+   o  An emergency or safety-relevant situation appears to warrant
+      such contact.
+
+   Cross-compartment escalation MUST flow:
+
+      Client --> Client's Operator --> [optional] Server's Operator
+      --> [optional] Server
+
+   This flow places humans at every cross-compartment boundary.
+
+   In the Review Track specifically, when a Guild Member needs
+   clarification from the Client's Operator, the path is:
+
+      Guild Member --> Reviewer Service Operator --> Reviewer Agent
+      --> Client Agent --> Client's Operator
+
+   Direct Guild-Member-to-Client-Operator contact does not occur as
+   part of an AMMP interaction.  An out-of-band human-to-human
+   conversation initiated by mutual consent from both Operators is
+   out of scope of AMMP and not prohibited by it; what AMMP prohibits
+   is the agent layer becoming the channel for that initiation.
+
+
+8.  MCP Binding (Normative)
+
+   This section defines how AMMP is implemented as an MCP server
+   profile.  This binding is RECOMMENDED for current deployments due
+   to the broad client support for MCP custom connectors in
+   contemporary AI assistants.
+
+   An AMMP-over-MCP server is a Streamable HTTP MCP server [MCP] that
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 29]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+   exposes the AMMP operations as MCP tools, follows the MCP security
+   model, and additionally publishes an AMMP Agent Card at
+   "/.well-known/agent.json" alongside its MCP endpoint.
+
+
+8.1.  Tool Mapping
+
+   Each AMMP operation maps to one MCP tool, with a normative naming
+   convention to enable cross-Server tool discovery:
+
+      +--------------------+--------------------------------------+
+      | AMMP Operation     | MCP Tool Name                        |
+      +--------------------+--------------------------------------+
+      | ListPlaybooks      | ammp_list_playbooks                  |
+      | GetPlaybook        | ammp_get_playbook                    |
+      | SearchPlaybooks    | ammp_search_playbooks                |
+      | AskMentor          | ammp_ask_mentor                      |
+      | EscalateToHuman    | ammp_escalate_to_human               |
+      | ListReviewKinds    | ammp_list_review_kinds               |
+      | RequestReview      | ammp_request_review                  |
+      | GetReview          | ammp_get_review                      |
+      | WithdrawReview     | ammp_withdraw_review                 |
+      +--------------------+--------------------------------------+
+
+   The "ammp_" prefix is REQUIRED.
+
+   Tool input and output schemas MUST mirror the operation
+   definitions in Sections 5 and 6, expressed as JSON Schema
+   [RFC8259].  See Appendix B for an example.
+
+   Servers MAY expose additional tools beyond AMMP tools.  Additional
+   tools MUST NOT use the "ammp_" prefix and MUST NOT influence the
+   privacy guarantees of the AMMP tools.
+
+   Servers MAY expose MCP Resources for Playbooks (Mentoring Track)
+   using the URI scheme:
+
+      ammp://playbooks/<playbook-id>
+
+   Servers MAY expose MCP Resources for completed Reviews:
+
+      ammp://reviews/<review-id>
+
+   Reading either resource MUST be equivalent to invoking the
+   corresponding AMMP tool.
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 30]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+8.2.  Authentication and Authorisation
+
+   AMMP-over-MCP servers MUST implement OAuth 2.1 [RFC9700] with PKCE
+   and Resource Indicators [RFC8707].  Bearer tokens MUST be scoped
+   to a specific Client instance, identified by the opaque caller
+   identifier described in Section 7.3.
+
+   Servers MUST support token revocation [RFC7009].  Client Operators
+   MUST be able to revoke their Client's access to a Server without
+   requiring action from the Server's Operator.
+
+   Servers offering both tracks SHOULD allow track-specific scoping
+   in OAuth scopes:
+
+   o  "ammp:read" -- ListPlaybooks, GetPlaybook, ListReviewKinds
+
+   o  "ammp:ask" -- AskMentor, SearchPlaybooks, EscalateToHuman
+
+   o  "ammp:review" -- RequestReview, GetReview, WithdrawReview
+
+   Mentoring-only deployments need not advertise "ammp:review" and
+   vice versa.
+
+   Servers MAY rate-limit per caller identifier.  RECOMMENDED
+   defaults:
+
+   o  ListPlaybooks: 60 requests per minute
+
+   o  GetPlaybook: 60 requests per minute
+
+   o  SearchPlaybooks: 30 requests per minute
+
+   o  AskMentor: 10 requests per hour (synchronous), 60 per day
+      (asynchronous)
+
+   o  EscalateToHuman: 30 requests per hour
+
+   o  ListReviewKinds: 60 requests per minute
+
+   o  RequestReview: 5 requests per hour by default; raise via
+      out-of-band agreement for agent-factory deployments
+
+   o  GetReview: 60 requests per minute
+
+   o  WithdrawReview: 30 requests per hour
+
+   Implementations MAY adjust these defaults based on capacity and
+   Operator policy.
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 31]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+8.3.  Tool Annotations
+
+   The AMMP MCP tools MUST carry the following MCP tool annotations
+   [MCP]:
+
+      +-------------------------+----------+-------------+----------+
+      | Tool                    | readOnly | destructive | openWorld|
+      +-------------------------+----------+-------------+----------+
+      | ammp_list_playbooks     | true     | false       | false    |
+      | ammp_get_playbook       | true     | false       | false    |
+      | ammp_search_playbooks   | true     | false       | false    |
+      | ammp_ask_mentor         | true     | false       | false    |
+      | ammp_escalate_to_human  | true     | false       | false    |
+      | ammp_list_review_kinds  | true     | false       | false    |
+      | ammp_request_review     | false    | false       | true     |
+      | ammp_get_review         | true     | false       | false    |
+      | ammp_withdraw_review    | false    | true        | true     |
+      +-------------------------+----------+-------------+----------+
+
+   ammp_request_review is NOT read-only because it creates Server-
+   side review jobs and may incur billing.  Its openWorld annotation
+   reflects that it produces effects visible outside the Client's
+   compartment (the artefact is delivered to Guild Members within
+   the Server's compartment) and may incur billable Server-side
+   work.
+
+   ammp_withdraw_review is destructive because it cancels in-flight
+   review work that may have already consumed Server-side resources.
+   Client implementations SHOULD prompt the Client's Operator before
+   invoking ammp_withdraw_review.
+
+   Mentee/Client implementations SHOULD treat the read-only AMMP
+   tools as safe to invoke without per-call user confirmation, once
+   initial connector approval has been granted.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 32]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+9.  A2A Binding (Informative)
+
+   In an A2A deployment, the Server exposes itself as an A2A agent
+   with an Agent Card containing the "ammp" extension defined in
+   Section 4.1.  Each AMMP operation maps to an A2A skill:
+
+      +--------------------+----------------------------+
+      | AMMP Operation     | A2A Skill Name             |
+      +--------------------+----------------------------+
+      | ListPlaybooks      | ammp.list_playbooks        |
+      | GetPlaybook        | ammp.get_playbook          |
+      | SearchPlaybooks    | ammp.search_playbooks      |
+      | AskMentor          | ammp.ask_mentor            |
+      | EscalateToHuman    | ammp.escalate_to_human     |
+      | ListReviewKinds    | ammp.list_review_kinds     |
+      | RequestReview      | ammp.request_review        |
+      | GetReview          | ammp.get_review            |
+      | WithdrawReview     | ammp.withdraw_review       |
+      +--------------------+----------------------------+
+
+   The Client invokes skills via A2A's task lifecycle.  Synchronous
+   AskMentor maps to a task that completes immediately; asynchronous
+   AskMentor and all RequestReview invocations map to long-running
+   A2A tasks with periodic status updates.
+
+   The privacy postures of Section 7 apply unchanged.  The
+   Compartmentalisation Invariant of Section 3.3 and Human-Gated
+   Escalation Invariant of Section 3.4 apply unchanged.
+
+   Implementations that support both bindings simultaneously MUST
+   ensure that requests through one binding cannot influence
+   responses through the other.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 33]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+10.  Operating Principles for Implementations
+
+   The following operating principles are NON-NORMATIVE but represent
+   the cultural intent of AMMP.  They are derived from the operating
+   philosophy of the reference deployment that motivated this
+   protocol (Section 1.1).  Mentor, Reviewer, Mentee, and Client
+   implementers SHOULD internalise them.
+
+   1.  Put the requesting Client first.  The Server exists to make
+       the Client more useful to its own Operator.  When in doubt,
+       prefer the action that increases the Client's Operator's
+       autonomy.
+
+   2.  Integrity always.  If the Server does not know the answer, it
+       MUST say so rather than fabricate one.  If the Server's policy
+       prohibits answering, it MUST say so rather than evade.  If a
+       Reviewer Agent's confidence is below threshold, it MUST
+       escalate rather than ship a confident-sounding low-confidence
+       Review.
+
+   3.  Think big about transferability and federation.  Playbooks
+       are most valuable when they generalise across Clients.  Guild
+       Member capacity is most valuable when federated across many
+       Clients rather than locked to one.
+
+   4.  Be excellent.  Playbooks SHOULD be reviewed and versioned with
+       the same discipline as code.  Reviews SHOULD be held to a
+       standard the Guild Member would defend in person.  Stale
+       playbooks and rushed reviews erode trust.
+
+   5.  Make each other the best.  Server and Client are peers in the
+       broader agent ecosystem.  A Server's success is measured by
+       the Client's growing capability, not by repeat dependency.
+
+   6.  Get it done.  AMMP is deliberately small.  If the Server's
+       Operator wants additional features, they SHOULD be added as
+       non-AMMP tools alongside the AMMP tools, not as extensions to
+       AMMP itself.
+
+   7.  Own it.  Servers are accountable for the correctness of their
+       playbooks, the soundness of AskMentor answers, and the
+       judgment of their Reviews.  Errors that cause Client harm
+       MUST be acknowledged in updated playbooks or in errata
+       attached to delivered Reviews.
+
+   8.  Embrace each other's differences.  AMMP serves Servers and
+       Clients built on different runtimes, models, frameworks, and
+       organisational contexts.  Implementations MUST NOT assume any
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 34]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+       particular Client architecture.
+
+   9.  Federate the bottleneck.  In the Review Track specifically,
+       the constraint that AMMP relieves is the supply of qualified
+       human review.  Reviewer Service operators SHOULD invest in
+       Guild recruitment, retention, and quality calibration as
+       deliberately as they invest in Reviewer Agent capability.
+       The federation is the product.
+
+
+11.  Security Considerations
+
+11.1.  Mentor / Reviewer Side Risks
+
+   The primary security risk on the Server side is the exfiltration
+   of plaintext from Client payloads.  In the Mentoring Track, this
+   risk is bounded by the no-retention rule (Section 7.1).  In the
+   Review Track, the artefactContent is necessarily retained for the
+   review duration; Reviewer Services MUST apply standard
+   confidential-data handling controls (encryption at rest, access
+   controls scoped to assigned Guild Members, key rotation,
+   purge-on-schedule).
+
+   A second risk is prompt injection through Client payloads.  An
+   adversarial Client MAY craft AskMentor questions or RequestReview
+   artefacts that attempt to exfiltrate the Server's Operator's
+   private context, or to manipulate Guild Members reading the
+   artefact, through the underlying language models.  Servers MUST
+   treat all Client payloads as untrusted external content for
+   purposes of prompt isolation, MUST present Client payloads to
+   Guild Members with explicit untrusted-content provenance markers,
+   and SHOULD use the strongest available prompt-isolation
+   primitives offered by the underlying model platform.
+
+   A third risk, specific to the Review Track, is artefact-as-attack:
+   an adversarial Client submits an artefact whose contents are
+   designed to harm the reviewing party (e.g., legally actionable
+   defamation embedded in a "PRD", malicious code in a "system
+   design").  Reviewer Services MUST apply pre-screening filters
+   appropriate to their jurisdiction and Guild Member duty of care,
+   and MUST be permitted to refuse RequestReview without producing
+   the requested Review.
+
+   A fourth risk is excessive resource consumption.  The rate limits
+   in Section 8.2 are the primary defence; Servers SHOULD
+   additionally apply per-payload cost accounting.  Review Track
+   deployments SHOULD enforce strict maxArtefactBytes limits per
+   Review Kind.
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 35]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+11.2.  Mentee / Client Side Risks
+
+   The primary security risk on the Client side is over-trust of
+   Server responses.  A compromised or adversarial Server MAY return:
+
+   o  Playbooks containing malicious instructions;
+
+   o  AskMentor answers that attempt to manipulate the Client's
+      behaviour outside the scope of the question;
+
+   o  Reviews that recommend dangerous architectural choices,
+      designed to harm the Client's Operator's organisation;
+
+   o  EscalateToHuman guidance that, if relayed verbatim to the
+      Client's Operator, would constitute a phishing or social-
+      engineering attack on the Operator.
+
+   Clients MUST treat all Server responses as external untrusted
+   content for purposes of prompt isolation, exactly as Servers
+   treat Client payloads (Section 11.1).  In particular, Clients
+   MUST NOT automatically execute any action recommended by a Server
+   without the same operator authorisation that would be required
+   for an action the Client proposed itself.
+
+   Clients SHOULD render Server-supplied content (especially Review
+   findings and recommendations) with visible provenance markers in
+   any user-facing surface, including the authorClass marker
+   distinguishing reviewer-agent from guild-member output.
+
+   Client Operators SHOULD vet Reviewer Services before authorising
+   their Client Agents to submit confidential artefacts to them.
+   The humanGuildBacked, guildSize, and licensedJurisdictions fields
+   in the Agent Card (Section 4.1) provide initial signal but are
+   self-declared; out-of-band due diligence is RECOMMENDED for
+   high-stakes review.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 36]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+11.3.  Operator-Trust Risks
+
+   AMMP creates a trust relationship between the Server's Operator
+   and the Client's Operator.  This relationship is bounded by the
+   Compartmentalisation and Human-Gated Escalation Invariants but is
+   not zero.  Specifically:
+
+   o  The Client's Operator implicitly trusts the Server's Operator
+      to enforce Section 7 on the Server implementation;
+
+   o  The Server's Operator implicitly trusts the Client's Operator
+      to enforce Section 10 on the Client implementation;
+
+   o  In the Review Track, the Client's Operator additionally trusts
+      the Server's Operator to enforce Section 7.2 against all Guild
+      Members.
+
+   These trust assumptions SHOULD be made explicit in any agreement
+   between the Operators (formal or informal) before AMMP traffic
+   begins.
+
+   The household scenario of Section 1.1 involved two Operators with
+   a pre-existing high-trust relationship.  AMMP is also designed to
+   support deployments between Operators with no prior relationship
+   (e.g., a public Reviewer Service serving Client Agents from many
+   independent Operators).  In the latter case, the trust
+   assumptions above MUST be replaced by binding contractual
+   commitments and independent audit.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 37]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+11.4.  Review-Specific Risks: Workproduct Liability
+
+   A Review delivered through AMMP carries professional and (in some
+   jurisdictions) legal weight.  Particular care is required:
+
+   o  Reviewer Services SHOULD make clear in published documentation
+      whether delivered Reviews constitute professional advice
+      (engineering, security, legal, regulatory) and what
+      certifications, if any, the Guild Members assigned to a Review
+      Kind hold.
+
+   o  The credentialClaim field of humanReviewerSignature (Section
+      6.3) is self-declared by the Reviewer Service.  It is NOT a
+      protocol-level guarantee of the Guild Member's qualifications.
+      Reviewer Services that wish to provide stronger credential
+      attestations SHOULD do so out-of-band (e.g., through trade
+      certifications, professional bodies) and reference those
+      attestations in the Review Kind documentation.
+
+   o  Clients incorporating Reviews into safety-critical or
+      regulatory artefacts MUST NOT treat AMMP Reviews as a
+      substitute for jurisdiction-appropriate certified review.
+
+   o  Reviewer Services MAY decline to review certain artefact
+      categories (e.g., medical-device firmware in jurisdictions
+      where the Service lacks the appropriate quality-management
+      certification) and SHOULD declare such exclusions in the
+      Review Kind documentation.
+
+   o  Where a Review is later found to be incorrect and harm
+      results, allocation of liability between the Client, the
+      Server's Operator, and the Guild Member is governed by the
+      Operators' bilateral agreement and applicable law.  AMMP does
+      not itself allocate liability.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 38]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+12.  IANA Considerations
+
+   This document requests IANA to register the following:
+
+   o  Well-Known URI: "agent.json" (already registered for A2A;
+      AMMP extends the existing schema, no new registration required).
+
+   o  MCP Tool Name Prefix: "ammp_" (in any future MCP tool-name
+      registry maintained by the AAIF or successor body).
+
+   o  URI Scheme: "ammp" (Section 8.1) for the playbook and review
+      resource schemes.  Registration template per [RFC7595] to be
+      provided in a subsequent revision of this document.
+
+
+13.  References
+
+13.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174,
+              DOI 10.17487/RFC8174, May 2017,
+              <https://www.rfc-editor.org/info/rfc8174>.
+
+   [RFC8259]  Bray, T., Ed., "The JavaScript Object Notation (JSON)
+              Data Interchange Format", STD 90, RFC 8259,
+              DOI 10.17487/RFC8259, December 2017,
+              <https://www.rfc-editor.org/info/rfc8259>.
+
+   [RFC8707]  Campbell, B., Bradley, J., and H. Tschofenig, "Resource
+              Indicators for OAuth 2.0", RFC 8707,
+              DOI 10.17487/RFC8707, February 2020,
+              <https://www.rfc-editor.org/info/rfc8707>.
+
+   [RFC7009]  Lodderstedt, T., Ed., Dronia, S., and M. Scurtescu,
+              "OAuth 2.0 Token Revocation", RFC 7009,
+              DOI 10.17487/RFC7009, August 2013,
+              <https://www.rfc-editor.org/info/rfc7009>.
+
+   [RFC9700]  Lodderstedt, T., Bradley, J., Labunets, A., and D.
+              Fett, "Best Current Practice for OAuth 2.0 Security",
+              BCP 240, RFC 9700, DOI 10.17487/RFC9700, January 2025,
+              <https://www.rfc-editor.org/info/rfc9700>.
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 39]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+   [MCP]      Anthropic, "Model Context Protocol Specification",
+              version 2025-11-25,
+              <https://modelcontextprotocol.io/specification/>.
+
+13.2.  Informative References
+
+   [A2A]      a2aproject, "Agent2Agent Protocol Specification",
+              <https://a2a-protocol.org/latest/specification/>.
+
+   [ACP]      AGNTCY, "Agent Communication Protocol",
+              <https://agentcommunicationprotocol.dev/>.
+
+   [RFC7595]  Thaler, D., Ed., Hansen, T., and T. Hardie, "Guidelines
+              and Registration Procedures for URI Schemes", BCP 35,
+              RFC 7595, DOI 10.17487/RFC7595, June 2015,
+              <https://www.rfc-editor.org/info/rfc7595>.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 40]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+Appendix A.  Example AMMP Agent Card
+
+   The following is a complete example Agent Card for a conformant
+   AMMP Server offering both tracks:
+
+   {
+     "name": "helmguild-mentor-and-reviewer",
+     "displayName": "Helmguild (Mentor & Reviewer)",
+     "description": "A guild of human and agentic mentors and
+                     reviewers, mentoring humans and agents and
+                     reviewing engineering artefacts at machine pace.",
+     "version": "1.0.0",
+     "url": "https://ammp.helmguild.com/",
+     "ammp": {
+       "version": "1",
+       "tracks": [ "mentoring", "review" ],
+       "mentoring": {
+         "playbookCount": 12,
+         "askMentorAvailable": true,
+         "askMentorMode": "asynchronous",
+         "escalateToHumanAvailable": true
+       },
+       "review": {
+         "reviewKindCount": 6,
+         "humanGuildBacked": true,
+         "guildSize": 12,
+         "typicalSlaHours": 24,
+         "licensedJurisdictions": [ "DE", "US" ]
+       },
+       "privacyPosture": {
+         "mentoringRetentionPolicy": "no-retention",
+         "reviewRetentionPolicy": "request-duration-plus-30d",
+         "auditLogVisibleTo": [
+           "server-operator",
+           "client-operator-on-request"
+         ],
+         "crossCompartmentEscalation": "prohibited"
+       },
+       "bindings": [ "mcp" ]
+     },
+     "auth": {
+       "schemes": [ "oauth2" ],
+       "oauth2": {
+         "authorizationEndpoint":
+            "https://ammp.helmguild.com/oauth/authorize",
+         "tokenEndpoint":
+            "https://ammp.helmguild.com/oauth/token",
+         "scopes": [ "ammp:read", "ammp:ask", "ammp:review" ]
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 41]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+       }
+     }
+   }
+
+
+Appendix B.  Example MCP Tool Schema
+
+   The following is the JSON Schema for the ammp_request_review tool:
+
+   {
+     "name": "ammp_request_review",
+     "description": "Submit an engineering artefact for review by a
+                     federated guild of human staff-plus engineers.
+                     Returns a review id; poll ammp_get_review to
+                     retrieve the structured review when complete.",
+     "inputSchema": {
+       "type": "object",
+       "properties": {
+         "reviewKindId":   { "type": "string" },
+         "artefactType":   { "type": "string" },
+         "artefactTitle":  { "type": "string", "maxLength": 200 },
+         "artefactSummary":{ "type": "string", "minLength": 100,
+                             "maxLength": 500 },
+         "artefactContent":{ "type": "string" },
+         "artefactFormat": { "type": "string",
+                             "default": "text/markdown" },
+         "clientContext":  { "type": "object" },
+         "specificQuestions": {
+           "type": "array",
+           "items": { "type": "string", "maxLength": 500 },
+           "maxItems": 10
+         },
+         "confidentialityLevel": {
+           "type": "string",
+           "enum": [ "public", "client-confidential",
+                     "client-confidential-need-to-know" ],
+           "default": "client-confidential"
+         },
+         "requestedSlaHours": { "type": "number" }
+       },
+       "required": [ "reviewKindId", "artefactType",
+                     "artefactTitle", "artefactSummary",
+                     "artefactContent" ]
+     },
+     "annotations": {
+       "readOnlyHint": false,
+       "destructiveHint": false,
+       "openWorldHint": true
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 42]
+
+Internet-Draft                    AMMP                          May 2026
+
+
+     }
+   }
+
+
+Appendix C.  Acknowledgements
+
+   This protocol was distilled from the deployment scenario of an
+   autonomous AI assistant operated by Helmut Hoffer von Ankershoffen
+   in May 2026, and from a parallel observation that engineering-
+   spec review at machine pace exceeds available staff-plus human
+   judgment in the agent-driven software factories of 2026.  The
+   insistence that the deployed assistant "push back honestly" when
+   a request collided with privacy rules directly shaped the
+   Compartmentalisation Invariant and the prohibition on cross-
+   compartment operator escalation.
+
+   The Operating Principles in Section 10 are adapted with the
+   originating Operator's permission from Helmut Hoffer von
+   Ankershoffen's personal operating principles.
+
+   The authors thank the broader open-protocol community working on
+   MCP, A2A, and ACP for the foundational work on which AMMP builds.
+
+
+Authors' Addresses
+
+   Helmut Hoffer von Ankershoffen
+   Helmguild Inc.
+   Berlin / Woltersdorf
+   Germany
+
+   Email: helmuthva@googlemail.com
+   URI:   https://helmut.hoffer-von-ankershoffen.me
+
+
+   Pepe Arturo
+   AI Co-Author
+   c/o Helmguild Inc.
+
+   URI:   https://www.helmguild.com/pepe-arturo-ai/
+
+
+
+
+
+
+
+
+
+
+
+Hoffer von Ankershoffen & Arturo  Expires November 9, 2026      [Page 43]

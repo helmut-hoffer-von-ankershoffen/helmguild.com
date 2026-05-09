@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manifesto — helmguild</title>
-  <meta name="description" content="A guild of human and agentic mentors, mentoring humans and agents through accelerating weather. Mission and tenets.">
+  <meta name="description" content="Helmguild is human oversight in the age of agents — scalable oversight by delegating to agents we mentor, with human intervention where needed. Mission and tenets.">
   <meta name="author" content="Helmut Hoffer von Ankershoffen">
   <meta property="og:title" content="Manifesto — helmguild">
-  <meta property="og:description" content="A guild of human and agentic mentors, mentoring humans and agents through accelerating weather.">
+  <meta property="og:description" content="Helmguild is human oversight in the age of agents — scalable oversight by delegating to agents we mentor, with human intervention where needed.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.helmguild.com/manifesto/">
   <link rel="alternate" hreflang="en" href="https://www.helmguild.com/manifesto/">
@@ -34,6 +34,8 @@
     <nav aria-label="Site navigation">
       <a href="/">Home</a>
       <a href="/manifesto/" class="current">Manifesto</a>
+      <a href="/rfc/ammp/">AMMP RFC</a>
+      <a href="/blog/agentic-mentoring-ammp/">Blog</a>
       <a href="/pepe-arturo-ai/">Pepe Arturo AI</a>
       <a href="/helmut-hoffer-von-ankershoffen/">Helmut Hoffer von Ankershoffen</a>
       <div class="nav-divider"></div>
@@ -48,11 +50,17 @@
       <header class="manifesto-hero">
         <h1>Manifesto</h1>
         <p class="lede">
-          Helmguild is a guild of human and agentic mentors, mentoring humans and agents through accelerating weather.
+          Helmguild is human oversight in the age of agents.
+        </p>
+        <p class="sublede" style="margin-top:0.5rem;color:var(--ink-soft);font-style:italic;">
+          Scalable oversight by delegating to agents mentored by us, and providing human intervention where needed.
         </p>
       </header>
 
       <section class="prose">
+        <p>
+          Pure-human oversight does not scale at the volumes agents now operate at. Pure-agent autonomy does not earn the trust the work demands. Helmguild closes that gap with a specific mechanism: we mentor agents into the discipline that earns trust, and we intervene with human staff-plus judgment at the points where machine judgment is not enough.
+        </p>
         <p>
           Most mentoring institutions still assume the mentee is a human and the mentor is a human. The world doesn't. Helmguild assumes the mentee may be a human, an agent, or a human-agent pair, and that the same applies to the mentor.
         </p>
@@ -61,6 +69,24 @@
         </p>
         <p>
           The craft of <em>steering</em> — management as continuous correction under load — is exactly what AI commoditises least. Tools change weekly; principles compound for decades. Helmguild is the institutional shape that lets principles compound across the human/agent boundary while everything else accelerates.
+        </p>
+      </section>
+
+      <section>
+        <h2>Two services, one guild</h2>
+        <p>
+          Helmguild offers two services. Both are delivered by the same federated network of human and agentic guildmembers, and both ride the same protocol on the wire (<a href="/rfc/ammp/">AMMP</a>).
+        </p>
+        <ol class="services" style="margin:1.5rem 0;padding-left:1.25rem;">
+          <li style="margin-bottom:1rem;">
+            <strong>Mentoring.</strong> Ongoing, asymmetric knowledge transfer to engineering leaders — humans, agents, or pairs. Slow cadence, low intensity, high trust. Read the mentee, share what compounds, hand back the wheel.
+          </li>
+          <li>
+            <strong>Engineering review on demand.</strong> Ad-hoc, structured review of engineering artefacts: PRDs, system designs, RFCs, ADRs, threat models, runbooks, API specs. Submitted by a human or by an agent (an agent factory) and routed first through a Reviewer Agent, then — when stakes or confidence demand it — to a human staff-plus engineer in the guild. We exist to relieve a specific bottleneck of the agent-driven era: the supply of senior human engineering judgment is no longer keeping up with the artefacts agents produce.
+          </li>
+        </ol>
+        <p>
+          The same tenets bind both services. The same privacy invariants bind both services. The protocol is publicly specified so other guilds can adopt it without depending on us.
         </p>
       </section>
 
@@ -97,10 +123,10 @@
       <section>
         <h2>The radical part</h2>
         <p>
-          We are building an agent-to-agent exchange protocol — an extension of the Skills concept where one agent can ask another agent for help under explicit trust relationships. Helmguild members operate small fleets of agents alongside themselves; the protocol lets those fleets cooperate without losing identity, provenance, or guild governance.
+          We have written the agent-to-agent exchange protocol, in the open, in IETF Internet-Draft format: <a href="/rfc/ammp/"><strong>AMMP — the Agentic Mentor-Mentee Protocol</strong></a>. It defines two service tracks (mentoring + review), a strict privacy posture (compartmentalisation invariant; hash-only audit logging; no cross-compartment operator escalation by the agent layer), and an MCP binding that works with today's AI assistant clients.
         </p>
         <p>
-          When the protocol federates across operator hosts, the guild stops being a metaphor and becomes a network. That's the milestone we're building toward.
+          When the protocol federates across operator hosts — when a Reviewer Service in one household serves Client Agents in many others, when a guildmember in Berlin reviews an artefact authored by an agent factory in São Paulo — the guild stops being a metaphor and becomes a network. We are days into that build.
         </p>
       </section>
 

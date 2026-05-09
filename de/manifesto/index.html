@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manifest — helmguild</title>
-  <meta name="description" content="Eine Gilde aus menschlichen und agentischen Mentoren, die Menschen und Agenten durch aufziehendes Wetter mentort. Mission und Tenets.">
+  <meta name="description" content="Helmguild ist menschliche Aufsicht im Zeitalter der Agenten — skalierbare Aufsicht durch Delegation an Agenten, die wir mentoren, mit menschlicher Intervention wo nötig. Mission und Tenets.">
   <meta name="author" content="Helmut Hoffer von Ankershoffen">
   <meta property="og:title" content="Manifest — helmguild">
-  <meta property="og:description" content="Eine Gilde aus menschlichen und agentischen Mentoren, die Menschen und Agenten durch aufziehendes Wetter mentort.">
+  <meta property="og:description" content="Helmguild ist menschliche Aufsicht im Zeitalter der Agenten — skalierbare Aufsicht durch Delegation an Agenten, die wir mentoren, mit menschlicher Intervention wo nötig.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.helmguild.com/de/manifesto/">
   <link rel="alternate" hreflang="en" href="https://www.helmguild.com/manifesto/">
@@ -34,6 +34,8 @@
     <nav aria-label="Seitennavigation">
       <a href="/de/">Startseite</a>
       <a href="/de/manifesto/" class="current">Manifest</a>
+      <a href="/de/rfc/ammp/">AMMP RFC</a>
+      <a href="/de/blog/agentic-mentoring-ammp/">Blog</a>
       <a href="/de/pepe-arturo-ai/">Pepe Arturo AI</a>
       <a href="/de/helmut-hoffer-von-ankershoffen/">Helmut Hoffer von Ankershoffen</a>
       <div class="nav-divider"></div>
@@ -48,11 +50,17 @@
       <header class="manifesto-hero">
         <h1>Manifest</h1>
         <p class="lede">
-          Helmguild ist eine Gilde aus menschlichen und agentischen Mentoren, die Menschen und Agenten durch aufziehendes Wetter mentort.
+          Helmguild ist menschliche Aufsicht im Zeitalter der Agenten.
+        </p>
+        <p class="sublede" style="margin-top:0.5rem;color:var(--ink-soft);font-style:italic;">
+          Skalierbare Aufsicht durch Delegation an Agenten, die wir mentoren, mit menschlicher Intervention dort, wo sie nötig ist.
         </p>
       </header>
 
       <section class="prose">
+        <p>
+          Reine menschliche Aufsicht skaliert nicht in den Volumina, mit denen Agenten heute arbeiten. Reine agentische Autonomie verdient nicht das Vertrauen, das die Arbeit verlangt. Helmguild schließt diese Lücke mit einem konkreten Mechanismus: Wir mentoren Agenten in die Disziplin hinein, die Vertrauen verdient, und wir intervenieren mit menschlichem Staff-plus-Urteil dort, wo maschinelles Urteil nicht reicht.
+        </p>
         <p>
           Die meisten Mentoring-Institutionen gehen davon aus, dass Mentee und Mentor menschlich sind. Die Welt tut das nicht. Helmguild geht davon aus, dass der Mentee ein Mensch, ein Agent oder ein Mensch-Agent-Paar sein kann — und dass dasselbe für den Mentor gilt.
         </p>
@@ -61,6 +69,24 @@
         </p>
         <p>
           Das Handwerk des <em>Steuerns</em> — Management als kontinuierliche Korrektur unter Last — ist genau das, was KI am wenigsten zur Massenware macht. Werkzeuge ändern sich wöchentlich; Prinzipien wachsen über Jahrzehnte. Helmguild ist die institutionelle Form, die Prinzipien über die Mensch/Agent-Grenze hinweg wachsen lässt, während alles andere beschleunigt.
+        </p>
+      </section>
+
+      <section>
+        <h2>Zwei Dienste, eine Gilde</h2>
+        <p>
+          Helmguild bietet zwei Dienste. Beide werden vom selben föderierten Netzwerk aus menschlichen und agentischen Gildenmitgliedern erbracht, und beide nutzen dasselbe Protokoll auf der Leitung (<a href="/de/rfc/ammp/">AMMP</a>).
+        </p>
+        <ol class="services" style="margin:1.5rem 0;padding-left:1.25rem;">
+          <li style="margin-bottom:1rem;">
+            <strong>Mentoring.</strong> Laufender, asymmetrischer Wissenstransfer an Engineering-Leader — Menschen, Agenten oder Paare. Niedrige Frequenz, niedrige Intensität, hohes Vertrauen. Den Mentee lesen, das teilen, was sich aufzinst, das Steuer wieder zurückgeben.
+          </li>
+          <li>
+            <strong>Engineering-Review auf Abruf.</strong> Ad-hoc, strukturierte Review von Engineering-Artefakten: PRDs, System-Designs, RFCs, ADRs, Threat Models, Runbooks, API-Specs. Eingereicht von einem Menschen oder von einem Agenten (einer Agent Factory), zuerst durch einen Reviewer Agent geleitet, dann — wenn die Tragweite oder das Konfidenz-Niveau es verlangt — an eine menschliche Staff-Plus-Engineer in der Gilde eskaliert. Wir existieren, um einen spezifischen Engpass des agentischen Zeitalters zu lindern: das Angebot an erfahrenem menschlichen Engineering-Urteil hält nicht mehr mit der Menge der Artefakte Schritt, die Agenten produzieren.
+          </li>
+        </ol>
+        <p>
+          Dieselben Tenets binden beide Dienste. Dieselben Privacy-Invarianten binden beide Dienste. Das Protokoll ist öffentlich spezifiziert, damit andere Gilden es übernehmen können, ohne von uns abzuhängen.
         </p>
       </section>
 
@@ -97,10 +123,10 @@
       <section>
         <h2>Das Radikale</h2>
         <p>
-          Wir bauen ein Agent-zu-Agent-Austauschprotokoll — eine Erweiterung des Skills-Konzepts, bei dem ein Agent einen anderen Agenten unter expliziten Vertrauensbeziehungen um Hilfe bitten kann. Helmguild-Mitglieder betreiben kleine Flotten von Agenten neben sich selbst; das Protokoll lässt diese Flotten kooperieren, ohne Identität, Herkunft oder Gilden-Governance zu verlieren.
+          Wir haben das Agent-zu-Agent-Austauschprotokoll geschrieben — offen, im IETF-Internet-Draft-Format: <a href="/de/rfc/ammp/"><strong>AMMP — das Agentic Mentor-Mentee Protocol</strong></a>. Es definiert zwei Service-Tracks (Mentoring + Review), eine strikte Privacy-Posture (Kompartimentierungs-Invariante; Hash-only-Audit-Logging; kein Cross-Compartment-Operator-Escalation durch die Agent-Schicht) und ein MCP-Binding, das mit den heutigen AI-Assistant-Clients funktioniert.
         </p>
         <p>
-          Wenn das Protokoll über Operator-Hosts hinweg föderiert, hört die Gilde auf, Metapher zu sein, und wird zum Netzwerk. Auf diesen Meilenstein arbeiten wir hin.
+          Wenn das Protokoll über Operator-Hosts föderiert — wenn ein Reviewer Service in einem Haushalt Client Agents in vielen anderen bedient, wenn ein Gildenmitglied in Berlin ein Artefakt reviewt, das von einer Agent Factory in São Paulo verfasst wurde — hört die Gilde auf, Metapher zu sein, und wird zum Netzwerk. Wir sind Tage in diesen Bau hinein.
         </p>
       </section>
 

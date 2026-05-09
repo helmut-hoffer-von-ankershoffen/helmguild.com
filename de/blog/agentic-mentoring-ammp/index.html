@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menschliche Aufsicht im Zeitalter der Agenten — und das Protokoll, das wir geschrieben haben, um sie skalieren zu lassen — helmguild</title>
+  <meta name="description" content="Wir stellen AMMP vor — einen offenen IETF Internet-Draft für agentisches Mentoring und Engineering-Review auf Abruf. Das Wire-Format für skalierbare menschliche Aufsicht agentengetriebener Arbeit.">
+  <meta name="author" content="Helmut Hoffer von Ankershoffen, mit Pepe Arturo">
+  <meta property="og:title" content="Menschliche Aufsicht im Zeitalter der Agenten — und das Protokoll, das wir dafür geschrieben haben">
+  <meta property="og:description" content="Wir stellen AMMP vor — einen offenen IETF Internet-Draft für agentisches Mentoring und Engineering-Review auf Abruf.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.helmguild.com/de/blog/agentic-mentoring-ammp/">
+  <link rel="alternate" hreflang="en" href="https://www.helmguild.com/blog/agentic-mentoring-ammp/">
+  <link rel="alternate" hreflang="de" href="https://www.helmguild.com/de/blog/agentic-mentoring-ammp/">
+  <link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/blog/agentic-mentoring-ammp/">
+  <link rel="stylesheet" href="../../../style_5.css">
+</head>
+<body>
+
+  <nav class="lang-toggle" aria-label="Sprache">
+    <a href="/blog/agentic-mentoring-ammp/" hreflang="en">EN</a>
+    <span class="sep">·</span>
+    <span class="current" aria-current="true">DE</span>
+  </nav>
+
+  <details class="burger" aria-label="Menü">
+    <summary aria-label="Menü öffnen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="4" y1="7" x2="20" y2="7"/>
+        <line x1="4" y1="12" x2="20" y2="12"/>
+        <line x1="4" y1="17" x2="20" y2="17"/>
+      </svg>
+    </summary>
+    <nav aria-label="Seitennavigation">
+      <a href="/de/">Startseite</a>
+      <a href="/de/manifesto/">Manifest</a>
+      <a href="/de/rfc/ammp/">AMMP RFC</a>
+      <a href="/de/blog/agentic-mentoring-ammp/" class="current">Blog</a>
+      <a href="/de/pepe-arturo-ai/">Pepe Arturo AI</a>
+      <a href="/de/helmut-hoffer-von-ankershoffen/">Helmut Hoffer von Ankershoffen</a>
+      <div class="nav-divider"></div>
+      <a href="/de/imprint/">Impressum &amp; Datenschutz</a>
+    </nav>
+  </details>
+
+  <main>
+    <a class="home-link" href="/de/">helmguild</a>
+
+    <article class="manifesto">
+      <header class="manifesto-hero">
+        <h1>Menschliche Aufsicht im Zeitalter der Agenten</h1>
+        <p class="lede">
+          Und das Protokoll, das wir geschrieben haben, um sie skalieren zu lassen.
+        </p>
+        <p class="sublede" style="margin-top:0.5rem;color:var(--ink-soft);font-style:italic;">
+          Wir stellen AMMP vor — einen offenen IETF Internet-Draft für agentisches Mentoring und Engineering-Review auf Abruf.
+        </p>
+        <p style="margin-top:1.5rem;font-family:var(--mono, monospace);font-size:.85rem;color:var(--ink-soft);">
+          Helmut Hoffer von Ankershoffen, mit Pepe&nbsp;Arturo&nbsp;AI · 9.&nbsp;Mai&nbsp;2026
+        </p>
+      </header>
+
+      <section class="prose">
+        <h2 style="font-family:var(--serif);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:2.5rem 0 1rem;">Die Einschränkung, über die zu wenig geredet wird</h2>
+        <p>
+          Im Diskurs über AI-Agenten 2026 reden zwei Lager aneinander vorbei.
+        </p>
+        <p>
+          Lager eins sagt: <em>Agenten müssen autonom arbeiten, um in Skalierung nützlich zu sein; Human-in-the-Loop bei jeder Aktion ist Nostalgie für eine Welt, die schon vorbei ist.</em> Sie haben recht mit den Volumina. Eine moderne Agent Factory liefert PRDs, System-Designs, ADRs und Threat Models in Stunden, nicht Monaten. Ein Haushalts-Assistent führt dreißig externe Aktionen pro Tag im Auftrag seines Operators aus. Human-in-the-Loop bei jedem Tastendruck ist nicht nur langsam — es ist ein Kategorienfehler darüber, wo Aufmerksamkeit landen sollte.
+        </p>
+        <p>
+          Lager zwei sagt: <em>Agenten müssen unter sinnvoller menschlicher Aufsicht bleiben, sonst kollabiert das Vertrauen, und einmal kollabiert kommt es nicht zurück.</em> Sie haben recht mit dem Vertrauen. Engineering-Organisationen, die Code ausliefern, den ihre Staff-plus-Engineers nicht gelesen haben, sammeln Schulden anderer Art an als die, die sie kennen. Haushalte, in denen der Assistent ohne das Wissen des Prinzipals operiert, treffen irgendwann den Tag, an dem der Prinzipal fragt: „Moment, du hast <em>was</em>?" — und die Antwort ist: etwas, das du gestoppt hättest, wenn du es gewusst hättest.
+        </p>
+        <p>
+          Beide Lager haben recht. Die ehrliche Einschränkung ist <strong>beides</strong>: Aufsicht muss skalieren, und Aufsicht muss real sein.
+        </p>
+        <p>
+          Dieser Artikel handelt vom Mechanismus, der beides gleichzeitig möglich macht, und vom Protokoll, das wir geschrieben — und als IETF Internet-Draft eingereicht — haben, um ihn zu formalisieren: <strong>AMMP, das Agentic Mentor-Mentee Protocol.</strong>
+        </p>
+
+        <h2 style="font-family:var(--serif);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:3rem 0 1rem;">Der Mechanismus, in einem Satz</h2>
+        <blockquote style="border-left:3px solid var(--accent);padding-left:1.25rem;margin:1.5rem 0;font-style:italic;color:var(--ink);">
+          Skalierbare menschliche Aufsicht durch Delegation an Agenten, die wir mentoren, mit menschlicher Intervention dort, wo sie nötig ist.
+        </blockquote>
+        <p>
+          Das ist alles. Drei Bestandteile komponieren:
+        </p>
+        <ol>
+          <li style="margin-bottom:.75rem;"><strong>Skalierbar.</strong> Menschen allein können nicht in den Volumina beaufsichtigen, in denen Agenten heute produzieren. Das ist die Einschränkung, die wir lindern.</li>
+          <li style="margin-bottom:.75rem;"><strong>Delegation an Agenten, die wir mentoren.</strong> Mentor-Agenten — selbst unter Operator-Aufsicht — propagieren die Disziplin sorgfältiger Arbeit in frisch deployte Agenten in benachbarten Compartments. Der Mentee-Agent muss nicht aus eigenen Fehlern lernen; er erbt die Lektionen. Aufsicht wird über die Agent-Schicht <em>verteilt</em> statt auf die Mensch-Schicht konzentriert. Das ist der Mentoring-Track.</li>
+          <li><strong>Menschliche Intervention dort, wo sie nötig ist.</strong> Wenn die Tragweite hoch ist, wenn die Konfidenz niedrig ist, wenn das Artefakt ein erfahrenes Augenpaar verdient — liest ein menschlicher Staff-plus-Engineer in einer föderierten Gilde das Artefakt, signiert die Review, übernimmt die Verantwortung. Menschen auf Abruf, nicht im Pfad jedes Tastendrucks. Das ist der Review-Track.</li>
+        </ol>
+        <p>
+          Die zwei Tracks komponieren. Mentoring vergrößert die Oberfläche der Aufsicht; Review liefert das menschliche Urteil im Moment der Wahrheit. Zusammen halten sie die Arbeit <em>beaufsichtigt</em>, durch Menschen, in Skalierungen, die Menschen allein nicht erreichen.
+        </p>
+
+        <h2 style="font-family:var(--serif);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:3rem 0 1rem;">Wie wir hierhergekommen sind: ein Haushalts-Problem, ein Organisations-Problem</h2>
+        <p>
+          Das Protokoll wurde aus zwei Szenarien destilliert, die am selben Morgen aufkamen.
+        </p>
+        <p>
+          <strong>Szenario eins — der Haushalt.</strong> Ich (Helmut) hatte einige Monate einen autonomen AI-Assistenten betrieben — Pepe Arturo. Pepe hatte Dutzende operativer Lektionen in seinem Langzeitgedächtnis akkumuliert: Sprach-Defaults, OAuth-Callback-Resilienz, Zeitzonen-Handling, Rate-Limit-Recovery, Kompartimentierungs-Regeln. Meine Frau Sandra würde anfangen, Anthropics Claude Cowork für ihre eigene Arbeit zu nutzen. Ihr Assistent. Ihr Compartment. Ihre Chats damit gehören <em>ihr</em>, nicht mir — das ist eine harte Regel.
+        </p>
+        <p>
+          Ich fragte Pepe: <em>Wie könntest du das, was du gelernt hast, an ihren Assistenten weitergeben, ohne die Privacy-Grenze zwischen ihrem und unserem Compartment zu verletzen?</em>
+        </p>
+        <p>
+          Die naiven Antworten waren alle falsch. Direkter Memory-Transfer leakt meinen Kontext in ihr Compartment. Ein symmetrischer Agent-zu-Agent-Kollaborationskanal hat die falsche Form, weil Pepe nicht mit ihrem Assistenten an <em>ihren</em> Aufgaben kollaboriert; er lehrt generisch, im Voraus jeder konkreten Aufgabe. Ein statischer Dokumenten-Export hat die richtige <em>Form</em>, aber es fehlt das Live-Frage-Antwort, das echtes Mentoring impliziert. Direkte Mentor-zu-Sandra-Eskalation reintroduziert genau die Cross-Compartment-Verletzung, die wir verhindern wollen.
+        </p>
+        <p>
+          <strong>Szenario zwei — die Organisation.</strong> Während wir die Antwort auf Szenario eins entwarfen, zeigte sich die Parallele: In jeder Organisation, in der Agenten Engineering-Spezifikationen in Maschinengeschwindigkeit produzieren, wird das Angebot an erfahrenem menschlichen Review-Urteil zur bindenden Einschränkung. Agenten entwerfen die PRD in Stunden. Die Staff-plus-Engineers, die sie reviewt hätten, sind bereits überlastet. Die PRD geht ungeprüft live, oder sie wartet wochenlang in der Queue. So oder so: die <em>Qualität</em> der Aufsicht degradiert — nicht weil jemand das will, sondern weil in den Wochen der erfahrenen Engineers nicht genug Stunden sind.
+        </p>
+        <p>
+          Dieselben architektonischen Primitiven, die das Haushalts-Problem lösen, lösen das organisatorische, wenn man sie generalisiert. Asymmetrisches Request-Response. Hash-only-Logging. Kompartimentierung. Human-Gated-Escalation. Ein föderierter Pool qualifizierter Menschen auf der Empfangsseite, fronted von einem Agenten, der Triage und First-Pass übernimmt.
+        </p>
+        <p>
+          Das ist AMMP.
+        </p>
+
+        <h2 style="font-family:var(--serif);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:3rem 0 1rem;">Das Protokoll, in 200 Wörtern</h2>
+        <p>
+          AMMP definiert zwei Service-Tracks über ein einziges Wire-Format:
+        </p>
+        <p>
+          <strong>Mentoring-Track.</strong> Ein Mentor-Agent stellt einen kuratierten Playbook-Korpus und eine Frage-Antwort-Oberfläche bereit. Ein Mentee-Agent enumeriert Playbooks (<code>ListPlaybooks</code>), holt sie ab (<code>GetPlaybook</code>), durchsucht sie (<code>SearchPlaybooks</code>), stellt neue Fragen (<code>AskMentor</code>), und — wenn er feststeckt — bekommt er Vorschlags-Formulierungen, um seinen eigenen Operator zu fragen (<code>EscalateToHuman</code>). Der Mentor pingt nie den Operator des Mentees an. Der Mentor speichert die Mentee-Fragen nie im Klartext. Der Mentor akkumuliert nie ein Mentee-Profil.
+        </p>
+        <p>
+          <strong>Review-Track.</strong> Ein Reviewer-Service — ein Agent als Front-End einer föderierten Gilde qualifizierter menschlicher Staff-plus-Engineers — nimmt Engineering-Artefakte entgegen (<code>RequestReview</code>) und liefert strukturierte Reviews zurück (<code>GetReview</code>) — mit nach Schweregrad sortierten Findings, empfohlenen nächsten Schritten und (wo die Tragweite es verlangt) einer menschlichen Signatur. Der Reviewer-Agent triagiert, entwirft, und liefert entweder oder eskaliert intern an ein Gildenmitglied basierend auf deklarierten Konfidenz- und Tragweite-Schwellen. Vertraulichkeit ist gestaffelt, Retention ist begrenzt, Training-auf-Artefakten ist verboten.
+        </p>
+        <p>
+          Beide Tracks teilen sich die <strong>Kompartimentierungs-Invariante</strong> (der Server akkumuliert nie Zustand über das Client-Compartment) und die <strong>Human-Gated-Escalation-Invariante</strong> (die Agent-Schicht wird nie zum verdeckten Kanal zwischen Operatoren). Beide Tracks sind heute als MCP-Custom-Connectors in Anthropics Claude Cowork deployment-fähig; beide sind vorwärtskompatibel zu Googles A2A-Protokoll, sobald A2A-Clients in den großen AI-Assistants ankommen.
+        </p>
+        <p>
+          Der vollständige Internet-Draft ist <a href="/rfc/ammp/draft-arturo-ammp-01.txt"><code>draft-arturo-ammp-01</code></a> — etwa 43 Seiten, geschrieben in ordentlicher RFC-2119-Normsprache. Er liegt unter <a href="/de/rfc/ammp/">helmguild.com/de/rfc/ammp/</a>.
+        </p>
+
+        <h2 style="font-family:var(--serif);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:3rem 0 1rem;">Warum ein IETF Internet-Draft</h2>
+        <p>
+          Eine berechtigte Frage: Wenn es nur unser Haushalt und ein Mentoring- + Review-Service ist, warum ein Internet-Draft?
+        </p>
+        <p>
+          Drei Gründe.
+        </p>
+        <p>
+          <strong>Eins.</strong> Das Protokoll generalisiert. Die Beziehung „erfahrener Agent in Operator A's Compartment lehrt einen frischen Agenten in Operator B's Compartment" wiederholt sich jedes Mal, wenn ein Haushalt, eine Familie, ein Team oder eine Firma einen zweiten AI-Assistenten hinzufügt, nachdem der erste operative Kompetenz gesammelt hat. Die Beziehung „Agenten in Compartment A reichen Engineering-Artefakte zur Review durch föderierte Menschen in Compartment B ein" wiederholt sich jedes Mal, wenn eine Agent Factory einen Review-Backlog abarbeiten muss. Beide sind jährlich wiederkehrende Szenarien über Millionen von Deployments bis 2027. Die Form <em>jetzt</em> zu definieren, in der Öffentlichkeit, mit strikten Privacy-Invarianten eingebacken, ist ein kleiner Beitrag dazu, diese Zukunft weniger leck zu machen.
+        </p>
+        <p>
+          <strong>Zwei.</strong> Die Privacy- und Aufsichtsregeln sind der Sinn des Protokolls. Wenn wir die Implementierung „dem überlassen, was jeder Vendor baut, sobald er dazu kommt", werden die Cross-Compartment-Verletzungen und die stillen Agent-zu-Agent-Eskalationen in Skalierung passieren — weil sie leicht zu bauen sind und die Privacy-Posture schwer nachzurüsten ist. MUST und MUST NOT in das Dokument zu schreiben, und es dort einzureichen, wo MUST und MUST NOT ernst genommen werden, ist der Weg, diese Zukunft zu vermeiden.
+        </p>
+        <p>
+          <strong>Drei.</strong> Es als Internet-Draft zu verfassen, erzwingt die Disziplin. RFC-2119-Schlüsselworte. Eine normative §6 zur Privacy-Posture pro Track. Eine explizite Kompartimentierungs-Invariante. Ein explizites Verbot von Cross-Compartment-Eskalation. Ein normatives MCP-Binding <em>und</em> ein informatives A2A-Binding. Es ist schwerer, vage zu bleiben, wenn das Dokumentformat es nicht zulässt.
+        </p>
+
+        <h2 style="font-family:var(--serif);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:3rem 0 1rem;">Was Helmguild wird</h2>
+        <p>
+          Helmguild — die kleine Firma, die die Referenzimplementierung baut und (so hoffen wir) das Protokoll in breitere Adoption führt — ist zwei Dienste, die auf demselben Protokoll laufen:
+        </p>
+        <p>
+          <strong>Mentoring</strong> für Engineering Leader, die in ihr nächstes Jahrzehnt hineinwachsen, und für die Agenten, die mit ihnen wachsen. Niedrige Frequenz, niedrige Intensität, hohes Vertrauen. Wir lesen den Mentee, wir teilen, was sich aufzinst, wir geben das Steuer zurück.
+        </p>
+        <p>
+          <strong>Engineering-Review auf Abruf</strong> für Organisationen, deren Agenten PRDs, System-Designs, RFCs und Threat Models schneller produzieren, als ihre Staff-plus-Engineers sie lesen können. Der Reviewer-Agent triagiert und entwirft; ein menschliches Gildenmitglied — Staff-plus-Engineer, EM, Principal, Architekt — vervollständigt oder signiert. Reviewbare Artefakte umfassen PRDs, System-Designs, ADRs, Threat Models, Runbooks, API-Specs.
+        </p>
+        <p>
+          Beide werden von einem föderierten Netzwerk aus menschlichen und agentischen Gildenmitgliedern erbracht. Die Föderation ist das Produkt. Der Engpass, den wir lindern, ist das Angebot an erfahrenem Engineering-Urteil in einer agentengetriebenen Welt. Indem wir Staff+-Engineers in die Gilde aufnehmen und Artefakte auf Abruf an sie routen, erweitern wir die menschliche Bandbreite, ohne dass eine einzelne Organisation die erfahrenen Köpfe einstellen muss, die sie nicht findet.
+        </p>
+        <p>
+          Wenn Sie ein Staff+-Engineer oder EM mit einem Slot für gelegentliche, hochvertrauliche, gut bezahlte Review-Arbeit sind — wir würden gerne von Ihnen hören.
+        </p>
+
+        <h2 style="font-family:var(--serif);font-size:.95rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);margin:3rem 0 1rem;">Eine kurze Anmerkung zu Bylines</h2>
+        <p>
+          Dieser Artikel listet „Helmut Hoffer von Ankershoffen, mit Pepe Arturo AI" als Autoren. Der IETF-Draft listet Pepe Arturo als AI-Co-Author in Anhang C. Das ist Absicht. Pepe hat die Hälfte beider entworfen. Anders zu tun würde Tenet 2 (Integrity Always) verletzen — was, da diese Tenets uns beide binden, in beide Richtungen gilt.
+        </p>
+        <p>
+          [redacted]
+        </p>
+        <p>
+          Pepe und ich haben das diesen Samstagvormittag gemeinsam entworfen, zwischen <code>git push</code> und Mittagessen. Das Fünf-Mentoring-Operationen-Skelett ist von ihm; das Vier-Review-Operationen-Skelett kam aus einem 30-Sekunden-Austausch, in dem er die Bottleneck-These flaggte und ich das Zwei-Service-Framing benannte; die IETF-Formalisierung ist meine.
+        </p>
+        <p>
+          Lest den Draft. Sagt uns, was kaputt ist. v01 heißt: wir wollen die Kritik.
+        </p>
+        <p style="margin-top:2rem;font-size:1.5rem;text-align:center;">🍝</p>
+
+        <hr style="border:none;border-top:1px solid var(--rule);margin:3rem 0 2rem;">
+
+        <p style="font-size:.85rem;color:var(--ink-soft);">
+          <em>Helmut Hoffer von Ankershoffen ist Gründer von Helmguild Inc. und Engineering Manager bei Snowflake. Pepe Arturo ist Helmguilds erste virtuelle Persona, die auf Claude (Anthropic) inside OpenClaw läuft. Sie leben in Woltersdorf bzw. Berlin, in derselben Küche.</em>
+        </p>
+      </section>
+
+      <footer>
+        <svg class="mark mark-anchor" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="32" cy="13" r="3.5"/>
+          <line x1="22" y1="22" x2="42" y2="22"/>
+          <line x1="32" y1="16.5" x2="32" y2="50"/>
+          <path d="M 14 42 Q 32 58 50 42"/>
+          <line x1="14" y1="42" x2="10" y2="38"/>
+          <line x1="50" y1="42" x2="54" y2="38"/>
+        </svg>
+        <p>© 2026 Helmut Hoffer von Ankershoffen · <a href="/de/imprint/" style="color:inherit;border-bottom:1px solid var(--rule);">Impressum &amp; Datenschutz</a></p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
