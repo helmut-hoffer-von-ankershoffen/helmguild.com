@@ -11,15 +11,18 @@ Static, JS-free site at `https://www.helmguild.com`. Hosted on **GitHub Pages**,
 ```
 /                          # EN (default) — root
   index.html               # homepage
-  style_4.css              # current stylesheet (versioned, see below)
+  style_5.css              # current stylesheet (versioned, see below)
+  manifesto/               # public mission + tenets
   pepe-arturo-ai/          # virtual-persona page + reels + assets
   helmut-hoffer-von-ankershoffen/  # founder profile + portrait
   imprint/                 # EN imprint & privacy (canonical)
     en/                    # legacy redirect → /imprint/
   CNAME                    # GitHub Pages custom-domain pin (www.helmguild.com)
+  AGENTS.md                # this file
 
 /de/                       # DE mirror — same structure, in German
   index.html
+  manifesto/index.html
   pepe-arturo-ai/index.html
   helmut-hoffer-von-ankershoffen/index.html
   imprint/index.html       # DE Impressum (legally binding under TMG/MStV/DSGVO)
@@ -64,7 +67,7 @@ Fixed-position pill, top-right, sits left of the burger. Drop this snippet near 
 </nav>
 ```
 
-The styling (`.lang-toggle`, `.current`, `.sep`) is in `style_4.css`.
+The styling (`.lang-toggle`, `.current`, `.sep`) is in `style_5.css`.
 
 ## Burger menu
 
@@ -72,7 +75,7 @@ In-language: DE pages list only `/de/*` paths and German labels; EN pages list o
 
 ## CSS — versioned filenames
 
-Single stylesheet, but the filename carries a bump integer (`style_4.css`). Why: aggressive browser/CDN caching of CSS makes plain edits invisible to returning visitors.
+Single stylesheet, but the filename carries a bump integer (`style_5.css`). Why: aggressive browser/CDN caching of CSS makes plain edits invisible to returning visitors.
 
 **On any CSS change:**
 
