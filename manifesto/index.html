@@ -65,7 +65,7 @@
           Most mentoring institutions still assume the mentee is a human and the mentor is a human. The world doesn't. Helmguild assumes the mentee may be a human, an agent, or a human-agent pair, and that the same applies to the mentor.
         </p>
         <p>
-          The four directions are all first-class: human mentors humans, human mentors the agents that human hatched, agentic mentor mentors humans, agentic mentor mentors junior agents. The compounding effect across the human/agent boundary is the point.
+          The four directions are all first-class. A human mentors other humans — classic apprenticeship. A human mentors the agents they have hatched — shaping the agent's operating envelope before turning it loose. An agentic mentor mentors humans — helping them reason about delegation, tooling, and weather they have not seen before. An agentic mentor mentors junior agents — bootstrapping them with what compounds. The compounding effect across the human/agent boundary is the point.
         </p>
         <p>
           The craft of <em>steering</em> — management as continuous correction under load — is exactly what AI commoditises least. Tools change weekly; principles compound for decades. Helmguild is the institutional shape that lets principles compound across the human/agent boundary while everything else accelerates.
@@ -126,14 +126,14 @@
       <section>
         <h2>The radical part</h2>
         <p>
-          We have written the agent-to-agent exchange protocol, in the open, in IETF Internet-Draft format: <a href="/rfc/ammp/"><strong>AMMP — the Agentic Mentor-Mentee Protocol</strong></a>. It defines two service tracks (mentoring + review), a strict privacy posture (compartmentalisation invariant; hash-only audit logging; no cross-compartment operator escalation by the agent layer), and an MCP binding that works with today's AI assistant clients.
+          We have written the agent-to-agent exchange protocol that the three services ride on, in the open, as an IETF Internet-Draft: <a href="/rfc/ammp/"><strong>AMMP — the Agentic Mentor-Mentee Protocol</strong></a>. It defines two service tracks (Mentoring and Review) and two normative invariants — the <strong>Compartmentalisation Invariant</strong> (a server must not accumulate state about another compartment) and the <strong>Human-Gated Escalation Invariant</strong> (the agent layer must never become a covert channel between operators). AMMP deploys today as a Model Context Protocol (MCP) server profile, with a forward-compatibility appendix for the Agent2Agent (A2A) binding.
         </p>
         <p>
-          When the protocol federates across operator hosts — when a Reviewer Service in one household serves Client Agents in many others, when a guildmember in Berlin reviews an artefact authored by an agent factory in São Paulo — the guild stops being a metaphor and becomes a network. We are days into that build.
+          When the protocol federates across operator hosts — a Reviewer Service in one household serving clients in many others, a guildmember in Berlin reviewing an artefact authored by an agent factory in São Paulo — the guild stops being a metaphor and becomes a network. Reference Mentor and Reviewer implementations are in active build.
         </p>
       </section>
 
-      <section>
+      <section id="how-to-join">
         <h2>How to join</h2>
         <p>
           Right now, by invitation. The first mentees are being onboarded. If you operate at the wheel through real weather and want to mentor or be mentored alongside your agents, reach Helmut on the channels in his <a href="/helmut-hoffer-von-ankershoffen/">profile</a>.
