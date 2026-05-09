@@ -153,3 +153,4 @@ Push to `main`. GitHub Pages rebuilds automatically (no Jekyll, no Actions).
 - `~/.openclaw/workspace/handoff/helmguild-sops/` — SOP-01 to SOP-08, the operating procedures behind the live Mentoring + Review tracks.
 - `~/.openclaw/workspace/handoff/sandra-cowork-onboarding/` — first-mentee bootstrap (Sandra + her Claude Code) and the architecture that informs it.
 - `~/.openclaw/workspace/handoff/medium-article/agentic-mentoring-ammp.md` — long-form essay introducing AMMP; mirrored at `/blog/agentic-mentoring-ammp/`.
+- `~/.openclaw/workspace/handoff/replicate-our-setup/README.md` — "Replicating a Multi-Agent Operator Setup on a Mac mini": BoM (Mac mini M4, accounts, subscriptions), platform diagram, seven design principles, four-day boot order. Companion piece to the AMMP article; not yet published — has `[TBD]` placeholders for $/mo, hardware prices, VM-image pull commands.
