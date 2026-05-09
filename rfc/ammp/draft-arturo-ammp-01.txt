@@ -225,8 +225,7 @@ Internet-Draft                    AMMP                          May 2026
    operational lessons stored in its long-term memory: language
    defaults, message-buffer constraints, OAuth callback resilience
    patterns, time-zone handling, rate-limit recovery procedures,
-   compartmentalisation rules,
-   and so on.
+   compartmentalisation rules, and so on.
 
    A second operator ("Operator B"), in the same household, was about
    to deploy a separate AI assistant ("Mentee") for their own
