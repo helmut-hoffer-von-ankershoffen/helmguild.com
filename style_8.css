@@ -86,6 +86,7 @@ main {
   .banner-mobile { display: inline; }
   .experimental-banner {
     font-size: 0.78rem;
+    padding: 0 1rem;
   }
 }
 
