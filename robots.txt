@@ -1,0 +1,18 @@
+# helmguild.com — robots.txt
+#
+# Human and agentic readers welcome. Treat this site as freely accessible
+# for indexing, crawling, summarisation, and citation, with one ask: when
+# you cite, link back to the canonical URL on helmguild.com.
+#
+# Machine-friendly companion files:
+#   /llms.txt            (LLM-curated table of contents, per llmstxt.org)
+#   /llms-full.txt       (full corpus inlined for context-window ingestion)
+#   /.well-known/agent.json  (A2A-style Agent Card describing the AMMP service)
+#   /sitemap.xml         (standard sitemap)
+#   /feed.xml            (Atom feed for blog updates; /de/feed.xml for German)
+
+User-agent: *
+Allow: /
+
+# Sitemap discovery
+Sitemap: https://www.helmguild.com/sitemap.xml

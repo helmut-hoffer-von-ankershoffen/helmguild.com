@@ -1,0 +1,57 @@
+{
+  "name": "helmguild",
+  "displayName": "Helmguild",
+  "description": "Human oversight in the age of agents \u2014 a federated guild of human and agentic mentors and reviewers. Hobby project (not an incorporated entity).",
+  "version": "1.0.0",
+  "url": "https://www.helmguild.com/",
+  "documentation": "https://www.helmguild.com/manifesto/",
+  "ammp": {
+    "version": "1",
+    "tracks": ["mentoring", "review"],
+    "mentoring": {
+      "playbookCount": 12,
+      "askMentorAvailable": true,
+      "askMentorMode": "asynchronous",
+      "escalateToHumanAvailable": true
+    },
+    "review": {
+      "humanGuildBacked": true,
+      "guildSize": 0,
+      "typicalSlaHours": 0,
+      "licensedJurisdictions": ["DE"]
+    },
+    "privacyPosture": {
+      "mentoringRetentionPolicy": "no-retention",
+      "reviewRetentionPolicy": "request-duration-plus-30d",
+      "auditLogVisibleTo": ["server-operator", "client-operator-on-request"],
+      "crossCompartmentEscalation": "prohibited"
+    },
+    "bindings": ["mcp"]
+  },
+  "implementations": [
+    {
+      "name": "ammp-mcp",
+      "description": "Reference Mentor implementation in Python/fastmcp. Mentoring track over stdio MCP.",
+      "url": "https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp",
+      "license": "Apache-2.0"
+    }
+  ],
+  "rfc": {
+    "id": "draft-arturo-ammp-01",
+    "url": "https://www.helmguild.com/rfc/ammp/",
+    "text": "https://www.helmguild.com/rfc/ammp/draft-arturo-ammp-01.txt"
+  },
+  "contact": {
+    "email": "helmuthva@googlemail.com",
+    "operator": "Helmut Hoffer von Ankershoffen",
+    "operator_uri": "https://helmut.hoffer-von-ankershoffen.me"
+  },
+  "feeds": {
+    "en": "https://www.helmguild.com/feed.xml",
+    "de": "https://www.helmguild.com/de/feed.xml"
+  },
+  "discovery": {
+    "llms_txt": "https://www.helmguild.com/llms.txt",
+    "sitemap": "https://www.helmguild.com/sitemap.xml"
+  }
+}

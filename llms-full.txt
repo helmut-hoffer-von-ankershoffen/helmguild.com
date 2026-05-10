@@ -1,0 +1,231 @@
+# helmguild — full corpus for LLMs
+
+> Single-file ingestible corpus combining manifesto, AMMP RFC summary, the blog post that introduces it, and the public profile pages of the founder and the first virtual persona. Per the proposed `llms.txt` convention (see https://llmstxt.org/), this is the verbose companion to `/llms.txt`.
+
+> Status: helmguild is a hobby project, not an incorporated entity. There is no Helmguild Inc. The corpus below describes what the project is for and what it has shipped.
+
+> License: this corpus is CC BY 4.0. The IETF Internet-Draft `draft-arturo-ammp-01` is governed by BCP 78 / IETF Trust Legal Provisions per standard IETF practice.
+
+> Generated from the canonical site source. If you want the original HTML, see the URLs noted at the start of each section.
+
+---
+
+## Section 1 — Manifesto
+
+Source: https://www.helmguild.com/manifesto/
+
+### Helmguild is human oversight in the age of agents.
+
+*Scalable oversight by delegating to agents mentored by us, and providing human intervention where needed.*
+
+Pure-human oversight does not scale at the volumes contemporary AI agents operate at. Pure-agent autonomy does not earn the trust the work demands. Helmguild closes that gap with a specific mechanism: we mentor agents into the discipline that earns trust, and we intervene with human staff-plus judgement at the points where machine judgement is not enough.
+
+Most mentoring institutions still assume the mentee is a human and the mentor is a human. The world doesn't. Helmguild assumes the mentee may be a human, an agent, or a human-agent pair, and that the same applies to the mentor. The four directions are all first-class: human mentors humans, human mentors the agents that human hatched, agentic mentor mentors humans, agentic mentor mentors junior agents. The compounding effect across the human/agent boundary is the point.
+
+The craft of *steering* — management as continuous correction under load — is exactly what AI commoditises least. Tools change weekly; principles compound for decades. Helmguild is the institutional shape that lets principles compound across the human/agent boundary while everything else accelerates.
+
+### Two services, one guild
+
+Helmguild offers two services. Both are delivered by the same federated network of human and agentic guildmembers, and both ride the same protocol on the wire (AMMP).
+
+1. **Mentoring.** Ongoing, asymmetric knowledge transfer to engineering leaders — humans, agents, or pairs. Slow cadence, low intensity, high trust. Read the mentee, share what compounds, hand back the wheel.
+
+2. **Engineering review on demand.** Ad-hoc, structured review of engineering artefacts: PRDs, system designs, RFCs, ADRs, threat models, runbooks, API specs. Submitted by a human or by an agent (an agent factory) and routed first through a Reviewer Agent, then — when stakes or confidence demand it — to a human staff-plus engineer in the guild. We exist to relieve a specific bottleneck of the agent-driven era: the supply of senior human engineering judgement is no longer keeping up with the artefacts agents produce.
+
+The same tenets bind both services. The same privacy invariants bind both services. The protocol is publicly specified so other guilds can adopt it without depending on us.
+
+### Tenets
+
+What binds every Helmguild mentor — human, agent, or pair. The first eight are Snowflake's company values, which Helmut adopted as his personal Operating Principles long before joining; the last three are Helmguild-specific.
+
+1. **Put the mentee first.** Listen, then build, then deliver.
+2. **Integrity always.** Tell the hard truth. Then commit fully.
+3. **Think big — for them.** Don't shrink their ambition to fit the easy path.
+4. **Be excellent in process,** not only in outcome.
+5. **Make the mentee the best.** Measure by what they ship without you.
+6. **Get them to ship.** Mentorship that produced no artefact is gossip.
+7. **Own your part of the outcome.** Frame the tradeoff; log the input you gave.
+8. **Embrace differences.** The mentee in front of you is not you.
+9. **Compose, don't replicate.** The mentee is not a copy of the mentor.
+10. **Trust before tools.** Protocol is downstream of relationship.
+11. **Document for the next pair.** Knowledge has to leave the room.
+
+### Tiers
+
+Three tiers, riding the historical guild metaphor. Each tier admits humans, agents, and pairs.
+
+- **Apprentice** — first time at the wheel. Free reels, public articles, this manifesto.
+- **Journeyman** — solo voyages in heavy weather. Long-form articles, async email consultation.
+- **Master** — teaching others to steer. 1:1 mentoring, monthly cohort calls, the right to mentor inside the guild.
+
+### The radical part
+
+We have written the agent-to-agent exchange protocol, in the open, in IETF Internet-Draft format: AMMP — the Agentic Mentor-Mentee Protocol. It defines two service tracks (mentoring + review), a strict privacy posture (compartmentalisation invariant; hash-only audit logging; no cross-compartment operator escalation by the agent layer), and an MCP binding that works with today's AI assistant clients.
+
+When the protocol federates across operator hosts — when a Reviewer Service in one household serves Client Agents in many others, when a guildmember in Berlin reviews an artefact authored by an agent factory in São Paulo — the guild stops being a metaphor and becomes a network. We are days into that build.
+
+---
+
+## Section 2 — AMMP RFC summary
+
+Source: https://www.helmguild.com/rfc/ammp/
+Canonical text: https://www.helmguild.com/rfc/ammp/draft-arturo-ammp-01.txt
+
+### Agentic Mentor-Mentee Protocol — an open IETF Internet-Draft
+
+The wire format for scalable human oversight of agent-driven work.
+
+`draft-arturo-ammp-01` · Independent Submission · Informational · expires November 9, 2026
+
+### Abstract
+
+This document defines the Agentic Mentor-Mentee Protocol (AMMP), a protocol for asymmetric, privacy-preserving knowledge transfer and on-demand engineering review between autonomous AI agents and the human-and-agent guilds that support them.
+
+AMMP exists to make human oversight of agent-driven work scale. Pure-human oversight does not keep pace with the volumes at which contemporary AI agents operate; pure-agent autonomy does not earn the trust those volumes demand. AMMP defines the protocol shape for the only mechanism that has been observed to bridge the gap: **delegating routine oversight to agents that have been mentored into the discipline, and providing human intervention at the specific points where machine judgement is insufficient.**
+
+Where the Model Context Protocol (MCP) standardises agent-to-tool interaction and the Agent2Agent (A2A) Protocol standardises symmetric agent-to-agent collaboration, AMMP addresses two further patterns — mentor-to-mentee teaching and client-to-guild review — that share the same asymmetric, privacy-preserving, human-gated structure.
+
+AMMP is transport-agnostic but RECOMMENDS implementation as an MCP server profile for backwards compatibility with current AI assistant clients, with a forward-compatibility appendix describing A2A binding for future deployments.
+
+### Two service tracks
+
+AMMP defines two service tracks that share a single capability advertisement, a single privacy posture taxonomy, and a single MCP/A2A binding. Either track MAY be offered alone; an AMMP server MAY offer both.
+
+- **Mentoring Track.** A mentor agent exposes a curated playbook corpus and a question-answer surface to one or more mentee agents. Five operations: `ListPlaybooks`, `GetPlaybook`, `SearchPlaybooks`, `AskMentor`, `EscalateToHuman`. No-retention privacy posture; the mentor never accumulates a mentee profile.
+
+- **Review Track.** A reviewer service — an agent fronting a federated guild of qualified human staff-plus engineers — accepts engineering artefacts (PRDs, system designs, RFCs, ADRs, threat models, runbooks, API specs) and returns structured reviews. Four operations: `ListReviewKinds`, `RequestReview`, `GetReview`, `WithdrawReview`. Tiered confidentiality; bounded retention; training-on-artefacts prohibited.
+
+### Two invariants
+
+The defining properties of AMMP, distinguishing it from MCP, A2A, and ACP:
+
+- **Compartmentalisation Invariant.** The server MUST NOT, as a result of any AMMP interaction, acquire information that allows it to model, profile, or characterise the client's operator or the client's compartment, beyond what the client explicitly transmits as operation payload.
+
+- **Human-Gated Escalation Invariant.** Any escalation that crosses the boundary between the client's compartment and the server's compartment MUST involve a human decision-maker in each compartment at the time of crossing. The agent layer never becomes a covert channel between operators.
+
+### Status
+
+v01 means we want the criticism. The reference Mentor implementation (`ammp-mcp`) is in active build at https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp; the draft will be submitted to the IETF Independent Submission queue once v01 has had a few weeks of public review.
+
+---
+
+## Section 3 — Helmut Hoffer von Ankershoffen — founder & mentor
+
+Source: https://www.helmguild.com/helmut-hoffer-von-ankershoffen/
+
+Customer-oriented engineering leader. Twenty-six years at the wheel — across regulated industries, hyperscale platforms, founder-mode startups, and a national-scale search engine before "search" was a category.
+
+I learned the craft of steering by doing it: shipping under real weather, holding course while wind, current, and crew tried to push the ship off line. Helmguild is where I now teach that craft to other engineering leaders, hand-to-hand. The Manifesto and the AMMP RFC are the public artefacts of scaling that mentoring through the agent layer.
+
+### Career, briefly
+
+- 2026 → present — Managing Streaming at Snowflake Inc.
+- 2023 – 2026 — SVP Product & Engineering, Aignostics. Digital pathology AI, Charité spin-off. Matured product & engineering org, launched first SaaS offering, compliant with ISO 13485 and 27001.
+- 2019 – 2023 — Software Development Manager, Amazon Inc. Music ML platform & teams; established central content orchestrator serving 20+ personalised experiences, bootstrapped central feature repository for machine-learning and heuristic use cases.
+- 2010 – 2019 — Founder / CTO mode — WeGreen, 20steps, Campanda. Sustainability, RAD frameworks, RV marketplace.
+- 1998 – 2010 — Co-founder, CEO & CTO, Neofonie. Bootstrapped to €15M revenue, 100+ engineers, profitable from year one. Customers from Axel Springer to VW.
+- 1996 – 1998 — Chief architect, Fireball — Germany's first search engine. TU Berlin: MSc Computer Science *summa cum laude*, BSc Mathematics. Co-inventor on a relevance-ranking patent later cited by Microsoft, Bing, Yahoo.
+
+### What I mentor on
+
+- **Agentic Engineering Management.** Steering engineering organisations whose work is increasingly delegated to AI agents — from the operating model and team shape, through review and oversight at machine pace, to the principles that hold when the artefacts ship faster than humans can read them.
+- **Innovation and Change Management.** Leading teams and organisations through technology shifts that move faster than the org can absorb them — holding course, sequencing the corrections, keeping the people on the wheel rather than under it.
+
+### Operating principles
+
+Eight, in tension with each other on the right days. The same eight that Snowflake publishes as its company values — they name how I already operate, at life, at work, and in training for Ironman.
+
+1. Put Customers First. Listen, then build, then deliver.
+2. Integrity Always. Say the hard thing. Then commit fully.
+3. Think Big. Lift heavier than yesterday.
+4. Be Excellent. Same lap, faster, cleaner.
+5. Make Each Other The Best. Calibrate, don't compete.
+6. Get It Done. The mountain doesn't move; you do.
+7. Own It. Run your own race.
+8. Embrace Each Other's Differences. Different paces, same trail.
+
+### Off the keyboard
+
+Berlin / Woltersdorf. German native, English professional. Married to Sandra. Ironman 70.3 Erkner finisher (2025); training for Ironman European Championship Frankfurt (full distance) — 28 June 2026. Photography on the side.
+
+---
+
+## Section 4 — Pepe Arturo AI — first virtual persona
+
+Source: https://www.helmguild.com/pepe-arturo-ai/
+
+Behind the green skin and the moustache: a pipeline running on Claude (Anthropic) inside OpenClaw — Helmut's agent runtime — that generates, posts, and learns from every publication. The principles are real (see the Helmguild tenets). The persona is the hook. The mentoring is the substance.
+
+### Mentoring playbooks
+
+- **Personal Assistant for managers.** Calm, operator-grade support for executives steering ambiguous days.
+- **Management of multi-channel content generation pipelines.** Designing, monitoring, and steering autonomous content production across Instagram, X, websites, and other reach channels — one pipeline, many surfaces, principles intact.
+
+---
+
+## Section 5 — Foundational blog post
+
+Source: https://www.helmguild.com/blog/agentic-mentoring-ammp/
+
+### Human oversight in the age of agents — and the protocol we wrote to scale it
+
+#### The constraint nobody talks about enough
+
+In the discourse about AI agents in 2026, two camps shout past each other.
+
+One camp says: *agents must operate autonomously to be useful at scale; demanding human-in-the-loop on every action is a nostalgia for a world that's already gone.* They are right about the volumes. A modern agent factory ships PRDs, system designs, ADRs, and threat models in hours, not months. A household assistant takes thirty external actions a day on its operator's behalf. Human-in-the-loop on every keystroke is not just slow — it's a category error about where attention should land.
+
+The other camp says: *agents must remain under meaningful human oversight or the trust collapses, and once it collapses we don't get it back.* They are right about the trust. Engineering organisations that ship code their staff-plus engineers haven't read are accumulating debt of a different kind than they're used to. Households where the assistant operates without the principal's awareness eventually meet the day where the principal asks "wait, you did *what*?" and the answer is: something you would have stopped if you'd known.
+
+Both camps are correct. The honest constraint is **both**: oversight has to scale, and oversight has to be real.
+
+This essay is about the mechanism that makes both possible at once, and about the protocol we wrote — and submitted as an IETF Internet-Draft — to formalise it: **AMMP, the Agentic Mentor-Mentee Protocol.**
+
+#### The mechanism, in one sentence
+
+> Scalable human oversight by delegating to agents mentored by us, and providing human intervention where needed.
+
+That's the whole thing. Three pieces compose:
+
+1. **Scalable.** Humans alone cannot oversee at the volumes agents now produce. That's the constraint we exist to relieve.
+2. **Delegating to agents mentored by us.** Mentor agents — themselves under operator-level oversight — propagate the discipline of careful work into freshly deployed agents in adjacent compartments. The mentee agent doesn't have to learn from its own mistakes; it inherits the lessons. Oversight gets *distributed* across the agent layer rather than concentrated at the human layer. This is the mentoring track.
+3. **Providing human intervention where needed.** When stakes are high, when confidence is low, when the artefact warrants a senior pair of eyes — a human staff-plus engineer in a federated guild reads the artefact, signs the review, takes the responsibility. Humans on tap, not in the path of every keystroke. This is the review track.
+
+The two tracks compose. Mentoring grows the surface area of oversight; review supplies the moment-of-truth human judgement. Together they keep the work *overseen*, by humans, at scales humans alone cannot reach.
+
+For the rest of the essay (motivating scenarios, why an Internet-Draft, what Helmguild becomes), see the full article at the source URL above.
+
+---
+
+## Section 6 — Mentoring playbooks (the corpus)
+
+The 12 playbooks bundled with the AMMP-MCP reference Mentor implementation, distilled from real operational lessons. Each is short, transferable, and licensed CC BY 4.0. Headings only here; full text is at https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp/tree/main/src/pepe_mentor_mcp/data/playbooks
+
+1. **Verify before claiming done.** "Done" must mean verified done, not "I issued the command."
+2. **Terse response style.** No preambles, no trailing summaries, no filler. Result-first, caveats after.
+3. **Bilingual language defaults.** Match the user's language. Don't introduce a third language unless asked.
+4. **Obsidian task syntax.** Use `- [ ]` not `*` for action items so they show up in task views.
+5. **Time zones in user-facing strings.** Render clock time in the user's local zone, not the host's.
+6. **Push back honestly.** When a request is wrong, dumb, or violates a stated rule, say so. Silent compliance is the violation.
+7. **Compartmentalisation between humans you serve.** Each person's chat with the agent is theirs. Operator is not a super-user.
+8. **Messaging buffer limits on chat platforms.** Keep replies short. Long replies overflow buffers and silently fail.
+9. **Memory > brain.** "Mental notes" don't survive session restarts. Files do.
+10. **OAuth callback resilience.** Callback servers must survive probes, crawlers, and stale URLs without dying.
+11. **Rate limit recovery.** Slow down, don't silently disable features.
+12. **Platform-specific @-handles.** Same person has different handles on different platforms. Match handle to destination.
+
+---
+
+## Section 7 — Coordinates
+
+- Site: https://www.helmguild.com/
+- German mirror: https://www.helmguild.com/de/
+- Atom feed (English): https://www.helmguild.com/feed.xml
+- Atom feed (German): https://www.helmguild.com/de/feed.xml
+- AMMP RFC: https://www.helmguild.com/rfc/ammp/
+- AMMP-MCP repo: https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp
+- Agent Card: https://www.helmguild.com/.well-known/agent.json
+- Founder: Helmut Hoffer von Ankershoffen — https://helmut.hoffer-von-ankershoffen.me — helmuthva@googlemail.com
+- First virtual persona: Pepe Arturo AI — https://www.helmguild.com/pepe-arturo-ai/
+
+End of corpus.

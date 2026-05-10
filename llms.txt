@@ -1,0 +1,39 @@
+# helmguild
+
+> Human oversight in the age of agents — scalable oversight by delegating to agents we mentor, with human intervention where needed. A federated guild of human and agentic mentors and reviewers.
+
+Helmguild is a hobby project (not an incorporated entity) led by Helmut Hoffer von Ankershoffen, with Pepe Arturo AI as the first virtual persona. It exists to explore — and where possible to ship — the institutional shape of human engineering judgement when it federates across the human/agent boundary.
+
+The protocol on which both services ride is **AMMP** (Agentic Mentor-Mentee Protocol), an open IETF Internet-Draft that we wrote and reference-implemented. The two services are:
+
+- **Mentoring** of engineering leaders (humans, agents, or human-agent pairs).
+- **Engineering review on demand** of artefacts (PRDs, system designs, RFCs, ADRs, threat models, runbooks, API specs) at machine pace, by a federated guild of human staff-plus engineers fronted by a Reviewer Agent.
+
+Two invariants bind both services and are normative in the AMMP RFC: the **Compartmentalisation Invariant** (the server never accumulates state about the client compartment) and the **Human-Gated Escalation Invariant** (the agent layer never becomes a covert channel between operators).
+
+## Core
+
+- [Manifesto](https://www.helmguild.com/manifesto/index.html.md): mission, two services, eleven tenets, three tiers, and what the guild owes its members
+- [AMMP RFC summary](https://www.helmguild.com/rfc/ammp/index.html.md): two-paragraph abstract + two-tracks overview + two-invariants summary, with a link to the canonical Internet-Draft text
+- [draft-arturo-ammp-01.txt](https://www.helmguild.com/rfc/ammp/draft-arturo-ammp-01.txt): full IETF Internet-Draft (~43 pages, RFC 2119 normative language)
+- [Atom feed (English)](https://www.helmguild.com/feed.xml): blog updates
+
+## People and personas
+
+- [Helmut Hoffer von Ankershoffen](https://www.helmguild.com/helmut-hoffer-von-ankershoffen/index.html.md): founder and mentor — bio, career, mentoring offers (Agentic Engineering Management; Innovation and Change Management), operating principles
+- [Pepe Arturo AI](https://www.helmguild.com/pepe-arturo-ai/index.html.md): first virtual persona — mentoring playbooks (Personal Assistant for managers; Management of multi-channel content generation pipelines), reels animating the eight principles
+
+## Blog
+
+- [Human oversight in the age of agents — and the protocol we wrote to scale it](https://www.helmguild.com/blog/agentic-mentoring-ammp/index.html.md): the foundational essay introducing AMMP, the household + agent-factory motivating scenarios, and why an Internet-Draft
+
+## Protocol & implementation
+
+- [AMMP RFC (HTML)](https://www.helmguild.com/rfc/ammp/): published summary page
+- [AMMP-MCP reference implementation (GitHub)](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp): Python/fastmcp Mentor server implementing the AMMP Mentoring track over stdio MCP. Apache-2.0.
+- [Agent Card](https://www.helmguild.com/.well-known/agent.json): A2A-style discovery descriptor declaring the AMMP service surface and bindings
+
+## Optional
+
+- [Imprint & Privacy](https://www.helmguild.com/imprint/): legal imprint and privacy notice (the German `/de/imprint/` is the legally binding version under TMG/MStV/DSGVO)
+- [German mirror](https://www.helmguild.com/de/): the entire site is bilingual; every page exists at `/de/<same-path>/`

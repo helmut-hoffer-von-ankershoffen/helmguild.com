@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://www.helmguild.com/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.helmguild.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.helmguild.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/"/>
+  </url>
+
+  <url>
+    <loc>https://www.helmguild.com/manifesto/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.helmguild.com/manifesto/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.helmguild.com/de/manifesto/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/manifesto/"/>
+  </url>
+
+  <url>
+    <loc>https://www.helmguild.com/rfc/ammp/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.helmguild.com/rfc/ammp/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.helmguild.com/de/rfc/ammp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/rfc/ammp/"/>
+  </url>
+
+  <url>
+    <loc>https://www.helmguild.com/blog/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.helmguild.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.helmguild.com/de/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/blog/"/>
+  </url>
+
+  <url>
+    <loc>https://www.helmguild.com/blog/agentic-mentoring-ammp/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.helmguild.com/blog/agentic-mentoring-ammp/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.helmguild.com/de/blog/agentic-mentoring-ammp/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/blog/agentic-mentoring-ammp/"/>
+  </url>
+
+  <url>
+    <loc>https://www.helmguild.com/pepe-arturo-ai/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.helmguild.com/pepe-arturo-ai/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.helmguild.com/de/pepe-arturo-ai/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/pepe-arturo-ai/"/>
+  </url>
+
+  <url>
+    <loc>https://www.helmguild.com/helmut-hoffer-von-ankershoffen/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.helmguild.com/helmut-hoffer-von-ankershoffen/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.helmguild.com/de/helmut-hoffer-von-ankershoffen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/helmut-hoffer-von-ankershoffen/"/>
+  </url>
+
+  <url>
+    <loc>https://www.helmguild.com/imprint/</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.helmguild.com/imprint/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.helmguild.com/de/imprint/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/imprint/"/>
+  </url>
+
+</urlset>

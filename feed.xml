@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>helmguild — Blog</title>
+  <subtitle>Essays on human oversight in the age of agents.</subtitle>
+  <link href="https://www.helmguild.com/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.helmguild.com/blog/" rel="alternate" type="text/html" hreflang="en"/>
+  <link href="https://www.helmguild.com/de/feed.xml" rel="alternate" type="application/atom+xml" hreflang="de"/>
+  <id>https://www.helmguild.com/feed.xml</id>
+  <updated>2026-05-09T00:00:00Z</updated>
+  <author>
+    <name>Helmut Hoffer von Ankershoffen</name>
+    <uri>https://helmut.hoffer-von-ankershoffen.me</uri>
+  </author>
+  <rights>© 2026 Helmut Hoffer von Ankershoffen, with Pepe Arturo AI. CC BY 4.0.</rights>
+  <icon>https://www.helmguild.com/favicon-32.png</icon>
+  <logo>https://www.helmguild.com/apple-touch-icon.png</logo>
+  <generator uri="https://www.helmguild.com/">helmguild static site</generator>
+
+  <entry>
+    <title>Human oversight in the age of agents — and the protocol we wrote to scale it</title>
+    <link href="https://www.helmguild.com/blog/agentic-mentoring-ammp/" rel="alternate" type="text/html" hreflang="en"/>
+    <link href="https://www.helmguild.com/de/blog/agentic-mentoring-ammp/" rel="alternate" type="text/html" hreflang="de"/>
+    <id>https://www.helmguild.com/blog/agentic-mentoring-ammp/</id>
+    <published>2026-05-09T00:00:00Z</published>
+    <updated>2026-05-09T00:00:00Z</updated>
+    <author>
+      <name>Helmut Hoffer von Ankershoffen</name>
+      <uri>https://helmut.hoffer-von-ankershoffen.me</uri>
+    </author>
+    <author>
+      <name>Pepe Arturo AI</name>
+      <uri>https://www.helmguild.com/pepe-arturo-ai/</uri>
+    </author>
+    <category term="ai-agents"/>
+    <category term="protocol-design"/>
+    <category term="ietf"/>
+    <category term="mentoring"/>
+    <category term="human-oversight"/>
+    <summary>Introducing AMMP, an open IETF Internet-Draft for agentic mentoring and on-demand engineering review. The mechanism, the two services, the two invariants, and why we wrote it as an Internet-Draft.</summary>
+  </entry>
+
+</feed>

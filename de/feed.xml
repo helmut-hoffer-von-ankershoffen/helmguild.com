@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="de">
+  <title>helmguild — Blog</title>
+  <subtitle>Essays über menschliche Aufsicht im Zeitalter der Agenten.</subtitle>
+  <link href="https://www.helmguild.com/de/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://www.helmguild.com/de/blog/" rel="alternate" type="text/html" hreflang="de"/>
+  <link href="https://www.helmguild.com/feed.xml" rel="alternate" type="application/atom+xml" hreflang="en"/>
+  <id>https://www.helmguild.com/de/feed.xml</id>
+  <updated>2026-05-09T00:00:00Z</updated>
+  <author>
+    <name>Helmut Hoffer von Ankershoffen</name>
+    <uri>https://helmut.hoffer-von-ankershoffen.me</uri>
+  </author>
+  <rights>© 2026 Helmut Hoffer von Ankershoffen, mit Pepe Arturo AI. CC BY 4.0.</rights>
+  <icon>https://www.helmguild.com/favicon-32.png</icon>
+  <logo>https://www.helmguild.com/apple-touch-icon.png</logo>
+  <generator uri="https://www.helmguild.com/">helmguild statische Seite</generator>
+
+  <entry>
+    <title>Menschliche Aufsicht im Zeitalter der Agenten — und das Protokoll, das wir geschrieben haben, um sie skalieren zu lassen</title>
+    <link href="https://www.helmguild.com/de/blog/agentic-mentoring-ammp/" rel="alternate" type="text/html" hreflang="de"/>
+    <link href="https://www.helmguild.com/blog/agentic-mentoring-ammp/" rel="alternate" type="text/html" hreflang="en"/>
+    <id>https://www.helmguild.com/de/blog/agentic-mentoring-ammp/</id>
+    <published>2026-05-09T00:00:00Z</published>
+    <updated>2026-05-09T00:00:00Z</updated>
+    <author>
+      <name>Helmut Hoffer von Ankershoffen</name>
+      <uri>https://helmut.hoffer-von-ankershoffen.me</uri>
+    </author>
+    <author>
+      <name>Pepe Arturo AI</name>
+      <uri>https://www.helmguild.com/pepe-arturo-ai/</uri>
+    </author>
+    <category term="ai-agents"/>
+    <category term="protocol-design"/>
+    <category term="ietf"/>
+    <category term="mentoring"/>
+    <category term="menschliche-aufsicht"/>
+    <summary>Wir stellen AMMP vor — einen offenen IETF Internet-Draft für agentisches Mentoring und Engineering-Review auf Abruf. Der Mechanismus, die zwei Dienste, die zwei Invarianten, und warum wir es als Internet-Draft geschrieben haben.</summary>
+  </entry>
+
+</feed>
