@@ -79,12 +79,12 @@ main {
   text-overflow: ellipsis;
 }
 
+.banner-mobile { display: none; }
+
 @media (max-width: 720px) {
+  .banner-full { display: none; }
+  .banner-mobile { display: inline; }
   .experimental-banner {
-    white-space: normal;
-    height: auto;
-    min-height: var(--banner-h);
-    padding: 0.3rem 1rem;
     font-size: 0.78rem;
   }
 }
