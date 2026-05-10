@@ -16,6 +16,13 @@
   <link rel="alternate" type="application/atom+xml" title="helmguild blog (Atom-Feed)" href="/de/feed.xml">
   <link rel="alternate" type="text/markdown" title="LLM-friendly Markdown of this page" href="/de/index.html.md">
   <link rel="stylesheet" href="../style_7.css">
+  <style>
+    .ref-impl-mobile { display: none; }
+    @media (max-width: 600px) {
+      .ref-impl-full { display: none; }
+      .ref-impl-mobile { display: inline; }
+    }
+  </style>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -94,7 +101,7 @@
           <span style="display:block;font-size:.78rem;color:var(--ink-soft);font-style:italic;border:none;margin-top:2px;">das Wie</span>
         </a>
         <a href="https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(46, 79, 107, 0.3);padding-bottom:1px;">
-          Referenzimplementierung
+          <span class="ref-impl-full">Referenzimplementierung</span><span class="ref-impl-mobile">Implementierung</span>
           <span style="display:block;font-size:.78rem;color:var(--ink-soft);font-style:italic;border:none;margin-top:2px;">der Code</span>
         </a>
       </p>
