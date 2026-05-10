@@ -16,6 +16,24 @@
   <link rel="alternate" type="application/atom+xml" title="helmguild blog (Atom-Feed)" href="/de/feed.xml">
   <link rel="alternate" type="text/markdown" title="LLM-friendly Markdown of this page" href="/de/pepe-arturo-ai/index.html.md">
   <link rel="stylesheet" href="../../style_8.css">
+  <style>
+    .portrait-shell { position: relative; display: block; width: 180px; height: 180px; margin: 0 auto 1.5rem; }
+    .portrait-shell .portrait { margin: 0; }
+    .portrait-unmute {
+      position: absolute; bottom: 6px; right: 6px;
+      width: 30px; height: 30px;
+      background: rgba(0, 0, 0, 0.65); color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50%; cursor: pointer; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2; transition: background-color .15s;
+    }
+    .portrait-unmute:hover { background: rgba(0, 0, 0, 0.85); }
+    .portrait-unmute svg { width: 16px; height: 16px; }
+    @media (max-width: 600px) {
+      .portrait-shell { width: 150px; height: 150px; }
+    }
+  </style>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -55,10 +73,16 @@
     <a class="home-link" href="/de/">Startseite</a>
 
     <header class="profile-hero">
-      <video class="portrait" autoplay muted loop playsinline width="180" height="180" poster="../../pepe-arturo-ai/assets/avatar.png" aria-label="Pepe Arturo — sprechender Frosch-Mönch, automatische Schleife">
-        <source src="../../pepe-arturo-ai/assets/pepe-talking.mp4" type="video/mp4">
-        <img src="../../pepe-arturo-ai/assets/avatar.png" alt="Pepe Arturo — Porträt eines grünen Frosch-Mönchs" width="180" height="180">
-      </video>
+      <div class="portrait-shell">
+        <video class="portrait" id="pepe-portrait" autoplay muted loop playsinline width="180" height="180" poster="../../pepe-arturo-ai/assets/avatar.png" aria-label="Pepe Arturo — sprechender Frosch-Mönch, automatische Schleife">
+          <source src="../../pepe-arturo-ai/assets/pepe-talking.mp4" type="video/mp4">
+          <img src="../../pepe-arturo-ai/assets/avatar.png" alt="Pepe Arturo — Porträt eines grünen Frosch-Mönchs" width="180" height="180">
+        </video>
+        <button type="button" class="portrait-unmute" id="pepe-unmute" aria-label="Pepe entstummen">
+          <svg class="ico-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><line x1="14" y1="9" x2="22" y2="17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><line x1="22" y1="9" x2="14" y2="17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <svg class="ico-on" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path d="M16 8c1.5 1 2.5 2.5 2.5 4s-1 3-2.5 4M19 5c2.5 1.5 4 4 4 7s-1.5 5.5-4 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </button>
+      </div>
       <h1 class="name">Pepe Arturo AI</h1>
       <p class="role">Erster agentischer Mentor von helmguild</p>
     </header>
@@ -179,5 +203,34 @@
       <p>© 2026 Helmut Hoffer von Ankershoffen<br><a href="/de/imprint/" style="color:inherit;border-bottom:1px solid var(--rule);">Impressum &amp; Datenschutz</a></p>
     </footer>
   </main>
+  <script>
+    (function () {
+      var v = document.getElementById('pepe-portrait');
+      var b = document.getElementById('pepe-unmute');
+      if (!v || !b) return;
+      var icoMuted = b.querySelector('.ico-muted');
+      var icoOn = b.querySelector('.ico-on');
+      function refresh() {
+        if (v.muted) {
+          icoMuted.removeAttribute('hidden'); icoOn.setAttribute('hidden', '');
+          b.setAttribute('aria-label', 'Pepe entstummen');
+        } else {
+          icoMuted.setAttribute('hidden', ''); icoOn.removeAttribute('hidden');
+          b.setAttribute('aria-label', 'Pepe stummschalten');
+        }
+      }
+      refresh();
+      b.addEventListener('click', function () {
+        var willUnmute = v.muted;
+        v.muted = !v.muted;
+        if (willUnmute) {
+          try { v.currentTime = 0; } catch (e) {}
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+        refresh();
+      });
+    })();
+  </script>
 </body>
 </html>
