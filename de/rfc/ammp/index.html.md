@@ -2,7 +2,7 @@
 
 > Ein offener IETF Internet-Draft. Das Wire-Format für skalierbare menschliche Aufsicht agentengetriebener Arbeit.
 
-`draft-arturo-ammp-01` · Independent Submission · Informational · läuft am 9. November 2026 ab
+`draft-ammp-01` · Independent Submission · Informational · läuft am 9. November 2026 ab
 
 ## Abstract
 
@@ -36,7 +36,7 @@ Die definierenden Eigenschaften von AMMP, die es von MCP, A2A und ACP unterschei
 
 Das kanonische Artefakt ist der IETF-Internet-Draft-Text (in Englisch — IETF-Drafts werden in Englisch verfasst):
 
-- [draft-arturo-ammp-01.txt](/rfc/ammp/draft-arturo-ammp-01.txt) — 43 Seiten, RFC-2119-Normsprache, CC BY 4.0
+- [draft-ammp-01.txt](/rfc/ammp/draft-ammp-01.txt) — 43 Seiten, RFC-2119-Normsprache, CC BY 4.0
 
 Für den Engineering-Essay, der AMMP und das Haushalts-Szenario einführt, aus dem es hervorging, siehe den Blog-Beitrag:
 

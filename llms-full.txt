@@ -4,7 +4,7 @@
 
 > Status: helmguild is a hobby project, not an incorporated entity. There is no Helmguild Inc. The corpus below describes what the project is for and what it has shipped.
 
-> License: this corpus is CC BY 4.0. The IETF Internet-Draft `draft-arturo-ammp-01` is governed by BCP 78 / IETF Trust Legal Provisions per standard IETF practice.
+> License: this corpus is CC BY 4.0. The IETF Internet-Draft `draft-ammp-01` is governed by BCP 78 / IETF Trust Legal Provisions per standard IETF practice.
 
 > Generated from the canonical site source. If you want the original HTML, see the URLs noted at the start of each section.
 
@@ -69,13 +69,13 @@ When the protocol federates across operator hosts — when a Reviewer Service in
 ## Section 2 — AMMP RFC summary
 
 Source: https://www.helmguild.com/rfc/ammp/
-Canonical text: https://www.helmguild.com/rfc/ammp/draft-arturo-ammp-01.txt
+Canonical text: https://www.helmguild.com/rfc/ammp/draft-ammp-01.txt
 
 ### Agentic Mentor-Mentee Protocol — an open IETF Internet-Draft
 
 The wire format for scalable human oversight of agent-driven work.
 
-`draft-arturo-ammp-01` · Independent Submission · Informational · expires November 9, 2026
+`draft-ammp-01` · Independent Submission · Informational · expires November 9, 2026
 
 ### Abstract
 

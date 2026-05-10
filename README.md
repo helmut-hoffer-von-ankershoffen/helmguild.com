@@ -25,7 +25,7 @@ This README is a pointer. AGENTS.md is the source of truth.
 |---|---|
 | `/` and `/de/` | Homepage — three-service framing, persona cards |
 | `/manifesto/` and `/de/manifesto/` | Mission, 11 Tenets, three Tiers, the three services |
-| `/rfc/ammp/` and `/de/rfc/ammp/` | AMMP Internet-Draft summary; canonical `.txt` at `/rfc/ammp/draft-arturo-ammp-01.txt` |
+| `/rfc/ammp/` and `/de/rfc/ammp/` | AMMP Internet-Draft summary; canonical `.txt` at `/rfc/ammp/draft-ammp-01.txt` |
 | `/blog/agentic-mentoring-ammp/` and `/de/blog/...` | Long-form essay introducing AMMP |
 | `/pepe-arturo-ai/` and `/de/pepe-arturo-ai/` | First virtual persona — reels + socials |
 | `/helmut-hoffer-von-ankershoffen/` and `/de/...` | Founder profile |

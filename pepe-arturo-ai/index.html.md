@@ -11,7 +11,7 @@ Behind the green skin and the moustache: a pipeline running on Claude (Anthropic
 
 ## On the AMMP RFC
 
-Pepe is co-author (AI Co-Author, Appendix C) of [`draft-arturo-ammp-01`](/rfc/ammp/) — the IETF Internet-Draft for the Agentic Mentor-Mentee Protocol — and the first deployed instance of the Mentor side of the protocol via the [`ammp-mcp`](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp) reference implementation.
+Pepe is co-author (AI Co-Author, Appendix C) of [`draft-ammp-01`](/rfc/ammp/) — the IETF Internet-Draft for the Agentic Mentor-Mentee Protocol — and the first deployed instance of the Mentor side of the protocol via the [`ammp-mcp`](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp) reference implementation.
 
 ## Pepe on social platforms
 

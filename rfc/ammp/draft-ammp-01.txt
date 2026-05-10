@@ -10,7 +10,7 @@ Expires: November 9, 2026                                       AI Co-Author
 
 
              Agentic Mentor-Mentee Protocol (AMMP) Version 1
-                          draft-arturo-ammp-01
+                          draft-ammp-01
 
 
 Abstract

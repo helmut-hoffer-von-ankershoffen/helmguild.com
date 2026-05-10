@@ -2,7 +2,7 @@
 
 > An open IETF Internet-Draft. The wire format for scalable human oversight of agent-driven work.
 
-`draft-arturo-ammp-01` · Independent Submission · Informational · expires November 9, 2026
+`draft-ammp-01` · Independent Submission · Informational · expires November 9, 2026
 
 ## Abstract
 
@@ -34,7 +34,7 @@ The defining properties of AMMP, distinguishing it from MCP, A2A, and ACP:
 
 The canonical artefact is the IETF Internet-Draft text:
 
-- [draft-arturo-ammp-01.txt](draft-arturo-ammp-01.txt) — 43 pages, RFC 2119 normative language, CC BY 4.0
+- [draft-ammp-01.txt](draft-ammp-01.txt) — 43 pages, RFC 2119 normative language, CC BY 4.0
 
 For the engineering essay that introduces AMMP and the household scenario it grew from, see the blog post:
 

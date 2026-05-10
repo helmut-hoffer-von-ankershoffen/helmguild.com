@@ -15,7 +15,7 @@ Two invariants bind both services and are normative in the AMMP RFC: the **Compa
 
 - [Manifesto](https://www.helmguild.com/manifesto/index.html.md): mission, two services, eleven tenets, three tiers, and what the guild owes its members
 - [AMMP RFC summary](https://www.helmguild.com/rfc/ammp/index.html.md): two-paragraph abstract + two-tracks overview + two-invariants summary, with a link to the canonical Internet-Draft text
-- [draft-arturo-ammp-01.txt](https://www.helmguild.com/rfc/ammp/draft-arturo-ammp-01.txt): full IETF Internet-Draft (~43 pages, RFC 2119 normative language)
+- [draft-ammp-01.txt](https://www.helmguild.com/rfc/ammp/draft-ammp-01.txt): full IETF Internet-Draft (~43 pages, RFC 2119 normative language)
 - [Atom feed (English)](https://www.helmguild.com/feed.xml): blog updates
 
 ## People and personas

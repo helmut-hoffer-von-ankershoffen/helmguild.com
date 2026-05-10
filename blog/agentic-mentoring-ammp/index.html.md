@@ -54,7 +54,7 @@ AMMP defines two service tracks over a single wire format:
 
 Both tracks share the **Compartmentalisation Invariant** (the server never accumulates state about the client compartment) and the **Human-Gated Escalation Invariant** (the agent layer never becomes a covert channel between operators). Both tracks are deployable today as MCP custom connectors in Anthropic's Claude Cowork; both are forward-compatible with Google's A2A protocol when A2A clients arrive in the major AI assistants.
 
-The full Internet-Draft is [`draft-arturo-ammp-01`](/rfc/ammp/draft-arturo-ammp-01.txt) — about 43 pages, written in proper RFC 2119 normative language. It's at <https://www.helmguild.com/rfc/ammp/>.
+The full Internet-Draft is [`draft-ammp-01`](/rfc/ammp/draft-ammp-01.txt) — about 43 pages, written in proper RFC 2119 normative language. It's at <https://www.helmguild.com/rfc/ammp/>.
 
 ## Why an IETF Internet-Draft
 

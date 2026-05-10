@@ -13,7 +13,7 @@ Static, JS-free site at `https://www.helmguild.com`. Hosted on **GitHub Pages**,
   index.html               # homepage
   style_6.css              # current stylesheet (versioned, see below)
   manifesto/               # mission + tenets + tier ladder
-  rfc/ammp/                # AMMP Internet-Draft (HTML) + draft-arturo-ammp-01.txt
+  rfc/ammp/                # AMMP Internet-Draft (HTML) + draft-ammp-01.txt
   blog/                    # essays — currently /blog/agentic-mentoring-ammp/
   pepe-arturo-ai/          # virtual-persona page + reels + assets
   helmut-hoffer-von-ankershoffen/  # founder profile + portrait
