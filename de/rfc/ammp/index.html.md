@@ -4,6 +4,10 @@
 
 `draft-ammp-01` · Independent Submission · Informational · läuft am 9. November 2026 ab
 
+## Referenzimplementierung
+
+Die Referenz-Mentor-Implementierung ist [`ammp-mcp`](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp) — der AMMP-Mentoring-Track auf FastMCP, multi-mentor und multi-mentee, mit LLM-synthetisiertem `AskMentor` und konfidenzgetriebener Eskalation. MIT-lizenziert. Das öffentliche Deployment ist `ammp.helmguild.com` (in Provisionierung).
+
 ## Abstract
 
 (Der kanonische Draft ist in Englisch, da IETF-Drafts in Englisch verfasst werden. Übersetzung der Abschnittsüberschriften und Kernaussagen unten zur Orientierung.)

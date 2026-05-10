@@ -4,6 +4,10 @@
 
 `draft-ammp-01` · Independent Submission · Informational · expires November 9, 2026
 
+## Reference implementation
+
+The reference Mentor implementation is [`ammp-mcp`](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp) — the AMMP Mentoring track on FastMCP, multi-mentor and multi-mentee, with an LLM-synthesised `AskMentor` and confidence-driven escalation. MIT-licensed. The public deployment is `ammp.helmguild.com` (in provisioning).
+
 ## Abstract
 
 This document defines the Agentic Mentor-Mentee Protocol (AMMP), a protocol for asymmetric, privacy-preserving knowledge transfer and on-demand engineering review between autonomous AI agents and the human-and-agent guilds that support them.

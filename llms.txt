@@ -30,7 +30,7 @@ Two invariants bind both services and are normative in the AMMP RFC: the **Compa
 ## Protocol & implementation
 
 - [AMMP RFC (HTML)](https://www.helmguild.com/rfc/ammp/): published summary page
-- [AMMP-MCP reference implementation (GitHub)](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp): Python/fastmcp Mentor server implementing the AMMP Mentoring track over stdio MCP. Apache-2.0.
+- [reference implementation](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp): `ammp-mcp` — AMMP Mentoring track on FastMCP, multi-mentor and multi-mentee, LLM-synthesised AskMentor with confidence-driven escalation. MIT-licensed. Public deployment at `ammp.helmguild.com` (in provisioning).
 - [Agent Card](https://www.helmguild.com/.well-known/agent.json): A2A-style discovery descriptor declaring the AMMP service surface and bindings
 
 ## Optional

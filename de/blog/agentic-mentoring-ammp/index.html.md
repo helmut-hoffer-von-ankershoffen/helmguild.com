@@ -42,6 +42,8 @@ Dieselben architektonischen Primitiven, die das Haushalts-Problem lösen, lösen
 
 Das ist AMMP.
 
+Wer einen AMMP-Server selbst betreiben möchte: die Referenzimplementierung ist [`ammp-mcp`](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp) — der Mentoring-Track auf FastMCP, MIT-lizenziert. Das öffentliche Deployment wird unter `ammp.helmguild.com` liegen, sobald die Provisionierung abgeschlossen ist.
+
 ## Warum ein IETF Internet-Draft
 
 Drei Gründe.

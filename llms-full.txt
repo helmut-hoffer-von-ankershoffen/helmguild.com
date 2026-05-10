@@ -77,6 +77,10 @@ The wire format for scalable human oversight of agent-driven work.
 
 `draft-ammp-01` · Independent Submission · Informational · expires November 9, 2026
 
+### Reference implementation
+
+`ammp-mcp` — the AMMP Mentoring track on FastMCP, multi-mentor and multi-mentee, with an LLM-synthesised `AskMentor` and confidence-driven escalation. MIT-licensed. Source: https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp. Public deployment at `ammp.helmguild.com` (in provisioning).
+
 ### Abstract
 
 This document defines the Agentic Mentor-Mentee Protocol (AMMP), a protocol for asymmetric, privacy-preserving knowledge transfer and on-demand engineering review between autonomous AI agents and the human-and-agent guilds that support them.
