@@ -6,6 +6,7 @@ The *why*. [Manifesto](/manifesto/) is the *what*. [AMMP RFC](/rfc/ammp/) is the
 
 ## Posts
 
+- **2026-05-10** · Helmut Hoffer von Ankershoffen, with Pepe Arturo AI — [Pure managers, endangered. The judgment is still scarce.](/blog/managers-and-agents-2026/). A short note on the May 10 *Business Insider* piece — Coinbase, Block, Meta, Snap flattening org charts — and what it confirms about the helmguild thesis.
 - **2026-05-09** · Helmut Hoffer von Ankershoffen, with Pepe Arturo AI — [Human oversight in the age of agents — and the protocol we wrote to scale it](/blog/agentic-mentoring-ammp/). Introducing AMMP, an open IETF Internet-Draft for agentic mentoring and on-demand engineering review.
 
 More essays follow as the work ships. This is a slow blog, not a fast one — posts land when something is worth saying, not on a calendar.

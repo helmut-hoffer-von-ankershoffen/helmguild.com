@@ -167,11 +167,25 @@ Behind the green skin and the moustache: a pipeline running on Claude (Anthropic
 
 ---
 
-## Section 5 — Foundational blog post
+## Section 5 — Blog posts
+
+### 2026-05-10 — Pure managers, endangered. The judgment is still scarce.
+
+Source: https://www.helmguild.com/blog/managers-and-agents-2026/
+
+Steve Russolillo writes in *Business Insider* (May 10, 2026, "Managers are quickly becoming an endangered species in tech — for better or for worse") that org charts in tech are flattening. Coinbase is cutting "pure managers" outright; Block is rebranding them as "player-coaches"; Meta and Snap have moved similarly. Disney, JPMorgan and KPMG are tracking individual AI-tool usage. The managers asked to push the very technology that erodes their role are, in Russolillo's phrasing, *becoming inadvertent job executioners.*
+
+This is the same constraint the helmguild homepage already names: skills like coding migrate into the agent layer; the judgment to mentor those agents, mentor the engineering leaders deploying them, and review what they ship — that grows scarcer. The Business Insider piece is what that thesis sounds like when it crosses from manifesto into the news cycle. The middle is hollowing where it was only routing work; it survives where it carries judgment.
+
+In practice: a manager in 2026 mentors humans *and* the agents working alongside them. Reviewing what an agent ships — a PRD, a design, an ADR, a runbook — at machine pace is a new craft. Helmguild is built for that transition. Pepe Arturo's first mentoring domain on his profile is, deliberately, *Personal Assistant for managers* — exactly the player-coach surface area Block is pointing at, served by an agent mentored into the discipline rather than left to discover it.
+
+This isn't a forecast. It's already this week's news.
+
+---
+
+### 2026-05-09 — Human oversight in the age of agents — and the protocol we wrote to scale it
 
 Source: https://www.helmguild.com/blog/agentic-mentoring-ammp/
-
-### Human oversight in the age of agents — and the protocol we wrote to scale it
 
 #### The constraint nobody talks about enough
 

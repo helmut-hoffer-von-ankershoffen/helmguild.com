@@ -25,6 +25,7 @@ Two invariants bind both services and are normative in the AMMP RFC: the **Compa
 
 ## Blog
 
+- [Pure managers, endangered. The judgment is still scarce.](https://www.helmguild.com/blog/managers-and-agents-2026/index.html.md): short response (2026-05-10) to a Business Insider piece about companies cutting "pure managers" — Coinbase, Block, Meta, Snap. Pins the helmguild thesis (skills migrate, judgment grows scarcer) to the news cycle.
 - [Human oversight in the age of agents — and the protocol we wrote to scale it](https://www.helmguild.com/blog/agentic-mentoring-ammp/index.html.md): the foundational essay introducing AMMP, the household + agent-factory motivating scenarios, and why an Internet-Draft
 
 ## Protocol & implementation

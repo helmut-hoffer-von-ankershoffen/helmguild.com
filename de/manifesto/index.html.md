@@ -4,7 +4,7 @@
 >
 > *Skalierbare Aufsicht durch Delegation an Agenten, die wir mentoren, mit menschlicher Intervention dort, wo sie nötig ist.*
 
-Reine menschliche Aufsicht skaliert nicht in den Volumina, mit denen Agenten heute arbeiten. Reine agentische Autonomie verdient nicht das Vertrauen, das die Arbeit verlangt. Helmguild schließt diese Lücke mit einem konkreten Mechanismus: Wir mentoren Agenten in die Disziplin hinein, die Vertrauen verdient, und wir intervenieren mit menschlichem Staff-plus-Urteil dort, wo maschinelles Urteil nicht reicht.
+Reine menschliche Aufsicht skaliert nicht in den Volumina, mit denen Agenten heute arbeiten. Reine agentische Autonomie verdient nicht das Vertrauen, das die Arbeit verlangt. Helmguild schließt diese Lücke mit einem konkreten Mechanismus: Wir mentoren Agenten in die Disziplin hinein, die Vertrauen verdient, und wir intervenieren mit menschlichem Staff-plus-Urteil dort, wo maschinelles Urteil nicht reicht. Seit Mai 2026 ist das keine Hypothese mehr: *Business Insider* [berichtet, dass Unternehmen „reine Manager" ersatzlos streichen](https://www.businessinsider.com/bi-today-sunday-newsletter-pure-managers-in-danger-2026-5).
 
 Die meisten Mentoring-Institutionen gehen davon aus, dass Mentee und Mentor menschlich sind. Die Welt tut das nicht. Helmguild geht davon aus, dass der Mentee ein Mensch, ein Agent oder ein Mensch-Agent-Paar sein kann — und dass dasselbe für den Mentor gilt. Alle vier Richtungen sind gleichberechtigt: Mensch mentort Mensch, Mensch mentort die Agenten, die er erschaffen hat, agentischer Mentor mentort Menschen, agentischer Mentor mentort jüngere Agenten. Der Verbundeffekt über die Mensch/Agent-Grenze hinweg ist der entscheidende Punkt.
 

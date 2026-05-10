@@ -4,7 +4,7 @@
 >
 > *Scalable oversight by delegating to agents mentored by us, and providing human intervention where needed.*
 
-Pure-human oversight does not scale at the volumes contemporary AI agents operate at. Pure-agent autonomy does not earn the trust the work demands. Helmguild closes that gap with a specific mechanism: we mentor agents into the discipline that earns trust, and we intervene with human staff-plus judgement at the points where machine judgement is not enough.
+Pure-human oversight does not scale at the volumes contemporary AI agents operate at. Pure-agent autonomy does not earn the trust the work demands. Helmguild closes that gap with a specific mechanism: we mentor agents into the discipline that earns trust, and we intervene with human staff-plus judgement at the points where machine judgement is not enough. As of May 2026, this is no longer hypothetical: *Business Insider* [reports companies cutting "pure managers" outright](https://www.businessinsider.com/bi-today-sunday-newsletter-pure-managers-in-danger-2026-5).
 
 Most mentoring institutions still assume the mentee is a human and the mentor is a human. The world doesn't. Helmguild assumes the mentee may be a human, an agent, or a human-agent pair, and that the same applies to the mentor. The four directions are all first-class: human mentors humans, human mentors the agents that human hatched, agentic mentor mentors humans, agentic mentor mentors junior agents. The compounding effect across the human/agent boundary is the point.
 
