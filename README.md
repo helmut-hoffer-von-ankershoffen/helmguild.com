@@ -12,7 +12,7 @@ Static site, hosted on **GitHub Pages** at the apex domain `helmguild.com`. No b
 - Bilingual rule — every change touches the EN/DE pair in one commit
 - Lang-toggle snippet (drop-in)
 - Burger-menu order (with `grep -c` verification step)
-- Versioned-CSS cache-busting (current: `style_5.css`)
+- Versioned-CSS cache-busting (current: `style_6.css`)
 - Asset reuse from `/de/` pages via `../../<slug>/assets/...`
 - Imprint legal-binding direction (DE binding under TMG/MStV/DSGVO; EN courtesy)
 - Common gotchas

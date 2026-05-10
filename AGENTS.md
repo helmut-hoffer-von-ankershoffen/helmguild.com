@@ -11,7 +11,7 @@ Static, JS-free site at `https://www.helmguild.com`. Hosted on **GitHub Pages**,
 ```
 /                          # EN (default) — root
   index.html               # homepage
-  style_5.css              # current stylesheet (versioned, see below)
+  style_6.css              # current stylesheet (versioned, see below)
   manifesto/               # mission + tenets + tier ladder
   rfc/ammp/                # AMMP Internet-Draft (HTML) + draft-arturo-ammp-01.txt
   blog/                    # essays — currently /blog/agentic-mentoring-ammp/
@@ -71,7 +71,7 @@ Fixed-position pill, top-right, sits left of the burger. Drop this snippet near 
 </nav>
 ```
 
-The styling (`.lang-toggle`, `.current`, `.sep`) is in `style_5.css`.
+The styling (`.lang-toggle`, `.current`, `.sep`) is in `style_6.css`.
 
 ## Burger menu
 
@@ -92,7 +92,7 @@ Adding a new top-level page = an `<a>` in **all ten** `<details class="burger">`
 
 ## CSS — versioned filenames
 
-Single stylesheet, but the filename carries a bump integer (`style_5.css`). Why: aggressive browser/CDN caching of CSS makes plain edits invisible to returning visitors.
+Single stylesheet, but the filename carries a bump integer (`style_6.css`). Why: aggressive browser/CDN caching of CSS makes plain edits invisible to returning visitors.
 
 **On any CSS change:**
 
