@@ -30,6 +30,20 @@
     }
     .portrait-unmute:hover { background: rgba(0, 0, 0, 0.85); }
     .portrait-unmute svg { width: 16px; height: 16px; }
+    .portrait-unmute.is-pulsing::before {
+      content: ""; position: absolute; inset: -4px;
+      border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.65);
+      animation: pepe-unmute-pulse 1.6s ease-out infinite;
+      pointer-events: none;
+    }
+    @keyframes pepe-unmute-pulse {
+      0%   { transform: scale(0.95); opacity: 0.9; }
+      80%  { transform: scale(1.45); opacity: 0;   }
+      100% { transform: scale(1.45); opacity: 0;   }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .portrait-unmute.is-pulsing::before { animation: none; opacity: 0.6; }
+    }
     @media (max-width: 600px) {
       .portrait-shell { width: 150px; height: 150px; }
     }
@@ -204,31 +218,83 @@
     </footer>
   </main>
   <script>
+    /*
+     * Pepe avatar audio — autoplay-with-sound is globally blocked by every
+     * mainstream browser on first paint. The video element ships
+     * `muted autoplay loop playsinline` so it autoplays silently.
+     *
+     * Strategy: try `play()` with sound first (works for repeat visitors
+     * with high Media Engagement Index, or sites the user has whitelisted
+     * for autoplay). If that promise rejects, fall back to muted autoplay
+     * AND listen for the first user gesture anywhere on the page — click,
+     * touch, key, pointer. The first gesture unmutes + restarts the video
+     * so the line plays cleanly from t=0.
+     *
+     * A pulsing ring on the speaker button until first unmute hints that
+     * audio is available without demanding a specific button click.
+     */
     (function () {
       var v = document.getElementById('pepe-portrait');
       var b = document.getElementById('pepe-unmute');
       if (!v || !b) return;
       var icoMuted = b.querySelector('.ico-muted');
       var icoOn = b.querySelector('.ico-on');
+
       function refresh() {
         if (v.muted) {
           icoMuted.removeAttribute('hidden'); icoOn.setAttribute('hidden', '');
           b.setAttribute('aria-label', 'Pepe entstummen');
+          b.classList.add('is-pulsing');
         } else {
           icoMuted.setAttribute('hidden', ''); icoOn.removeAttribute('hidden');
           b.setAttribute('aria-label', 'Pepe stummschalten');
+          b.classList.remove('is-pulsing');
         }
       }
-      refresh();
-      b.addEventListener('click', function () {
-        var willUnmute = v.muted;
-        v.muted = !v.muted;
-        if (willUnmute) {
-          try { v.currentTime = 0; } catch (e) {}
-          var p = v.play();
-          if (p && p.catch) p.catch(function () {});
-        }
+
+      function unmuteAndRestart() {
+        v.muted = false;
+        try { v.currentTime = 0; } catch (e) {}
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
         refresh();
+      }
+
+      refresh();
+
+      // Best-effort: try audible autoplay up front.
+      v.muted = false;
+      var earlyPlay = v.play();
+      if (earlyPlay && earlyPlay.catch) {
+        earlyPlay.catch(function () {
+          v.muted = true;
+          v.play().catch(function () {});
+          refresh();
+        });
+      }
+
+      // First-gesture-anywhere unmute.
+      var firstGestureHandler = function () {
+        if (v.muted) unmuteAndRestart();
+        document.removeEventListener('click', firstGestureHandler, true);
+        document.removeEventListener('touchstart', firstGestureHandler, true);
+        document.removeEventListener('keydown', firstGestureHandler, true);
+        document.removeEventListener('pointerdown', firstGestureHandler, true);
+      };
+      document.addEventListener('click', firstGestureHandler, { capture: true, passive: true });
+      document.addEventListener('touchstart', firstGestureHandler, { capture: true, passive: true });
+      document.addEventListener('keydown', firstGestureHandler, { capture: true, passive: true });
+      document.addEventListener('pointerdown', firstGestureHandler, { capture: true, passive: true });
+
+      // Explicit toggle via the speaker button.
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (v.muted) {
+          unmuteAndRestart();
+        } else {
+          v.muted = true;
+          refresh();
+        }
       });
     })();
   </script>
