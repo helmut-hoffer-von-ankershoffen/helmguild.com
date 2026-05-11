@@ -51,27 +51,35 @@ Each page declares its alternates explicitly:
 <link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/<path>/">
 ```
 
-## Language toggle
+## Language toggle + MCP-endpoint link
 
-Fixed-position pill, top-right, sits left of the burger. Drop this snippet near the top of `<body>` on every page; bold-inert the current language:
+Single fixed-position pill, top-right, sits left of the burger. Three items: `EN · DE · mcp`. The first two are the language toggle (bold-inert the current language); the third is a link to the AMMP reference deployment at `https://mcp.helmguild.com` so a visitor's MCP-aware agent (Claude.ai / Cowork / Code / OpenClaw / Hermes) can connect as a mentee straight from any page. Drop this snippet near the top of `<body>` on every page:
 
 ```html
 <!-- EN page -->
-<nav class="lang-toggle" aria-label="Language">
+<nav class="lang-toggle" aria-label="Language and MCP endpoint">
   <span class="current" aria-current="true">EN</span>
   <span class="sep">·</span>
   <a href="/de/<path>/" hreflang="de">DE</a>
+  <span class="sep">·</span>
+  <a class="ext" href="https://mcp.helmguild.com"
+     title="MCP endpoint — connect your agent to a helmguild mentor"
+     aria-label="MCP endpoint — connect your agent to a helmguild mentor">mcp</a>
 </nav>
 
 <!-- DE page -->
-<nav class="lang-toggle" aria-label="Sprache">
+<nav class="lang-toggle" aria-label="Language and MCP endpoint">
   <a href="/<path>/" hreflang="en">EN</a>
   <span class="sep">·</span>
   <span class="current" aria-current="true">DE</span>
+  <span class="sep">·</span>
+  <a class="ext" href="https://mcp.helmguild.com"
+     title="MCP-Endpoint — verbinde deinen Agenten mit einem helmguild-Mentor"
+     aria-label="MCP-Endpoint — verbinde deinen Agenten mit einem helmguild-Mentor">mcp</a>
 </nav>
 ```
 
-The styling (`.lang-toggle`, `.current`, `.sep`) is in `style_6.css`.
+The styling (`.lang-toggle`, `.current`, `.sep`) is in `style_<N>.css`. The mcp link uses the existing `.lang-toggle a` rule — no separate CSS class needed for it.
 
 ## Burger menu
 
@@ -89,24 +97,6 @@ Current full set, in this order (mirrored across both languages):
 8. Imprint & Privacy / Impressum & Datenschutz
 
 Adding a new top-level page = an `<a>` in **all ten** `<details class="burger">` blocks (5 EN + 5 DE), in the same slot. Verify with a `grep -c '<new-href>' *.html de/*.html` after editing — count must equal 10. The menu isn't templated; this is the most reliable drift catcher we have.
-
-## MCP-endpoint pill (top-left)
-
-Tiny glass pill matching the lang-toggle's size/colour exactly, mirrored on the left edge. Links to `https://mcp.helmguild.com` — the AMMP reference deployment where a visitor's MCP-aware agent (Claude.ai / Cowork / Code / OpenClaw / Hermes) can connect as a mentee. The label is the lowercase term `mcp` — an MCP-savvy visitor reads it as "this is the MCP endpoint"; the `title` + `aria-label` attributes spell it out for everyone else. Lives on every page, immediately after the experimental-banner.
-
-```html
-<!-- EN page -->
-<a class="mcp-link" href="https://mcp.helmguild.com"
-   title="MCP endpoint — connect your agent to a helmguild mentor"
-   aria-label="MCP endpoint — connect your agent to a helmguild mentor">mcp</a>
-
-<!-- DE page -->
-<a class="mcp-link" href="https://mcp.helmguild.com"
-   title="MCP-Endpoint — verbinde deinen Agenten mit einem helmguild-Mentor"
-   aria-label="MCP-Endpoint — verbinde deinen Agenten mit einem helmguild-Mentor">mcp</a>
-```
-
-The styling (`.mcp-link`) is in `style_<N>.css`. Same height (46px outer) and colour palette as `.lang-toggle` and `.burger > summary`, so the three pieces visually align as one chrome row. Don't enlarge the label or add an icon — the brand bar reads better when it's restrained.
 
 ## CSS — versioned filenames
 
