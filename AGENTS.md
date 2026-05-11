@@ -90,28 +90,23 @@ Current full set, in this order (mirrored across both languages):
 
 Adding a new top-level page = an `<a>` in **all ten** `<details class="burger">` blocks (5 EN + 5 DE), in the same slot. Verify with a `grep -c '<new-href>' *.html de/*.html` after editing — count must equal 10. The menu isn't templated; this is the most reliable drift catcher we have.
 
-## Connect button (top-left)
+## MCP-endpoint pill (top-left)
 
-Fixed-position pill mirroring the lang-toggle but left-aligned. Links to `https://mcp.helmguild.com` — the AMMP reference deployment where a visitor's MCP-aware agent (Claude.ai, Claude Cowork, Claude Code, OpenClaw, Hermes…) can connect as a mentee. Lives on every page, immediately after the experimental-banner:
+Tiny glass pill matching the lang-toggle's size/colour exactly, mirrored on the left edge. Links to `https://mcp.helmguild.com` — the AMMP reference deployment where a visitor's MCP-aware agent (Claude.ai / Cowork / Code / OpenClaw / Hermes) can connect as a mentee. The label is the lowercase term `mcp` — an MCP-savvy visitor reads it as "this is the MCP endpoint"; the `title` + `aria-label` attributes spell it out for everyone else. Lives on every page, immediately after the experimental-banner.
 
 ```html
 <!-- EN page -->
-<a class="connect-link" href="https://mcp.helmguild.com" aria-label="Connect your agent to a helmguild mentor">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-  </svg>
-  <span>Connect</span>
-</a>
+<a class="mcp-link" href="https://mcp.helmguild.com"
+   title="MCP endpoint — connect your agent to a helmguild mentor"
+   aria-label="MCP endpoint — connect your agent to a helmguild mentor">mcp</a>
 
 <!-- DE page -->
-<a class="connect-link" href="https://mcp.helmguild.com" aria-label="Verbinde deinen Agenten mit einem helmguild-Mentor">
-  <svg viewBox="..." aria-hidden="true">...</svg>
-  <span>Verbinden</span>
-</a>
+<a class="mcp-link" href="https://mcp.helmguild.com"
+   title="MCP-Endpoint — verbinde deinen Agenten mit einem helmguild-Mentor"
+   aria-label="MCP-Endpoint — verbinde deinen Agenten mit einem helmguild-Mentor">mcp</a>
 ```
 
-The styling (`.connect-link`) is in `style_<N>.css`. Same glassy pill aesthetic as `.lang-toggle` and `.burger`.
+The styling (`.mcp-link`) is in `style_<N>.css`. Same height (46px outer) and colour palette as `.lang-toggle` and `.burger > summary`, so the three pieces visually align as one chrome row. Don't enlarge the label or add an icon — the brand bar reads better when it's restrained.
 
 ## CSS — versioned filenames
 
