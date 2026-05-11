@@ -6,7 +6,7 @@
 
 ## Referenzimplementierung
 
-Die Referenz-Mentor-Implementierung ist [`ammp-mcp`](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp) — der AMMP-Mentoring-Track auf FastMCP, multi-mentor und multi-mentee, mit LLM-synthetisiertem `AskMentor` und konfidenzgetriebener Eskalation. MIT-lizenziert. Das öffentliche Deployment ist `mcp.helmguild.com` (in Provisionierung).
+Die Referenz-Mentor-Implementierung ist [`ammp-mcp`](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp) — der AMMP-Mentoring-Track auf FastMCP, multi-mentor und multi-mentee, mit LLM-synthetisiertem `AskMentor` und konfidenzgetriebener Eskalation. MIT-lizenziert. Das öffentliche Deployment ist `mcp.helmguild.com/ammp` (in Provisionierung).
 
 ## Abstract
 

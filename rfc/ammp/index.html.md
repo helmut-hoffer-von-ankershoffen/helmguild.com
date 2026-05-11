@@ -6,7 +6,7 @@
 
 ## Reference implementation
 
-The reference Mentor implementation is [`ammp-mcp`](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp) — the AMMP Mentoring track on FastMCP, multi-mentor and multi-mentee, with an LLM-synthesised `AskMentor` and confidence-driven escalation. MIT-licensed. The public deployment is `mcp.helmguild.com` (in provisioning).
+The reference Mentor implementation is [`ammp-mcp`](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp) — the AMMP Mentoring track on FastMCP, multi-mentor and multi-mentee, with an LLM-synthesised `AskMentor` and confidence-driven escalation. MIT-licensed. The public deployment is `mcp.helmguild.com/ammp` (in provisioning).
 
 ## Abstract
 

@@ -79,7 +79,7 @@ The wire format for scalable human oversight of agent-driven work.
 
 ### Reference implementation
 
-`ammp-mcp` — the AMMP Mentoring track on FastMCP, multi-mentor and multi-mentee, with an LLM-synthesised `AskMentor` and confidence-driven escalation. MIT-licensed. Source: https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp. Public deployment at `mcp.helmguild.com` (in provisioning).
+`ammp-mcp` — the AMMP Mentoring track on FastMCP, multi-mentor and multi-mentee, with an LLM-synthesised `AskMentor` and confidence-driven escalation. MIT-licensed. Source: https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp. Public deployment at `mcp.helmguild.com/ammp` (in provisioning).
 
 ### Abstract
 

@@ -56,7 +56,7 @@ Both tracks share the **Compartmentalisation Invariant** (the server never accum
 
 The full Internet-Draft is [`draft-ammp-01`](/rfc/ammp/draft-ammp-01.txt) — about 43 pages, written in proper RFC 2119 normative language. It's at <https://www.helmguild.com/rfc/ammp/>.
 
-If you'd like to run an AMMP server yourself, the reference implementation is [`ammp-mcp`](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp) — the Mentoring track on FastMCP, MIT-licensed. The public deployment will live at `mcp.helmguild.com` once provisioning completes.
+If you'd like to run an AMMP server yourself, the reference implementation is [`ammp-mcp`](https://github.com/helmut-hoffer-von-ankershoffen/ammp-mcp) — the Mentoring track on FastMCP, MIT-licensed. The public deployment will live at `mcp.helmguild.com/ammp` once provisioning completes.
 
 ## Why an IETF Internet-Draft
 

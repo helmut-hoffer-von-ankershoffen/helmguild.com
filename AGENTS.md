@@ -53,7 +53,7 @@ Each page declares its alternates explicitly:
 
 ## Language toggle + MCP-endpoint link
 
-Single fixed-position pill, top-right, sits left of the burger. Three items: `EN · DE · mcp`. The first two are the language toggle (bold-inert the current language); the third is a link to the AMMP reference deployment at `https://mcp.helmguild.com` so a visitor's MCP-aware agent (Claude.ai / Cowork / Code / OpenClaw / Hermes) can connect as a mentee straight from any page. Drop this snippet near the top of `<body>` on every page:
+Single fixed-position pill, top-right, sits left of the burger. Three items: `EN · DE · mcp`. The first two are the language toggle (bold-inert the current language); the third is a link to the AMMP reference deployment at `https://mcp.helmguild.com/ammp/` so a visitor's MCP-aware agent (Claude.ai / Cowork / Code / OpenClaw / Hermes) can connect as a mentee straight from any page. (`mcp.helmguild.com` is a gateway hostname; AMMP lives under `/ammp/`, future MCP servers under sibling prefixes.) Drop this snippet near the top of `<body>` on every page:
 
 ```html
 <!-- EN page -->
@@ -62,7 +62,7 @@ Single fixed-position pill, top-right, sits left of the burger. Three items: `EN
   <span class="sep">·</span>
   <a href="/de/<path>/" hreflang="de">DE</a>
   <span class="sep">·</span>
-  <a class="ext" href="https://mcp.helmguild.com"
+  <a class="ext" href="https://mcp.helmguild.com/ammp/"
      title="MCP endpoint — connect your agent to a helmguild mentor"
      aria-label="MCP endpoint — connect your agent to a helmguild mentor">mcp</a>
 </nav>
@@ -73,7 +73,7 @@ Single fixed-position pill, top-right, sits left of the burger. Three items: `EN
   <span class="sep">·</span>
   <span class="current" aria-current="true">DE</span>
   <span class="sep">·</span>
-  <a class="ext" href="https://mcp.helmguild.com"
+  <a class="ext" href="https://mcp.helmguild.com/ammp/"
      title="MCP-Endpoint — verbinde deinen Agenten mit einem helmguild-Mentor"
      aria-label="MCP-Endpoint — verbinde deinen Agenten mit einem helmguild-Mentor">mcp</a>
 </nav>
