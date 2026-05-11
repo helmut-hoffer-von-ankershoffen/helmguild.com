@@ -90,6 +90,29 @@ Current full set, in this order (mirrored across both languages):
 
 Adding a new top-level page = an `<a>` in **all ten** `<details class="burger">` blocks (5 EN + 5 DE), in the same slot. Verify with a `grep -c '<new-href>' *.html de/*.html` after editing — count must equal 10. The menu isn't templated; this is the most reliable drift catcher we have.
 
+## Connect button (top-left)
+
+Fixed-position pill mirroring the lang-toggle but left-aligned. Links to `https://mcp.helmguild.com` — the AMMP reference deployment where a visitor's MCP-aware agent (Claude.ai, Claude Cowork, Claude Code, OpenClaw, Hermes…) can connect as a mentee. Lives on every page, immediately after the experimental-banner:
+
+```html
+<!-- EN page -->
+<a class="connect-link" href="https://mcp.helmguild.com" aria-label="Connect your agent to a helmguild mentor">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+  </svg>
+  <span>Connect</span>
+</a>
+
+<!-- DE page -->
+<a class="connect-link" href="https://mcp.helmguild.com" aria-label="Verbinde deinen Agenten mit einem helmguild-Mentor">
+  <svg viewBox="..." aria-hidden="true">...</svg>
+  <span>Verbinden</span>
+</a>
+```
+
+The styling (`.connect-link`) is in `style_<N>.css`. Same glassy pill aesthetic as `.lang-toggle` and `.burger`.
+
 ## CSS — versioned filenames
 
 Single stylesheet, but the filename carries a bump integer (`style_6.css`). Why: aggressive browser/CDN caching of CSS makes plain edits invisible to returning visitors.
