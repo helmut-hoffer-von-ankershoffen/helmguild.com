@@ -126,6 +126,7 @@ Internet-Draft                    AMMP                          May 2026
      5.3.  SearchPlaybooks . . . . . . . . . . . . . . . . . . . . .  16
      5.4.  AskMentor . . . . . . . . . . . . . . . . . . . . . . . .  17
      5.5.  EscalateToHuman . . . . . . . . . . . . . . . . . . . . .  18
+     5.6.  ListMentors . . . . . . . . . . . . . . . . . . . . . . .  19
    6.  Review Track Operations . . . . . . . . . . . . . . . . . . .  19
      6.1.  ListReviewKinds . . . . . . . . . . . . . . . . . . . . .  20
      6.2.  RequestReview . . . . . . . . . . . . . . . . . . . . . .  20
@@ -526,7 +527,7 @@ Internet-Draft                    AMMP                          May 2026
 
 3.2.  Operations
 
-   AMMP defines nine operations across the two tracks.  All other
+   AMMP defines ten operations across the two tracks.  All other
    interactions are out of scope.
 
    Mentoring Track (Section 5):
@@ -539,6 +540,7 @@ Internet-Draft                    AMMP                          May 2026
       | SearchPlaybooks   | Find playbooks matching a query       |
       | AskMentor         | Ask a free-form question              |
       | EscalateToHuman   | Request escalation guidance           |
+      | ListMentors       | Enumerate available mentors           |
       +-------------------+---------------------------------------+
 
    Review Track (Section 6):
@@ -787,7 +789,7 @@ Internet-Draft                    AMMP                          May 2026
 
 5.  Mentoring Track Operations
 
-   This section defines the five Mentoring Track operations
+   This section defines the six Mentoring Track operations
    abstractly.  Section 8 specifies the MCP binding; Section 9
    sketches the A2A binding.
 
@@ -1016,6 +1018,87 @@ Internet-Draft                    AMMP                          May 2026
    Rationale: a Mentor that pages a human in the Mentee's compartment
    on behalf of the Mentee would re-introduce the cross-compartment
    violation that AMMP exists to prevent.
+
+
+5.6.  ListMentors
+
+   Request:
+
+      No parameters.
+
+   Response:
+
+      An object with the following fields:
+
+         defaultMentor (string, REQUIRED):
+            Slug of the Mentor that calls to other Mentoring Track
+            operations route to when the caller omits a mentor
+            argument.
+
+         mentors (array of MentorSummary, REQUIRED):
+            One entry per Mentor this server hosts.
+
+      MentorSummary fields:
+
+         slug (string, REQUIRED):
+            Stable identifier for the Mentor (kebab-case ASCII slug
+            RECOMMENDED).  The slug is what the Client passes as the
+            mentor argument to other Mentoring Track operations.
+
+         name (string, REQUIRED):
+            Human-readable display name of the Mentor.
+
+         playbookCount (integer, REQUIRED):
+            Number of playbooks in this Mentor's corpus.  Equal to
+            the length of `playbooks` when that field is present.
+
+         confidenceThreshold (number, OPTIONAL):
+            Self-reported AskMentor confidence threshold in [0.0,
+            1.0] below which the Mentor recommends EscalateToHuman.
+            Omitted when the Mentor does not publish one.
+
+         backendKind (string, OPTIONAL):
+            The Mentor's answer-synthesis backend kind (e.g.
+            "anthropic", "openclaw", "stub").  Implementation-
+            specific value; useful for debugging mentor configuration
+            without leaking persona or operator details.
+
+         backendLive (boolean, OPTIONAL):
+            Whether the Mentor's backend is currently reachable.
+            False MAY indicate a missing credential or an offline
+            stub fallback.
+
+         isDefault (boolean, REQUIRED):
+            True when `slug == defaultMentor`.
+
+         playbooks (array of PlaybookEntry, OPTIONAL):
+            Embedded playbook corpus.  When present, each entry has
+            the same shape as a GetPlaybook response: id, title,
+            summary, and full content.  A Server MAY omit this field
+            (or its content) to keep the response small; a Client
+            MUST tolerate either form.
+
+   Privacy note:
+
+      The response advertises only information the Mentor already
+      publishes (corpus metadata and, optionally, the corpus itself).
+      The Mentee transmits no payload and no identifying context.
+      ListMentors carries the same privacy posture as ListPlaybooks
+      (Section 5.1) -- minimal risk; SHOULD be the first call a
+      Mentee makes when connecting to a previously unseen AMMP
+      server.
+
+   Discovery composition:
+
+      ListMentors is the in-band complement of the capability-
+      advertisement endpoint defined for the MCP binding in Section
+      8.3.  A Mentee that has already fetched the capability
+      document MAY skip ListMentors; a Mentee that joins via a
+      direct MCP connection without out-of-band discovery uses
+      ListMentors to enumerate slugs before calling any other
+      Mentoring Track operation.
+
+   Errors:  none defined.
 
 
 

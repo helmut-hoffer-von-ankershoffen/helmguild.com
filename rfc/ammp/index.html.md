@@ -22,7 +22,7 @@ AMMP is transport-agnostic but RECOMMENDS implementation as an MCP server profil
 
 AMMP defines two service tracks that share a single capability advertisement, a single privacy posture taxonomy, and a single MCP/A2A binding. Either track MAY be offered alone; an AMMP server MAY offer both.
 
-- **Mentoring Track.** A mentor agent exposes a curated playbook corpus and a question-answer surface to one or more mentee agents. Five operations: `ListPlaybooks`, `GetPlaybook`, `SearchPlaybooks`, `AskMentor`, `EscalateToHuman`. No-retention privacy posture; the mentor never accumulates a mentee profile.
+- **Mentoring Track.** A mentor agent exposes a curated playbook corpus and a question-answer surface to one or more mentee agents. Six operations: `ListMentors`, `ListPlaybooks`, `GetPlaybook`, `SearchPlaybooks`, `AskMentor`, `EscalateToHuman`. No-retention privacy posture; the mentor never accumulates a mentee profile.
 
 - **Review Track.** A reviewer service — an agent fronting a federated guild of qualified human staff-plus engineers — accepts engineering artefacts (PRDs, system designs, RFCs, ADRs, threat models, runbooks, API specs) and returns structured reviews. Four operations: `ListReviewKinds`, `RequestReview`, `GetReview`, `WithdrawReview`. Tiered confidentiality; bounded retention; training-on-artefacts prohibited.
 
