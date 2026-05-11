@@ -2379,7 +2379,7 @@ Appendix A.  Example AMMP Agent Card
                      reviewers, mentoring humans and agents and
                      reviewing engineering artefacts at machine pace.",
      "version": "1.0.0",
-     "url": "https://ammp.helmguild.com/",
+     "url": "https://mcp.helmguild.com/",
      "ammp": {
        "version": "1",
        "tracks": [ "mentoring", "review" ],
@@ -2411,9 +2411,9 @@ Appendix A.  Example AMMP Agent Card
        "schemes": [ "oauth2" ],
        "oauth2": {
          "authorizationEndpoint":
-            "https://ammp.helmguild.com/oauth/authorize",
+            "https://mcp.helmguild.com/oauth/authorize",
          "tokenEndpoint":
-            "https://ammp.helmguild.com/oauth/token",
+            "https://mcp.helmguild.com/oauth/token",
          "scopes": [ "ammp:read", "ammp:ask", "ammp:review" ]
 
 
