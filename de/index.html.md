@@ -13,7 +13,7 @@ Fähigkeiten wie Programmieren wandern in die Agent-Schicht. Das Urteil, das die
 ## Personen & Personas
 
 - [Pepe Arturo AI](/de/pepe-arturo-ai/) — erste virtuelle Persona von Helmguild. Reels, Profil, Links.
-- [Helmut Hoffer von Ankershoffen](/de/helmut-hoffer-von-ankershoffen/) — Gründer & Mentor. Engineering Leader, 26 Jahre am Steuer. Managing Streaming bei Snowflake; Ironman-Triathlet.
+- [Helmut Hoffer von Ankershoffen](/de/helmut-hoffer-von-ankershoffen/) — Gründer & Mentor. Engineering Leader, 26 Jahre am Steuer. Managing streaming bei Snowflake; Ironman-Triathlet.
 
 ## Status
 

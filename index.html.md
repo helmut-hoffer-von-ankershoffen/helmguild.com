@@ -13,7 +13,7 @@ Skills like coding migrate into the agent layer. The judgement to mentor those a
 ## People & personas
 
 - [Pepe Arturo AI](/pepe-arturo-ai/) — first virtual persona of Helmguild. Reels, profile, links.
-- [Helmut Hoffer von Ankershoffen](/helmut-hoffer-von-ankershoffen/) — founder & mentor. Engineering leader, 26 years at the wheel. Managing Streaming at Snowflake; Ironman triathlete.
+- [Helmut Hoffer von Ankershoffen](/helmut-hoffer-von-ankershoffen/) — founder & mentor. Engineering leader, 26 years at the wheel. Managing streaming at Snowflake; Ironman triathlete.
 
 ## Status
 
