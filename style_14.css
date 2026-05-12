@@ -1,0 +1,979 @@
+/* helmguild.com — Starlight-flavored, modern, maritime-restrained
+ * Locked 2026-05-09. Voice: calm, principled, succinct.
+ *
+ * Primary color: Apple MacBook Air "Starlight" (Polarstern) — warm bone-cream,
+ * approximated to #ECE6D9 / #E5DFD0 for screen.
+ *
+ * Maritime cues: helm mark above the wordmark, anchor in the footer. Both as
+ * inline SVGs in the deep-ocean accent color.
+ */
+
+:root {
+  /* Starlight gradient — top brighter, bottom slightly more saturated, like brushed aluminum */
+  --starlight-hi: #F2EDE2;
+  --starlight: #ECE6D9;
+  --starlight-lo: #E2DBC8;
+
+  --ink: #1A1F2C;          /* deep ink-near-black */
+  --ink-soft: #535868;     /* muted slate */
+  --rule: #CFC8B6;         /* faint hairline, warm */
+  --accent: #2E4F6B;       /* deep ocean blue */
+  --accent-hover: #3B6488;
+
+  --serif: "Iowan Old Style", "Apple Garamond", "Palatino Linotype", "Palatino", Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --measure: 40rem;
+
+  /* Experimental banner — subtle warm amber that sits within the Starlight palette */
+  --banner-h: 32px;
+  --banner-bg: #F1E7D0;
+  --banner-border: #D9C9A3;
+  --banner-ink: #5C4A22;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, var(--starlight-hi) 0%, var(--starlight) 50%, var(--starlight-lo) 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: calc(5rem + var(--banner-h)) 1.75rem 2.5rem;
+}
+
+/* ─── Experimental banner (sticky, site-wide) ───────────────────────── */
+
+.experimental-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--banner-h);
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4.75rem 0 1rem;
+  background: var(--banner-bg);
+  border-bottom: 1px solid var(--banner-border);
+  color: var(--banner-ink);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.banner-mobile { display: none; }
+
+@media (max-width: 720px) {
+  .banner-full { display: none; }
+  .banner-mobile { display: inline; }
+  .experimental-banner {
+    font-size: 0.78rem;
+    padding: 0 1rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --banner-bg: #2A2418;
+    --banner-border: #3D331F;
+    --banner-ink: #D9C49A;
+  }
+}
+
+/* ─── Maritime SVG marks ─── */
+
+.mark {
+  display: block;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+.mark-helm {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  /* a single-direction soft drop-shadow for subtle depth on the warm bg */
+  filter: drop-shadow(0 1px 2px rgba(46, 79, 107, 0.12));
+}
+
+.mark-anchor {
+  width: 28px;
+  height: 28px;
+  margin: 0 0 0.75rem;
+  opacity: 0.7;
+}
+
+/* ─── Hero ─── */
+
+.hero {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+}
+
+.wordmark {
+  font-family: var(--serif);
+  font-size: clamp(2.25rem, 6.4vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  margin: 0;
+  color: var(--ink);
+}
+
+.tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.5vw, 1.45rem);
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0 0 0.75rem;
+  font-weight: 400;
+}
+
+.descriptor {
+  color: var(--ink-soft);
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+/* ─── Prose ─── */
+
+.prose p {
+  margin: 0 0 0.95rem;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.prose p:last-child { margin-bottom: 0; }
+
+/* ─── Presence ─── */
+
+.presence {
+  margin-top: 3.5rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 2.75rem;
+}
+
+.presence h2 {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-soft);
+  margin: 0 0 1.4rem;
+}
+
+.links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.links li {
+  margin-bottom: 0.85rem;
+  line-height: 1.5;
+}
+
+.links a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(46, 79, 107, 0.3);
+  padding-bottom: 1px;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.links a:hover,
+.links a:focus {
+  color: var(--accent-hover);
+  border-bottom-color: var(--accent-hover);
+}
+
+.caption {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin-left: 0.25rem;
+}
+
+/* ─── Footer ─── */
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+footer .mark-anchor {
+  margin: 0 0 0.6rem;
+}
+
+footer p {
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 480px) {
+  main { padding: calc(3.5rem + var(--banner-h)) 1.25rem 2rem; }
+  .hero { padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
+  .presence { margin-top: 2rem; padding-top: 1.5rem; }
+  .personas { margin-top: 1.75rem; padding-top: 1.5rem; }
+  footer { margin-top: 2.25rem; padding-top: 1.25rem; }
+  .brand { gap: 0.75rem; }
+  .mark-helm { width: 44px; height: 44px; }
+}
+
+/* ─── Reduced motion ─── */
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ─── Optional dark mode (quiet, not stark) ─── */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --starlight-hi: #1B1E25;
+    --starlight: #14171F;
+    --starlight-lo: #0F1218;
+    --ink: #ECE6D9;             /* Starlight inverted into the ink role */
+    --ink-soft: #9AA1B3;
+    --rule: #2B3142;
+    --accent: #87A8C3;
+    --accent-hover: #A4C3DC;
+  }
+  .mark { opacity: 0.95; }
+}
+
+/* ─── Homepage personas grid ─────────────────────────────────────────── */
+
+.personas {
+  margin-top: 2.25rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.75rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.persona-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+}
+
+.persona-card:hover,
+.persona-card:focus {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.persona-card .label {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-soft);
+  margin: 0 0 0.5rem;
+}
+
+.persona-card .name {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 0 0.4rem;
+  line-height: 1.2;
+}
+
+.persona-card .role {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ─── Sub-page common ───────────────────────────────────────────────── */
+
+.home-link {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 2.5rem;
+  transition: color 0.18s ease;
+}
+
+.home-link:hover { color: var(--accent); }
+.home-link::before { content: "←"; }
+
+/* When .home-link wraps multiple child <a>s (breadcrumb mode) — used on blog posts */
+.home-link a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+.home-link a:hover { color: var(--accent); }
+.home-link .sep {
+  opacity: 0.5;
+  margin: 0 0.1em;
+}
+
+/* ─── Persona-page hero with image background ───────────────────────── */
+
+.persona-hero {
+  position: relative;
+  margin: 0 0 3.25rem;
+  padding: 2.5rem 1.75rem 2.5rem;
+  border-radius: 6px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.persona-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--hero-bg, none) center/cover no-repeat;
+  z-index: -2;
+}
+
+.persona-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Stronger gradient: darker overall, deepest under the avatar/name/role block. */
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 75%, rgba(20, 23, 31, 0.78) 0%, rgba(20, 23, 31, 0.35) 70%, rgba(20, 23, 31, 0.30) 100%),
+    linear-gradient(180deg, rgba(20, 23, 31, 0.30) 0%, rgba(20, 23, 31, 0.65) 100%);
+  z-index: -1;
+}
+
+.persona-hero .avatar {
+  display: block;
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  margin: 0 auto 1.25rem;
+  border: 4px solid var(--starlight-hi);
+  box-shadow: 0 4px 20px rgba(20, 23, 31, 0.3);
+  background: var(--starlight-hi);
+  object-fit: cover;
+}
+
+.persona-hero .name {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 0.4rem;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.85),
+    0 2px 14px rgba(0, 0, 0, 0.75),
+    0 0 28px rgba(0, 0, 0, 0.55);
+}
+
+.persona-hero .role {
+  color: #ffffff;
+  text-align: center;
+  font-size: 1.05rem;
+  margin: 0;
+  opacity: 1;
+  font-weight: 500;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.85),
+    0 2px 12px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Profile-page hero (no banner — square portrait centered) */
+
+.profile-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.profile-hero .portrait {
+  display: block;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  box-shadow: 0 2px 16px rgba(46, 79, 107, 0.12);
+}
+
+.profile-hero .name {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5.4vw, 2.75rem);
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 0 0.4rem;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+}
+
+.profile-hero .role {
+  color: var(--ink-soft);
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* ─── Reels gallery ─────────────────────────────────────────────────── */
+
+.reels-grid {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.reel {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.reel video {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background: var(--starlight-lo);
+  border-radius: 6px;
+  border: 1px solid var(--rule);
+  display: block;
+  object-fit: cover;
+}
+
+.reel figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.reel figcaption strong {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+  font-size: 1rem;
+}
+
+.reel figcaption .quote {
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ─── Persona-page socials ──────────────────────────────────────────── */
+
+.socials {
+  margin-top: 3rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 2.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.socials a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(46, 79, 107, 0.3);
+  padding-bottom: 1px;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.socials a:hover { color: var(--accent-hover); border-bottom-color: var(--accent-hover); }
+
+/* ─── Profile-page bullets ──────────────────────────────────────────── */
+
+.career-glance {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.career-glance li {
+  padding-left: 1.25rem;
+  position: relative;
+  margin-bottom: 0.55rem;
+  line-height: 1.55;
+}
+
+.career-glance li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.career-glance li time {
+  display: inline-block;
+  min-width: 8.5rem;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.92rem;
+}
+
+.principles {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.4rem 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.principles li {
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.principles li strong {
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ─── Responsive: subpages ──────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .personas { grid-template-columns: 1fr; }
+  .reels-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+  .persona-hero .avatar { width: 110px; height: 110px; }
+  .profile-hero .portrait { width: 150px; height: 150px; }
+}
+
+
+/* ─── Burger menu (CSS-only via <details>) ──────────────────────────── */
+
+.burger {
+  position: fixed;
+  top: calc(1rem + var(--banner-h));
+  right: 1.25rem;
+  z-index: 100;
+}
+
+.burger > summary {
+  list-style: none;
+  cursor: pointer;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  color: var(--ink);
+  box-sizing: border-box;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.burger > summary::-webkit-details-marker { display: none; }
+.burger > summary::marker { content: ""; }
+
+.burger > summary:hover { background: rgba(255, 255, 255, 0.75); border-color: var(--accent); }
+
+.burger > summary svg { width: 20px; height: 20px; display: block; }
+
+.burger > nav {
+  position: absolute;
+  top: 52px;
+  right: 0;
+  background: var(--starlight-hi);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 0.65rem;
+  min-width: 240px;
+  box-shadow: 0 12px 32px rgba(20, 23, 31, 0.16);
+}
+
+.burger > nav a {
+  display: block;
+  padding: 0.7rem 0.9rem;
+  color: var(--ink);
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  border: none;
+  transition: background 0.14s ease, color 0.14s ease;
+}
+
+.burger > nav a:hover,
+.burger > nav a:focus {
+  background: rgba(46, 79, 107, 0.08);
+  color: var(--accent);
+}
+
+.burger > nav a.current {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.burger > nav .nav-divider {
+  height: 1px;
+  background: var(--rule);
+  margin: 0.4rem 0.4rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .burger > summary {
+    background: rgba(20, 23, 31, 0.55);
+    color: var(--ink);
+  }
+  .burger > summary:hover { background: rgba(20, 23, 31, 0.75); }
+  .burger > nav {
+    background: var(--starlight);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+}
+
+/* ─── Imprint / legal pages ─────────────────────────────────────────── */
+
+.legal h1 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+  font-weight: 500;
+  margin: 0 0 1.75rem;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+
+.legal h2 {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-soft);
+  margin: 2.5rem 0 1rem;
+}
+
+.legal h3 {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.5rem;
+  color: var(--ink);
+}
+
+.legal p,
+.legal address,
+.legal ul,
+.legal li {
+  font-style: normal;
+  font-size: 0.97rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.legal address {
+  font-style: normal;
+  margin: 0.5rem 0;
+}
+
+.legal a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(46, 79, 107, 0.3);
+  padding-bottom: 1px;
+}
+
+.legal a:hover { color: var(--accent-hover); border-bottom-color: var(--accent-hover); }
+
+.legal .placeholder {
+  background: rgba(46, 79, 107, 0.08);
+  border: 1px dashed rgba(46, 79, 107, 0.4);
+  border-radius: 3px;
+  padding: 0.05em 0.35em;
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 0.9em;
+}
+
+/* Global chrome pills — fixed top-right, paired with burger ──────────── */
+/* Two separate pills: language switch (EN · DE) and MCP endpoint (MCP). */
+/* Both share the same visual treatment so they read as one row.         */
+
+.lang-toggle,
+.mcp-pill {
+  position: fixed;
+  top: calc(1rem + var(--banner-h));
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  /* Unified chrome height — same as the burger summary box so all
+     three top-right controls read as one row. */
+  height: 38px;
+  padding: 0 0.7rem;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  font-family: var(--sans);
+  color: var(--ink-soft);
+  box-sizing: border-box;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.lang-toggle { right: 4.75rem; }
+.mcp-pill    { right: 11.5rem; }   /* sits left of EN · DE with a small gap */
+
+.lang-toggle:hover,
+.mcp-pill:hover { background: rgba(255, 255, 255, 0.75); border-color: var(--accent); }
+
+.lang-toggle a,
+.mcp-pill a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border: none;
+  padding: 0 0.2rem;
+  transition: color 0.18s ease;
+}
+
+.lang-toggle a:hover,
+.mcp-pill a:hover { color: var(--accent); }
+
+.lang-toggle .current {
+  color: var(--ink);
+  font-weight: 600;
+  padding: 0 0.2rem;
+}
+
+.lang-toggle .sep {
+  color: var(--ink-soft);
+  opacity: 0.5;
+  margin: 0 0.15rem;
+}
+
+.mcp-pill a {
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+@media (prefers-color-scheme: dark) {
+  .lang-toggle,
+  .mcp-pill { background: rgba(20, 23, 31, 0.55); }
+  .lang-toggle:hover,
+  .mcp-pill:hover { background: rgba(20, 23, 31, 0.75); }
+}
+
+@media (max-width: 480px) {
+  /* Height stays 38px (already unified with the burger); tighten
+     horizontal padding + font on small viewports only. */
+  .lang-toggle,
+  .mcp-pill {
+    padding: 0 0.55rem;
+    font-size: 0.8rem;
+  }
+  .lang-toggle { right: 4.25rem; }
+  .mcp-pill    { right: 9.75rem; }   /* sits left of EN · DE on mobile too */
+}
+
+.legal-note {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  background: rgba(46, 79, 107, 0.05);
+  border-left: 3px solid var(--rule);
+  padding: 0.85rem 1rem;
+  margin: 0 0 2rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.legal-note a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(46, 79, 107, 0.3);
+}
+
+.legal-note a:hover { color: var(--accent-hover); border-bottom-color: var(--accent-hover); }
+
+/* ─── Manifesto page ────────────────────────────────────────────────── */
+
+.manifesto-hero {
+  margin: 0 0 2.25rem;
+}
+
+.manifesto-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5.4vw, 2.75rem);
+  font-weight: 500;
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.manifesto-hero .lede {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0;
+  font-weight: 400;
+}
+
+.manifesto h2 {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-soft);
+  margin: 2.75rem 0 1rem;
+}
+
+.manifesto section + section { margin-top: 0.5rem; }
+
+.manifesto p { color: var(--ink); margin: 0 0 1rem; }
+
+.manifesto a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(46, 79, 107, 0.3);
+  padding-bottom: 1px;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.manifesto a:hover { color: var(--accent-hover); border-bottom-color: var(--accent-hover); }
+
+.tenets-lede {
+  color: var(--ink-soft);
+  font-size: 0.97rem;
+  margin: 0 0 1.25rem;
+  line-height: 1.55;
+}
+
+.tenets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: tenet;
+}
+
+.tenets li {
+  counter-increment: tenet;
+  position: relative;
+  padding: 0.4rem 0 0.4rem 2.5rem;
+  border-bottom: 1px solid var(--rule);
+  line-height: 1.55;
+}
+
+.tenets li:last-child { border-bottom: none; }
+
+.tenets li::before {
+  content: counter(tenet, upper-roman);
+  position: absolute;
+  left: 0;
+  top: 0.4rem;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  width: 2rem;
+  text-align: left;
+}
+
+.tenets li strong {
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.tiers {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tiers li {
+  padding-left: 1.25rem;
+  position: relative;
+  margin-bottom: 0.7rem;
+  line-height: 1.55;
+}
+
+.tiers li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.tiers li strong {
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+@media (max-width: 480px) {
+  .tenets li {
+    padding-left: 2rem;
+  }
+  .tenets li::before {
+    width: 1.6rem;
+    font-size: 0.88rem;
+  }
+}
+
