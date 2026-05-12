@@ -51,35 +51,37 @@ Each page declares its alternates explicitly:
 <link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/<path>/">
 ```
 
-## Language toggle + MCP-endpoint link
+## Language toggle + MCP-endpoint pills
 
-Single fixed-position pill, top-right, sits left of the burger. Three items: `EN · DE · mcp`. The first two are the language toggle (bold-inert the current language); the third is a link to the AMMP reference deployment at `https://mcp.helmguild.com/ammp/` so a visitor's MCP-aware agent (Claude.ai / Cowork / Code / OpenClaw / Hermes) can connect as a mentee straight from any page. (`mcp.helmguild.com` is a gateway hostname; AMMP lives under `/ammp/`, future MCP servers under sibling prefixes.) Drop this snippet near the top of `<body>` on every page:
+Two fixed-position pills, top-right, sitting left of the burger. The right one is the `EN · DE` language toggle (bold-inert the current language); to its left is a dedicated `MCP` pill that links to the AMMP reference deployment at `https://mcp.helmguild.com/ammp/` so a visitor's MCP-aware agent (Claude Desktop / Claude Code / Cowork / OpenClaw / Hermes) can connect as a mentee straight from any page. (`mcp.helmguild.com` is a gateway hostname; AMMP lives under `/ammp/`, future MCP servers under sibling prefixes.) Drop this snippet near the top of `<body>` on every page:
 
 ```html
 <!-- EN page -->
-<nav class="lang-toggle" aria-label="Language and MCP endpoint">
+<nav class="lang-toggle" aria-label="Language">
   <span class="current" aria-current="true">EN</span>
   <span class="sep">·</span>
   <a href="/de/<path>/" hreflang="de">DE</a>
-  <span class="sep">·</span>
-  <a class="ext" href="https://mcp.helmguild.com/ammp/"
+</nav>
+<nav class="mcp-pill" aria-label="MCP endpoint">
+  <a href="https://mcp.helmguild.com/ammp/"
      title="MCP endpoint — connect your agent to a helmguild mentor"
-     aria-label="MCP endpoint — connect your agent to a helmguild mentor">mcp</a>
+     aria-label="MCP endpoint — connect your agent to a helmguild mentor">MCP</a>
 </nav>
 
 <!-- DE page -->
-<nav class="lang-toggle" aria-label="Language and MCP endpoint">
+<nav class="lang-toggle" aria-label="Language">
   <a href="/<path>/" hreflang="en">EN</a>
   <span class="sep">·</span>
   <span class="current" aria-current="true">DE</span>
-  <span class="sep">·</span>
-  <a class="ext" href="https://mcp.helmguild.com/ammp/"
+</nav>
+<nav class="mcp-pill" aria-label="MCP-Endpoint">
+  <a href="https://mcp.helmguild.com/ammp/"
      title="MCP-Endpoint — verbinde deinen Agenten mit einem helmguild-Mentor"
-     aria-label="MCP-Endpoint — verbinde deinen Agenten mit einem helmguild-Mentor">mcp</a>
+     aria-label="MCP-Endpoint — verbinde deinen Agenten mit einem helmguild-Mentor">MCP</a>
 </nav>
 ```
 
-The styling (`.lang-toggle`, `.current`, `.sep`) is in `style_<N>.css`. The mcp link uses the existing `.lang-toggle a` rule — no separate CSS class needed for it.
+The styling (`.lang-toggle`, `.mcp-pill`, `.current`, `.sep`) is in `style_<N>.css`. Both pills share the same visual treatment so they read as one row; the MCP pill uses uppercase `MCP` with extra letter-spacing for emphasis.
 
 ## Burger menu
 
