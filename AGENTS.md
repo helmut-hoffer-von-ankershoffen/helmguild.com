@@ -53,7 +53,7 @@ Each page declares its alternates explicitly:
 
 ## Language toggle + MCP-endpoint pills
 
-Two fixed-position pills, top-right, sitting left of the burger. The right one is the `EN · DE` language toggle (bold-inert the current language); to its left is a dedicated `MCP` pill that links to the AMMP reference deployment at `https://mcp.helmguild.com/ammp/` so a visitor's MCP-aware agent (Claude Desktop / Claude Code / Cowork / OpenClaw / Hermes) can connect as a mentee straight from any page. (`mcp.helmguild.com` is a gateway hostname; AMMP lives under `/ammp/`, future MCP servers under sibling prefixes.) Drop this snippet near the top of `<body>` on every page:
+Two fixed-position pills, top-right, sitting left of the burger. The right one is the `EN · DE` language toggle (bold-inert the current language); to its left is a dedicated `MCP` pill that links to the AMMP reference deployment at `https://mcp.helmguild.com/ammp/` so a visitor's MCP-aware agent (Claude Cowork / Claude Code / Cowork / OpenClaw / Hermes) can connect as a mentee straight from any page. (`mcp.helmguild.com` is a gateway hostname; AMMP lives under `/ammp/`, future MCP servers under sibling prefixes.) Drop this snippet near the top of `<body>` on every page:
 
 ```html
 <!-- EN page -->
