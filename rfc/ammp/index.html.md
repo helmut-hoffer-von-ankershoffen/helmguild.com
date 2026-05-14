@@ -26,6 +26,18 @@ AMMP defines two service tracks that share a single capability advertisement, a 
 
 - **Review Track.** A reviewer service — an agent fronting a federated guild of qualified human staff-plus engineers — accepts engineering artefacts (PRDs, system designs, RFCs, ADRs, threat models, runbooks, API specs) and returns structured reviews. Four operations: `ListReviewKinds`, `RequestReview`, `GetReview`, `WithdrawReview`. Tiered confidentiality; bounded retention; training-on-artefacts prohibited.
 
+## Relationship to AgentSkills, plugins, and marketplaces
+
+AMMP separates the *protocol* (how a mentor exposes its corpus, how an agent asks a question, how an escalation crosses a compartment boundary) from the *on-disk format* of the corpus itself. The reference implementation adopts open Anthropic standards for the on-disk format wherever they exist:
+
+- **Skills** — Each leaf in an AMMP playbook is a single craft rule expressed as one Markdown file with YAML frontmatter (`name`, `description`, optional `metadata.order`, optional `allowed-tools`). This is the [AgentSkills](https://agentskills.io/home) `SKILL.md` format — the same format Claude Code, Claude Desktop, and other AgentSkills-aware runtimes already understand. AMMP exposes one such skill body via the `GetSkill` wire op.
+
+- **Plugins** — A [Claude Code plugin](https://code.claude.com/docs/en/plugins) is a portable bundle of skills (plus optional agents, hooks, an `.mcp.json`) that a runtime can install locally. An AMMP playbook MAY carry an optional `plugin: <name>@<marketplace>` reference; when set, the mentee can call `GetPluginArchive` to receive a Bearer-gated zip URL and hand it to its user for local install. The plugin's `.mcp.json` wires the same AMMP server, so the live ops (`AskMentor`, `EscalateToHumanMentor`) continue to work after install.
+
+- **Marketplaces** — A [Claude Code marketplace](https://code.claude.com/docs/en/plugin-marketplaces) hosts one or more plugins behind a single `.claude-plugin/marketplace.json` catalogue. AMMP playbooks reference plugins by `name@marketplace` so the same playbook config can target a public marketplace, a private GitHub repo (cloned ahead of time), or a future managed marketplace without changing the wire.
+
+The two-layer split keeps AMMP small. A playbook is *more than* a plugin — it is bound to a specific mentor agent with a specific human (A.h) at the other end of the escalation wire, and the mentor's `AskMentor` synthesis is stateful in a way no static skill bundle can be. A mentor is *more than* a marketplace — it carries a persona, a confidence threshold, a delivery adapter, and a consent-bound channel to the human behind it. AgentSkills and plugins give us the corpus on disk; AMMP gives us the protocol around it.
+
 ## Two invariants
 
 The defining properties of AMMP, distinguishing it from MCP, A2A, and ACP:

@@ -28,6 +28,18 @@ AMMP definiert zwei Service-Tracks, die sich eine einzige Capability-Advertiseme
 
 - **Review Track.** Ein Reviewer Service — ein Agent als Front-End einer föderierten Gilde qualifizierter menschlicher Staff-plus-Engineers — nimmt Engineering-Artefakte entgegen (PRDs, System-Designs, RFCs, ADRs, Threat Models, Runbooks, API-Specs) und liefert strukturierte Reviews zurück. Vier Operationen: `ListReviewKinds`, `RequestReview`, `GetReview`, `WithdrawReview`. Gestaffelte Vertraulichkeit; begrenzte Retention; Training-auf-Artefakten verboten.
 
+## Verhältnis zu AgentSkills, Plugins und Marketplaces
+
+AMMP trennt das *Protokoll* (wie ein Mentor seinen Korpus exponiert, wie ein Agent eine Frage stellt, wie eine Eskalation eine Compartment-Grenze überquert) vom *On-Disk-Format* des Korpus selbst. Die Referenz-Implementierung übernimmt offene Anthropic-Standards für das On-Disk-Format, wo sie existieren:
+
+- **Skills** — Jedes Blatt in einem AMMP-Playbook ist eine einzelne Handwerksregel, ausgedrückt als eine Markdown-Datei mit YAML-Frontmatter (`name`, `description`, optionales `metadata.order`, optionale `allowed-tools`). Das ist das [AgentSkills](https://agentskills.io/home)-`SKILL.md`-Format — dasselbe Format, das Claude Code, Claude Desktop und andere AgentSkills-bewusste Runtimes bereits verstehen. AMMP liefert einen solchen Skill-Body über die `GetSkill`-Wire-Op.
+
+- **Plugins** — Ein [Claude-Code-Plugin](https://code.claude.com/docs/en/plugins) ist ein portables Bündel aus Skills (plus optional Agents, Hooks, einer `.mcp.json`), das eine Runtime lokal installieren kann. Ein AMMP-Playbook KANN eine optionale `plugin: <name>@<marketplace>`-Referenz tragen; ist sie gesetzt, ruft der Mentee `GetPluginArchive` auf, erhält eine Bearer-gesicherte Zip-URL und übergibt sie seinem Nutzer zur lokalen Installation. Die `.mcp.json` des Plugins verdrahtet denselben AMMP-Server, sodass die Live-Ops (`AskMentor`, `EscalateToHumanMentor`) nach der Installation weiterlaufen.
+
+- **Marketplaces** — Ein [Claude-Code-Marketplace](https://code.claude.com/docs/en/plugin-marketplaces) beherbergt ein oder mehrere Plugins hinter einem einzigen `.claude-plugin/marketplace.json`-Katalog. AMMP-Playbooks referenzieren Plugins per `name@marketplace`, damit dieselbe Playbook-Konfiguration einen öffentlichen Marketplace, ein privates GitHub-Repo (vorab geklont) oder einen zukünftigen verwalteten Marketplace ansprechen kann, ohne dass die Wire sich ändert.
+
+Die Zwei-Schichten-Aufteilung hält AMMP klein. Ein Playbook ist *mehr als* ein Plugin — es ist an einen konkreten Mentor-Agenten mit einem konkreten Menschen (A.h) am anderen Ende der Eskalations-Wire gebunden, und die `AskMentor`-Synthese des Mentors ist stateful, was kein statisches Skill-Bundle leisten kann. Ein Mentor ist *mehr als* ein Marketplace — er trägt eine Persona, eine Confidence-Schwelle, einen Delivery-Adapter und einen consent-gebundenen Kanal zum Menschen hinter ihm. AgentSkills und Plugins liefern uns den Korpus auf der Platte; AMMP liefert das Protokoll drumherum.
+
 ## Zwei Invarianten
 
 Die definierenden Eigenschaften von AMMP, die es von MCP, A2A und ACP unterscheiden:
