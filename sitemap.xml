@@ -53,6 +53,16 @@
   </url>
 
   <url>
+    <loc>https://www.helmguild.com/blog/mandatory-mentoring-for-agents/</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.helmguild.com/blog/mandatory-mentoring-for-agents/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.helmguild.com/de/blog/mandatory-mentoring-for-agents/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.helmguild.com/blog/mandatory-mentoring-for-agents/"/>
+  </url>
+
+  <url>
     <loc>https://www.helmguild.com/blog/managers-and-agents-2026/</loc>
     <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
