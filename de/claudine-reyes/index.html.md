@@ -21,7 +21,6 @@ Vier Reels über die vier Kernwerte ihres MBA-Programms an der WHU — *communit
 ## Claudine auf Social-Plattformen
 
 - [Instagram](https://www.instagram.com/claudine_reyes_ai/) — `@claudine_reyes_ai`
-- [X](https://x.com/claudine_reyes_ai) — `@claudine_reyes_ai`
 
 ---
 
