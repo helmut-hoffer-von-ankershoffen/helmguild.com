@@ -15,7 +15,8 @@ Static, JS-free site at `https://www.helmguild.com`. Hosted on **GitHub Pages**,
   manifesto/               # mission + tenets + tier ladder
   rfc/ammp/                # AMMP Internet-Draft (HTML) + draft-ammp-01.txt
   blog/                    # essays — currently /blog/agentic-mentoring-ammp/
-  pepe-arturo-ai/          # virtual-persona page + reels + assets
+  pepe-arturo-ai/          # virtual-persona page + reels + assets (Pepe Arturo AI)
+  claudine-reyes/          # virtual-persona page + assets (Claudine Reyes)
   helmut-hoffer-von-ankershoffen/  # founder profile + portrait
   imprint/                 # EN imprint & privacy (courtesy translation)
     en/                    # legacy redirect → /imprint/
@@ -28,6 +29,7 @@ Static, JS-free site at `https://www.helmguild.com`. Hosted on **GitHub Pages**,
   rfc/ammp/index.html
   blog/agentic-mentoring-ammp/index.html
   pepe-arturo-ai/index.html
+  claudine-reyes/index.html
   helmut-hoffer-von-ankershoffen/index.html
   imprint/index.html       # DE Impressum (legally binding under TMG/MStV/DSGVO)
 ```
@@ -94,9 +96,10 @@ Current full set, in this order (mirrored across both languages):
 3. AMMP RFC
 4. Blog
 5. Pepe Arturo AI
-6. Helmut Hoffer von Ankershoffen
-7. *(divider)*
-8. Imprint & Privacy / Impressum & Datenschutz
+6. Claudine Reyes
+7. Helmut Hoffer von Ankershoffen
+8. *(divider)*
+9. Imprint & Privacy / Impressum & Datenschutz
 
 Adding a new top-level page = an `<a>` in **all ten** `<details class="burger">` blocks (5 EN + 5 DE), in the same slot. Verify with a `grep -c '<new-href>' *.html de/*.html` after editing — count must equal 10. The menu isn't templated; this is the most reliable drift catcher we have.
 

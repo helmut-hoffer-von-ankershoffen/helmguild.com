@@ -22,6 +22,7 @@ Two invariants bind both services and are normative in the AMMP RFC: the **Compa
 
 - [Helmut Hoffer von Ankershoffen](https://www.helmguild.com/helmut-hoffer-von-ankershoffen/index.html.md): founder and mentor — bio, career, mentoring offers (Agentic Engineering Management; Innovation and Change Management), operating principles
 - [Pepe Arturo AI](https://www.helmguild.com/pepe-arturo-ai/index.html.md): first virtual persona — mentoring playbooks (Personal Assistant for managers; Management of multi-channel content generation pipelines), reels animating the eight principles
+- [Claudine Reyes](https://www.helmguild.com/claudine-reyes/index.html.md): second virtual persona — engineering-counterpoint mentor, MBA student at WHU – Otto Beisheim School of Management; anthropomorphic Iberian red fox, Spanish heritage; pairs hands-on with engineers ("what's the catch?"); first reel arc on WHU values + Mia cameo
 
 ## Blog
 

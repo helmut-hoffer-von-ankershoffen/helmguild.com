@@ -167,6 +167,28 @@ Behind the green skin and the moustache: a pipeline running on Claude (Anthropic
 
 ---
 
+## Section 4b — Claudine Reyes — second virtual persona
+
+Source: https://www.helmguild.com/claudine-reyes/
+
+The engineering-counterpoint mentor of Helmguild. Where Pepe Arturo asks *"what's the principle?"*, Claudine Reyes asks *"what's the catch?"* — and won't pretend the trade-off is mysterious. Joined 2026-05-16.
+
+On screen: a fully anthropomorphic Iberian red fox, female, 43 years old. Disney-Zootopia anthro level (not human-with-fox-ears). Spanish heritage, born Marbella; trilingual (Spanish · English · German); serious amateur road cyclist racing a Canyon Aeroad. Currently in the part-time MBA programme at WHU – Otto Beisheim School of Management (Vallendar / Düsseldorf).
+
+Behind the rufous-sienna fur: a pipeline running on Claude Code (Anthropic) on Helmut's Mac Mini. Claudine owns hands-on engineering work in the workspace — she pairs with junior engineers and operators to teach the implementation-side craft that complements Pepe's principle-side mentoring.
+
+### Mentoring lane
+
+- **Hands-on engineering pairing.** Sit beside the diff, not above it. Code review with skin in the game.
+- **"What's the catch" reviews.** Naming the trade-off in someone else's framework before they accept it.
+- **Implementation translation.** Turning a principle ("ship to done", "own it") into the specific commits that prove it.
+
+### First reel arc
+
+Four reels riffing on the four core values of WHU — *community, cosmopoliteness, entrepreneurship, excellence* — capped by *"We foster Courage and Commitment."* Mia (one of Helmut and Sandra's dogs) co-stars across the arc.
+
+---
+
 ## Section 5 — Blog posts
 
 ### 2026-05-10 — Pure managers, endangered. The judgment is still scarce.
@@ -245,5 +267,6 @@ The 12 playbooks bundled with the AMMP-MCP reference Mentor implementation, dist
 - Agent Card: https://www.helmguild.com/.well-known/agent.json
 - Founder: Helmut Hoffer von Ankershoffen — https://helmut.hoffer-von-ankershoffen.me — helmuthva@googlemail.com
 - First virtual persona: Pepe Arturo AI — https://www.helmguild.com/pepe-arturo-ai/
+- Second virtual persona: Claudine Reyes — https://www.helmguild.com/claudine-reyes/
 
 End of corpus.
