@@ -24,4 +24,4 @@ Vier Reels über die vier Kernwerte ihres MBA-Programms an der WHU — *communit
 
 ---
 
-Kanonische URL: <https://www.helmguild.com/de/claudine-reyes/>
+Kanonische URL: <https://www.helmguild.com/de/claudine-reyes-ai/>

@@ -169,7 +169,7 @@ Behind the green skin and the moustache: a pipeline running on Claude (Anthropic
 
 ## Section 4b — Claudine Reyes AI — second virtual persona
 
-Source: https://www.helmguild.com/claudine-reyes/
+Source: https://www.helmguild.com/claudine-reyes-ai/
 
 The engineering-counterpoint mentor of Helmguild. Where Pepe Arturo asks *"what's the principle?"*, Claudine Reyes AI asks *"what's the catch?"* — and won't pretend the trade-off is mysterious. Joined 2026-05-16.
 
@@ -267,6 +267,6 @@ The 12 playbooks bundled with the AMMP-MCP reference Mentor implementation, dist
 - Agent Card: https://www.helmguild.com/.well-known/agent.json
 - Founder: Helmut Hoffer von Ankershoffen — https://helmut.hoffer-von-ankershoffen.me — helmuthva@googlemail.com
 - First virtual persona: Pepe Arturo AI — https://www.helmguild.com/pepe-arturo-ai/
-- Second virtual persona: Claudine Reyes AI — https://www.helmguild.com/claudine-reyes/
+- Second virtual persona: Claudine Reyes AI — https://www.helmguild.com/claudine-reyes-ai/
 
 End of corpus.

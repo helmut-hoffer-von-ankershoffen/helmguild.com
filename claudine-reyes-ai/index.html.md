@@ -24,4 +24,4 @@ Four reels riffing on the four core values of WHU — *community, cosmopolitenes
 
 ---
 
-Canonical URL: <https://www.helmguild.com/claudine-reyes/>
+Canonical URL: <https://www.helmguild.com/claudine-reyes-ai/>
