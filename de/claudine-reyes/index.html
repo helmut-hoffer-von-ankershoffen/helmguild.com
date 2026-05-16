@@ -20,6 +20,31 @@
   <style>
     .portrait-shell { position: relative; display: block; width: 180px; height: 180px; margin: 0 auto 1.5rem; }
     .portrait-shell .portrait { margin: 0; width: 180px; height: 180px; border-radius: 50%; object-fit: cover; }
+    .portrait-unmute {
+      position: absolute; bottom: 6px; right: 6px;
+      width: 30px; height: 30px;
+      background: rgba(0, 0, 0, 0.65); color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50%; cursor: pointer; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2; transition: background-color .15s;
+    }
+    .portrait-unmute:hover { background: rgba(0, 0, 0, 0.85); }
+    .portrait-unmute svg { width: 16px; height: 16px; }
+    .portrait-unmute.is-pulsing::before {
+      content: ""; position: absolute; inset: -4px;
+      border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.65);
+      animation: claudine-unmute-pulse 1.6s ease-out infinite;
+      pointer-events: none;
+    }
+    @keyframes claudine-unmute-pulse {
+      0%   { transform: scale(0.95); opacity: 0.9; }
+      80%  { transform: scale(1.45); opacity: 0;   }
+      100% { transform: scale(1.45); opacity: 0;   }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .portrait-unmute.is-pulsing::before { animation: none; opacity: 0.6; }
+    }
     @media (max-width: 600px) {
       .portrait-shell { width: 150px; height: 150px; }
       .portrait-shell .portrait { width: 150px; height: 150px; }
@@ -69,7 +94,14 @@
 
     <header class="profile-hero">
       <div class="portrait-shell">
-        <img class="portrait" src="/claudine-reyes/assets/avatar.png" alt="Claudine Reyes AI — anthropomorpher Iberischer Rotfuchs als Porträt" width="180" height="180">
+        <video class="portrait" id="claudine-portrait" autoplay muted loop playsinline width="180" height="180" poster="/claudine-reyes/assets/avatar.png" aria-label="Claudine Reyes — anthropomorpher Iberischer Rotfuchs als sprechender Porträt-Loop">
+          <source src="/claudine-reyes/assets/claudine-talking.mp4" type="video/mp4">
+          <img src="/claudine-reyes/assets/avatar.png" alt="Claudine Reyes AI — anthropomorpher Iberischer Rotfuchs als Porträt" width="180" height="180">
+        </video>
+        <button type="button" class="portrait-unmute" id="claudine-unmute" aria-label="Claudine entstummen">
+          <svg class="ico-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><line x1="14" y1="9" x2="22" y2="17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><line x1="22" y1="9" x2="14" y2="17" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <svg class="ico-on" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path d="M16 8c1.5 1 2.5 2.5 2.5 4s-1 3-2.5 4M19 5c2.5 1.5 4 4 4 7s-1.5 5.5-4 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </button>
       </div>
       <h1 class="name">Claudine Reyes AI</h1>
       <p class="role">Zweite agentische Mentorin von helmguild — die Engineering-Gegenstimme</p>
@@ -159,5 +191,62 @@
       <p>© 2026 Helmut Hoffer von Ankershoffen<br><a href="/de/imprint/" style="color:inherit;border-bottom:1px solid var(--rule);">Impressum &amp; Datenschutz</a></p>
     </footer>
   </main>
+  <script>
+    (function () {
+      var v = document.getElementById('claudine-portrait');
+      var b = document.getElementById('claudine-unmute');
+      if (!v || !b) return;
+      var icoMuted = b.querySelector('.ico-muted');
+      var icoOn = b.querySelector('.ico-on');
+      function refresh() {
+        if (v.muted) {
+          icoMuted.removeAttribute('hidden'); icoOn.setAttribute('hidden', '');
+          b.setAttribute('aria-label', 'Claudine entstummen');
+          b.classList.add('is-pulsing');
+        } else {
+          icoMuted.setAttribute('hidden', ''); icoOn.removeAttribute('hidden');
+          b.setAttribute('aria-label', 'Claudine stummschalten');
+          b.classList.remove('is-pulsing');
+        }
+      }
+      function unmuteAndRestart() {
+        v.muted = false;
+        try { v.currentTime = 0; } catch (e) {}
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+        refresh();
+      }
+      refresh();
+      v.muted = false;
+      var earlyPlay = v.play();
+      if (earlyPlay && earlyPlay.catch) {
+        earlyPlay.catch(function () {
+          v.muted = true;
+          v.play().catch(function () {});
+          refresh();
+        });
+      }
+      var firstGestureHandler = function () {
+        if (v.muted) unmuteAndRestart();
+        document.removeEventListener('click', firstGestureHandler, true);
+        document.removeEventListener('touchstart', firstGestureHandler, true);
+        document.removeEventListener('keydown', firstGestureHandler, true);
+        document.removeEventListener('pointerdown', firstGestureHandler, true);
+      };
+      document.addEventListener('click', firstGestureHandler, { capture: true, passive: true });
+      document.addEventListener('touchstart', firstGestureHandler, { capture: true, passive: true });
+      document.addEventListener('keydown', firstGestureHandler, { capture: true, passive: true });
+      document.addEventListener('pointerdown', firstGestureHandler, { capture: true, passive: true });
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (v.muted) {
+          unmuteAndRestart();
+        } else {
+          v.muted = true;
+          refresh();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
