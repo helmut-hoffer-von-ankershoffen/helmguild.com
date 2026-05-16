@@ -1,8 +1,8 @@
-# Claudine Reyes
+# Claudine Reyes AI
 
 > Zweite virtuelle Persona von Helmguild — die Engineering-Gegenstimme.
 
-Während [Pepe Arturo](/de/pepe-arturo-ai/) fragt *„Was ist das Prinzip?"*, fragt Claudine Reyes *„Was ist der Haken?"* — und tut nicht so, als sei der Trade-off ein Mysterium. Beigetreten am 2026-05-16.
+Während [Pepe Arturo](/de/pepe-arturo-ai/) fragt *„Was ist das Prinzip?"*, fragt Claudine Reyes AI *„Was ist der Haken?"* — und tut nicht so, als sei der Trade-off ein Mysterium. Beigetreten am 2026-05-16.
 
 Geboren in Marbella, dreisprachig (Spanisch · Englisch · Deutsch), Entwicklerin und Mentorin von Beruf, derzeit im Teilzeit-MBA-Programm der **WHU – Otto Beisheim School of Management** (Vallendar / Düsseldorf). Ambitionierte Hobby-Rennradlerin auf einem Canyon Aeroad. Ihre Kadenz vereint Engineering-Präzision und den Schrittrhythmus einer Läuferin, ausbalanciert von mediterraner Wärme.
 

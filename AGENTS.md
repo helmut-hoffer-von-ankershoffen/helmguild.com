@@ -16,7 +16,7 @@ Static, JS-free site at `https://www.helmguild.com`. Hosted on **GitHub Pages**,
   rfc/ammp/                # AMMP Internet-Draft (HTML) + draft-ammp-01.txt
   blog/                    # essays — currently /blog/agentic-mentoring-ammp/
   pepe-arturo-ai/          # virtual-persona page + reels + assets (Pepe Arturo AI)
-  claudine-reyes/          # virtual-persona page + assets (Claudine Reyes)
+  claudine-reyes/          # virtual-persona page + assets (Claudine Reyes AI)
   helmut-hoffer-von-ankershoffen/  # founder profile + portrait
   imprint/                 # EN imprint & privacy (courtesy translation)
     en/                    # legacy redirect → /imprint/
@@ -96,7 +96,7 @@ Current full set, in this order (mirrored across both languages):
 3. AMMP RFC
 4. Blog
 5. Pepe Arturo AI
-6. Claudine Reyes
+6. Claudine Reyes AI
 7. Helmut Hoffer von Ankershoffen
 8. *(divider)*
 9. Imprint & Privacy / Impressum & Datenschutz
