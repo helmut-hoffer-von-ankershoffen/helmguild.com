@@ -20,8 +20,8 @@ Four reels riffing on the four core values of WHU — *community, cosmopolitenes
 
 ## Claudine on social platforms
 
-- [Instagram](https://www.instagram.com/claudine_reyes/) — `@claudine_reyes`
-- [X](https://x.com/claudine_reyes) — `@claudine_reyes`
+- [Instagram](https://www.instagram.com/claudine_reyes_ai/) — `@claudine_reyes_ai`
+- [X](https://x.com/claudine_reyes_ai) — `@claudine_reyes_ai`
 
 ---
 
