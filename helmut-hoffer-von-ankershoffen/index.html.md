@@ -8,7 +8,7 @@ I learned the craft of steering by doing it: shipping under real weather, holdin
 
 ## Career, briefly
 
-- **2026 → present** — Managing streaming at **Snowflake** Inc.
+- **2026 → present** — Manager at **Snowflake** Inc.
 - **2023 – 2026** — SVP Product & Engineering, **Aignostics**. Digital pathology AI, Charité spin-off. Matured product & engineering org, launched first SaaS offering, compliant with ISO 13485 and 27001.
 - **2019 – 2023** — Software Development Manager, **Amazon** Inc. Music ML platform & teams; established central content orchestrator serving 20+ personalised experiences, bootstrapped central feature repository for machine-learning and heuristic use cases.
 - **2010 – 2019** — Founder / CTO mode — WeGreen, **20steps**, Campanda. Sustainability, RAD frameworks, RV marketplace.
