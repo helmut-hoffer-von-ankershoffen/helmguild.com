@@ -8,7 +8,7 @@ Das Handwerk des Steuerns habe ich gelernt, indem ich es ausgeübt habe: liefern
 
 ## Karriere, in Kürze
 
-- **ab 6/2027** — Managing streaming bei **Snowflake** Inc.
+- **2026 → heute** — Managing streaming bei **Snowflake** Inc.
 - **2023 – 2026** — SVP Product & Engineering, **Aignostics**. Digitale Pathologie-KI, Charité-Spin-off. Reife Produkt- & Engineering-Organisation aufgebaut, erste SaaS-Anwendung gelauncht, ISO 13485 und 27001 konform.
 - **2019 – 2023** — Software Development Manager, **Amazon** Inc. Music ML-Plattform & -Teams; zentralen Content-Orchestrator etabliert, der über 20 personalisierte Erlebnisse bedient.
 - **2010 – 2019** — Founder / CTO Mode — WeGreen, **20steps**, Campanda. Nachhaltigkeit, RAD-Frameworks, RV-Marktplatz.
